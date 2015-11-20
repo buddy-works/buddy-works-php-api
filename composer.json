@@ -17,16 +17,13 @@
 	],
 	"require": {
 		"php": ">=5.5.0",
+		"guzzlehttp/guzzle": "~5.0",
 		"ext-mbstring": "*"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "2.*",
 		"phpunit/phpunit": "~4.0",
-		"mockery/mockery": "~0.8",
-		"guzzlehttp/guzzle": "~5.0"
-	},
-	"suggest": {
-		"guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
+		"mockery/mockery": "~0.8"
 	},
 	"autoload": {
 		"psr-4": {

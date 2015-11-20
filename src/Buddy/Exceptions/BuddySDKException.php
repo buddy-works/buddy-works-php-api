@@ -12,25 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+namespace Buddy\Exceptions;
 
-namespace Buddy;
-
-use Buddy\Exceptions;
-
-class Buddy
+/**
+ * Class BuddySDKException
+ * @package Buddy\Exceptions
+ */
+class BuddySDKException extends \Exception
 {
-
-    /**
-     * @var \Buddy\BuddyClient
-     */
-    private $client;
-
-    /**
-     * Buddy constructor.
-     * @param array $config
-     */
-    public function __construct(array $config = [])
-    {
-        $this->client = new BuddyClient();
-    }
 }
