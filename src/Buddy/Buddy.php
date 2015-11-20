@@ -15,12 +15,9 @@
 
 namespace Buddy;
 
-
 class Buddy
 {
-
-	public function __construct()
-	{
-	}
-
+    public function __construct()
+    {
+    }
 }

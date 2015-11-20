@@ -1,5 +1,5 @@
 # Buddy Works APIs PHP SDK
-Buddy's officially supported PHP client library.
+[![Build Status](https://travis-ci.org/buddy-works/buddy-works-php-api.svg?branch=master)](https://travis-ci.org/buddy-works/buddy-works-php-api) Buddy's officially supported PHP client library.
 
 ## Installation
 
