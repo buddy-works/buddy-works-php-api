@@ -15,15 +15,18 @@
 
 namespace Buddy;
 
-use Buddy\Exceptions;
-
 class Buddy
 {
 
     /**
-     * @var \Buddy\BuddyClient
+     * @var BuddyClient
      */
     private $client;
+
+    /**
+     * @var BuddyOAuth
+     */
+    private $oauth;
 
     /**
      * Buddy constructor.
@@ -32,5 +35,22 @@ class Buddy
     public function __construct(array $config = [])
     {
         $this->client = new BuddyClient();
+        $this->oauth = new BuddyOAuth($this->client, $config);
+    }
+
+    /**
+     * @return BuddyClient
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @return BuddyOAuth
+     */
+    public function getOAuth()
+    {
+        return $this->oauth;
     }
 }

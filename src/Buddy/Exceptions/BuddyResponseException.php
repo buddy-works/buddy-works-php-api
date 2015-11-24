@@ -16,6 +16,7 @@
 namespace Buddy\Exceptions;
 
 use GuzzleHttp\Message\ResponseInterface;
+use Mockery\CountValidator\Exception;
 
 class BuddyResponseException extends BuddySDKException
 {
@@ -38,10 +39,15 @@ class BuddyResponseException extends BuddySDKException
         $this->code = $response->getStatusCode();
         $this->headers = $response->getHeaders();
         $this->rawBody = (string)$response->getBody();
-        $body = json_decode($this->rawBody, true);
         $this->message = 'Something went wrong';
-        if (!empty($body['errors']) && is_array($body['errors']) && !empty($body['errors'][0]) && !empty($body['errors'][0]['message'])) {
-            $this->message = $body['errors'][0]['message'];
+        try {
+            $body = json_decode($this->rawBody, true);
+            if (!empty($body['error'])){
+                $this->message = $body['error'];
+            }else if (!empty($body['errors']) && is_array($body['errors']) && !empty($body['errors'][0]) && !empty($body['errors'][0]['message'])) {
+                $this->message = $body['errors'][0]['message'];
+            }
+        } catch (Exception $e) {
         }
     }
 
@@ -60,5 +66,4 @@ class BuddyResponseException extends BuddySDKException
     {
         return $this->rawBody;
     }
-
 }

@@ -13,9 +13,29 @@
  * limitations under the License.
  */
 
-$env = dirname(__FILE__) . '/env.php';
-if (realpath($env)){
-    include($env);
-}
+namespace Buddy\Objects;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+class Object
+{
+    /**
+     * @var array
+     */
+    protected $json;
+
+    /**
+     * Object constructor.
+     * @param array $json
+     */
+    public function __construct(array $json)
+    {
+        $this->json = $json;
+    }
+
+    /**
+     * @return array
+     */
+    public function getJson()
+    {
+        return $this->json;
+    }
+}

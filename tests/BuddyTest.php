@@ -13,9 +13,17 @@
  * limitations under the License.
  */
 
-$env = dirname(__FILE__) . '/env.php';
-if (realpath($env)){
-    include($env);
-}
+namespace Buddy\Tests;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+use Buddy\Buddy;
+
+class BuddyTest extends \PHPUnit_Framework_TestCase
+{
+    public function testInstantiating()
+    {
+        $buddy = new Buddy();
+        $this->assertInstanceOf('Buddy\BuddyClient', $buddy->getClient());
+        $this->assertInstanceOf('Buddy\BuddyOAuth', $buddy->getOAuth());
+    }
+
+}

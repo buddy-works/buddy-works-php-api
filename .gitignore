@@ -1,4 +1,5 @@
 vendor/
+tests/env.php
 composer.lock
 tests/BuddyTestCredentials.php
 /.idea

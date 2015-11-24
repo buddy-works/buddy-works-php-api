@@ -22,6 +22,9 @@ use GuzzleHttp\Exception\RequestException;
 
 class BuddyClient
 {
+
+    const API_ENDPOINT = 'https://api.buddy.works';
+
     /**
      * @var \GuzzleHttp\Client
      */
@@ -39,7 +42,7 @@ class BuddyClient
      * @param string $url
      * @param string $method
      * @param array $options
-     * @return string
+     * @return BuddyResponse
      * @throws BuddyResponseException
      * @throws BuddySDKException
      */
@@ -62,7 +65,7 @@ class BuddyClient
         }
         $httpStatusCode = $rawResponse->getStatusCode();
         if ($httpStatusCode >= 200 && $httpStatusCode < 300) {
-            return (string)$rawResponse->getBody();
+            return new BuddyResponse($rawResponse);
         } else {
             throw new BuddyResponseException($rawResponse);
         }
@@ -73,7 +76,7 @@ class BuddyClient
      * @param string $url
      * @param string $method
      * @param null|array $body
-     * @return string
+     * @return BuddyResponse
      * @throws BuddyResponseException
      * @throws BuddySDKException
      */
@@ -93,9 +96,28 @@ class BuddyClient
     }
 
     /**
+     * @param string $url
+     * @param array $params
+     * @param array $query
+     * @return string
+     */
+    public function createUrl($url, array $params = [], array $query = [])
+    {
+        if (count($params) > 0) {
+            foreach ($params as $k => $v) {
+                $url = preg_replace("/:{$k}/", urlencode($v));
+            }
+        }
+        if (count($query) > 0) {
+            $url .= '?' . http_build_query($query);
+        }
+        return self::API_ENDPOINT . $url;
+    }
+
+    /**
      * @param string $accessToken
      * @param string $url
-     * @return string
+     * @return BuddyResponse
      */
     public function getJson($accessToken, $url)
     {
@@ -106,7 +128,7 @@ class BuddyClient
      * @param string $accessToken
      * @param string $url
      * @param null|array $body
-     * @return string
+     * @return BuddyResponse
      */
     public function deleteJson($accessToken, $url, $body = null)
     {
@@ -117,7 +139,7 @@ class BuddyClient
      * @param string $accessToken
      * @param string $url
      * @param array $body
-     * @return string
+     * @return BuddyResponse
      */
     public function postJson($accessToken, $url, $body)
     {
@@ -128,7 +150,7 @@ class BuddyClient
      * @param string $accessToken
      * @param string $url
      * @param array $body
-     * @return string
+     * @return BuddyResponse
      */
     public function putJson($accessToken, $url, $body)
     {
@@ -139,10 +161,24 @@ class BuddyClient
      * @param string $accessToken
      * @param string $url
      * @param array $body
-     * @return string
+     * @return BuddyResponse
      */
     public function patchJson($accessToken, $url, $body)
     {
         return $this->requestJson($accessToken, $url, 'PATCH', $body);
+    }
+
+    /**
+     * @param string $url
+     * @param array $params
+     * @return BuddyResponse
+     * @throws BuddyResponseException
+     * @throws BuddySDKException
+     */
+    public function post($url, array $params)
+    {
+        return $this->request($url, 'POST', [
+            'body' => $params
+        ]);
     }
 }

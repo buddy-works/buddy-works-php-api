@@ -13,9 +13,32 @@
  * limitations under the License.
  */
 
-$env = dirname(__FILE__) . '/env.php';
-if (realpath($env)){
-    include($env);
-}
+namespace Buddy;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+use \GuzzleHttp\Message\ResponseInterface;
+use \Buddy\Objects;
+
+class BuddyResponse
+{
+    /**
+     * @var ResponseInterface
+     */
+    private $rawResponse;
+
+    /**
+     * BuddyResponse constructor.
+     * @param ResponseInterface $rawResponse
+     */
+    public function __construct(ResponseInterface $rawResponse)
+    {
+        $this->rawResponse = $rawResponse;
+    }
+
+    /**
+     * @return Objects\Auth
+     */
+    public function getAsAuth()
+    {
+        return new Objects\Auth(json_decode($this->rawResponse->getBody(), true));
+    }
+}
