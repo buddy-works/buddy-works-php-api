@@ -35,7 +35,7 @@ Add application & get client id, client secret
 Copy file tests/env.php.dist -> tests/env.php and fill up variables
 Run command:
 ``` sh
-./vendor/bin/phpunit --coverage-text --exclude-group integration
+./vendor/bin/phpunit
 ```
 
 ## License
