@@ -26,7 +26,7 @@ $buddy = new Buddy\Buddy([
 try {
   $url = $buddy->getOAuth()->getAuthorizeUrl([
     Buddy\BuddyOAuth::SCOPE_MANAGE_EMAILS
-  ], 'state', 'redirectUrl);  
+  ], 'state', 'redirectUrl');  
 } catch(Buddy\Exceptions\BuddySDKException $e) {
   echo 'Buddy SDK return an error: ' . $e->getMessage();
   exit;
@@ -59,6 +59,8 @@ try {
 }
 $accessToken = $auth->getAccessToken();
 ```
+
+State should be the same as in getAuthorizeUrl method. 
 
 ## Usage of direct tokens
 
