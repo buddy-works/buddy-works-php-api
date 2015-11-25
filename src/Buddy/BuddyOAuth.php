@@ -98,7 +98,7 @@ class BuddyOAuth
         if (empty($_GET['state']) || $_GET['state'] != $state) {
             throw new BuddySDKException('State does not match');
         }
-        if (empty($_GET['code'])){
+        if (empty($_GET['code'])) {
             throw new BuddySDKException('No code provided');
         }
         if (empty($this->options['clientId'])) {

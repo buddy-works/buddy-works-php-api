@@ -15,23 +15,36 @@
 
 namespace Buddy;
 
-use \GuzzleHttp\Message\ResponseInterface;
 use \Buddy\Objects;
 
 class BuddyResponse
 {
     /**
-     * @var ResponseInterface
+     * @var string
      */
-    private $rawResponse;
+    private $body;
+
+    /**
+     * @var array
+     */
+    private $headers;
+
+    /**
+     * @var int
+     */
+    private $statusCode;
 
     /**
      * BuddyResponse constructor.
-     * @param ResponseInterface $rawResponse
+     * @param int $statusCode
+     * @param array $headers
+     * @param string $body
      */
-    public function __construct(ResponseInterface $rawResponse)
+    public function __construct($statusCode, $headers, $body)
     {
-        $this->rawResponse = $rawResponse;
+        $this->statusCode = $statusCode;
+        $this->headers = $headers;
+        $this->body = $body;
     }
 
     /**
@@ -39,6 +52,30 @@ class BuddyResponse
      */
     public function getAsAuth()
     {
-        return new Objects\Auth(json_decode($this->rawResponse->getBody(), true));
+        return new Objects\Auth(json_decode($this->body, true));
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatusCode()
+    {
+        return $this->statusCode;
     }
 }

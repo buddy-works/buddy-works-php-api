@@ -15,9 +15,6 @@
 
 namespace Buddy\Exceptions;
 
-use GuzzleHttp\Message\ResponseInterface;
-use Mockery\CountValidator\Exception;
-
 class BuddyResponseException extends BuddySDKException
 {
     /**
@@ -28,26 +25,33 @@ class BuddyResponseException extends BuddySDKException
     /**
      * @var string
      */
-    private $rawBody;
+    private $body;
+
+    /**
+     * @var int
+     */
+    private $statusCode;
 
     /**
      * BuddyResponseException constructor.
-     * @param ResponseInterface $response
+     * @param int $statusCode
+     * @param array $headers
+     * @param string $body
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct($statusCode, $headers, $body)
     {
-        $this->code = $response->getStatusCode();
-        $this->headers = $response->getHeaders();
-        $this->rawBody = (string)$response->getBody();
+        $this->statusCode = $statusCode;
+        $this->headers = $headers;
+        $this->body = $body;
         $this->message = 'Something went wrong';
         try {
-            $body = json_decode($this->rawBody, true);
-            if (!empty($body['error'])){
+            $body = json_decode($this->body, true);
+            if (!empty($body['error'])) {
                 $this->message = $body['error'];
-            }else if (!empty($body['errors']) && is_array($body['errors']) && !empty($body['errors'][0]) && !empty($body['errors'][0]['message'])) {
+            } else if (!empty($body['errors']) && is_array($body['errors']) && !empty($body['errors'][0]) && !empty($body['errors'][0]['message'])) {
                 $this->message = $body['errors'][0]['message'];
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -62,8 +66,16 @@ class BuddyResponseException extends BuddySDKException
     /**
      * @return string
      */
-    public function getRawBody()
+    public function getBody()
     {
-        return $this->rawBody;
+        return $this->body;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatusCode()
+    {
+        return $this->statusCode;
     }
 }

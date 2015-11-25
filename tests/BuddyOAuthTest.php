@@ -17,10 +17,23 @@
 namespace Buddy\Tests;
 
 use Buddy\Buddy;
+use Buddy\BuddyClient;
 use Buddy\BuddyOAuth;
 
 class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
 {
+    public function testConstructor()
+    {
+        $opts = [
+            'clientId' => 'foo',
+            'clientSecret' => 'bar'
+        ];
+        $oauth = new BuddyOAuth(new BuddyClient(), $opts);
+        $this->assertInstanceOf('Buddy\BuddyClient', \PHPUnit_Framework_Assert::readAttribute($oauth, 'client'));
+        $this->assertEquals($opts, \PHPUnit_Framework_Assert::readAttribute($oauth, 'options'));
+
+    }
+
     /**
      * @expectedException \Buddy\Exceptions\BuddySDKException
      * @expectedExceptionMessage Please provide clientId
@@ -55,30 +68,33 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
         $app->getOAuth()->getAuthorizeUrl([BuddyOAuth::SCOPE_MANAGE_EMAILS], '');
     }
 
-    public function testGetAuthorizeUrlWithFakeData()
+    public function testGetAuthorizeUrl()
     {
         $clientId = getenv('CLIENT_ID');
-        if (empty($clientId)) $clientId = 'foo';
+        if (empty($clientId)){
+            return;
+        }
         $app = new Buddy([
             'clientId' => $clientId
         ]);
         $url = $app->getOAuth()->getAuthorizeUrl([
-            BuddyOAuth::SCOPE_MANAGE_EMAILS,
-            BuddyOAuth::SCOPE_MEMBER_EMAIL,
-            BuddyOAuth::SCOPE_PROJECT_DELETE,
-            BuddyOAuth::SCOPE_RELEASE_INFO,
-            BuddyOAuth::SCOPE_RELEASE_MANAGE,
-            BuddyOAuth::SCOPE_RELEASE_RUN,
-            BuddyOAuth::SCOPE_REPOSITORY_READ,
-            BuddyOAuth::SCOPE_REPOSITORY_WRITE,
-            BuddyOAuth::SCOPE_USER_EMAIL,
-            BuddyOAuth::SCOPE_USER_INFO,
-            BuddyOAuth::SCOPE_USER_KEY,
-            BuddyOAuth::SCOPE_WEBHOOK_ADD,
-            BuddyOAuth::SCOPE_WEBHOOK_INFO,
-            BuddyOAuth::SCOPE_WEBHOOK_MANAGE,
-            BuddyOAuth::SCOPE_WORKSPACE
+            BuddyOAuth::SCOPE_MANAGE_EMAILS
         ], 'foo');
+        $this->assertNotEmpty($url);
+    }
+
+    public function testGetAuthorizeUrlWithRedirectUrl()
+    {
+        $clientId = getenv('CLIENT_ID');
+        if (empty($clientId)){
+            return;
+        }
+        $app = new Buddy([
+            'clientId' => $clientId
+        ]);
+        $url = $app->getOAuth()->getAuthorizeUrl([
+            BuddyOAuth::SCOPE_MANAGE_EMAILS
+        ], 'foo', 'http://127.0.0.1');
         $this->assertNotEmpty($url);
     }
 
@@ -88,16 +104,11 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAccessTokenWithoutCode()
     {
-        $clientId = getenv('CLIENT_ID');
         $_GET = [];
         $_GET['state'] = 'foo';
-        $clientSecret = getenv('CLIENT_SECRET');
-        if (empty($clientId) || empty($clientSecret)){
-            return;
-        }
         $app = new Buddy([
-            'clientId' => $clientId,
-            'clientSecret' => $clientSecret
+            'clientId' => 'clientId',
+            'clientSecret' => 'secret'
         ]);
         $app->getOAuth()->getAccessToken('foo');
     }
@@ -144,28 +155,39 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
             'clientId' => 'clientId',
             'clientSecret' => 'secret'
         ]);
-        $token = $app->getOAuth()->getAccessToken('foo');
-        $this->assertNotEmpty($token);
+        $app->getOAuth()->getAccessToken('foo');
     }
 
     /**
-     * @throws \Buddy\Exceptions\BuddySDKException
+     * @expectedException \Buddy\Exceptions\BuddyResponseException
+     * @expectedExceptionMessage Invalid client_id
      */
     public function testGetAccessToken()
     {
         $_GET = [];
-        $clientId = getenv('CLIENT_ID');
-        $clientSecret = getenv('CLIENT_SECRET');
-        $_GET['code'] = getenv('CODE');
-        $_GET['state'] = 'foo';
-        if (empty($clientId) || empty($clientSecret) || empty($_GET['code'])){
-            return;
-        }
+        $_GET['state'] = 'state';
+        $_GET['code'] = 'code';
         $app = new Buddy([
-            'clientId' => $clientId,
-            'clientSecret' => $clientSecret
+            'clientId' => 'clientId',
+            'clientSecret' => 'secret'
         ]);
-        $token = $app->getOAuth()->getAccessToken('foo');
-        $this->assertNotEmpty($token);
+        $app->getOAuth()->getAccessToken('state');
     }
+
+    /**
+     * @expectedException \Buddy\Exceptions\BuddyResponseException
+     * @expectedExceptionMessage Invalid client_id
+     */
+    public function testGetAccessTokenWithRedirectUrl()
+    {
+        $_GET = [];
+        $_GET['state'] = 'state';
+        $_GET['code'] = 'code';
+        $app = new Buddy([
+            'clientId' => 'clientId',
+            'clientSecret' => 'secret'
+        ]);
+        $app->getOAuth()->getAccessToken('state', 'http://12.0.0.1');
+    }
+
 }

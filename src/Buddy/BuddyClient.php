@@ -65,9 +65,9 @@ class BuddyClient
         }
         $httpStatusCode = $rawResponse->getStatusCode();
         if ($httpStatusCode >= 200 && $httpStatusCode < 300) {
-            return new BuddyResponse($rawResponse);
+            return new BuddyResponse($rawResponse->getStatusCode(), $rawResponse->getHeaders(), (string)$rawResponse->getBody());
         } else {
-            throw new BuddyResponseException($rawResponse);
+            throw new BuddyResponseException($rawResponse->getStatusCode(), $rawResponse->getHeaders(), (string)$rawResponse->getBody());
         }
     }
 
@@ -180,5 +180,16 @@ class BuddyClient
         return $this->request($url, 'POST', [
             'body' => $params
         ]);
+    }
+
+    /**
+     * @param string $url
+     * @return BuddyResponse
+     * @throws BuddyResponseException
+     * @throws BuddySDKException
+     */
+    public function get($url)
+    {
+        return $this->request($url, 'GET');
     }
 }
