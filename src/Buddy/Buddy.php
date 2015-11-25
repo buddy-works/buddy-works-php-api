@@ -15,6 +15,8 @@
 
 namespace Buddy;
 
+use Buddy\Apis;
+
 class Buddy
 {
 
@@ -29,6 +31,11 @@ class Buddy
     private $oauth;
 
     /**
+     * @var Apis\Workspaces
+     */
+    private $apiWorkspaces;
+
+    /**
      * Buddy constructor.
      * @param array $config
      */
@@ -36,14 +43,15 @@ class Buddy
     {
         $this->client = new BuddyClient();
         $this->oauth = new BuddyOAuth($this->client, $config);
+        $this->apiWorkspaces = new Apis\Workspaces($this->client, $config);
     }
 
     /**
-     * @return BuddyClient
+     * @return Apis\Workspaces
      */
-    public function getClient()
+    public function getApiWorkspaces()
     {
-        return $this->client;
+        return $this->apiWorkspaces;
     }
 
     /**

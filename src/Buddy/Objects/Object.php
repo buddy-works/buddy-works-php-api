@@ -32,6 +32,47 @@ class Object
     }
 
     /**
+     * @param string $propertyName
+     * @param string|null $jsonName
+     */
+    protected function setFromJson($propertyName, $jsonName = null){
+        if (empty($jsonName)) $jsonName = $propertyName;
+        if (isset($this->json[$jsonName])){
+            $this[$propertyName] = $this->json[$jsonName];
+        }
+    }
+
+    /**
+     * @param string $className
+     * @param string $propertyName
+     * @param string|null $jsonName
+     */
+    protected function setFromJsonAsObject($className, $propertyName, $jsonName = null)
+    {
+        $this->setFromJson($propertyName, $jsonName);
+        if (isset($this[$propertyName])) {
+            $this[$propertyName] = new $className($this[$propertyName]);
+        }
+    }
+
+    /**
+     * @param string $className
+     * @param string $propertyName
+     * @param string|null $jsonName
+     */
+    protected function setFromJsonAsArray($className, $propertyName, $jsonName = null)
+    {
+        $this->setFromJson($propertyName, $jsonName);
+        if (isset($this[$propertyName])){
+            $tmp = [];
+            foreach($this[$propertyName] as $json){
+                $tmp[] = new $className($json);
+            }
+            $this[$propertyName] = $tmp;
+        }
+    }
+
+    /**
      * @return array
      */
     public function getJson()

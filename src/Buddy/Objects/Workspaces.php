@@ -15,56 +15,56 @@
 
 namespace Buddy\Objects;
 
-class Auth extends Object
+class Workspaces extends Object
 {
     /**
      * @var string
      */
-    private $accessToken;
-
-    /**
-     * @var int
-     */
-    private $expiresIn;
+    private $url;
 
     /**
      * @var string
      */
-    private $tokenType;
+    private $htmlUrl;
 
     /**
-     * Auth constructor.
+     * @var array
+     */
+    private $workspaces;
+
+    /**
+     * Workspaces constructor.
      * @param array $json
      */
     public function __construct(array $json)
     {
         parent::__construct($json);
-        $this->setFromJson('accessToken', 'access_token');
-        $this->setFromJson('expiresIn', 'expires_in');
-        $this->setFromJson('tokenType', 'token_type');
+        $this->setFromJson('url');
+        $this->setFromJson('htmlUrl', 'html_url');
+        $this->setFromJsonAsArray('Buddy\Objects\Workspace', 'workspaces');
     }
 
     /**
      * @return string
      */
-    public function getAccessToken()
+    public function getUrl()
     {
-        return $this->accessToken;
-    }
-
-    /**
-     * @return int
-     */
-    public function getExpiresIn()
-    {
-        return $this->expiresIn;
+        return $this->url;
     }
 
     /**
      * @return string
      */
-    public function getTokenType()
+    public function getHtmlUrl()
     {
-        return $this->tokenType;
+        return $this->htmlUrl;
+    }
+
+    /**
+     * @return array
+     */
+    public function getWorkspaces()
+    {
+        return $this->workspaces;
     }
 }

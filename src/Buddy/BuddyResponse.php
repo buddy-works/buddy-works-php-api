@@ -56,6 +56,22 @@ class BuddyResponse
     }
 
     /**
+     * @return Objects\Workspaces
+     */
+    public function getAsWorkspaces()
+    {
+        return new Objects\Workspaces(json_decode($this->body, true));
+    }
+
+    /**
+     * @return Objects\Workspace
+     */
+    public function getAsWorkspace()
+    {
+        return new Objects\Workspace(json_decode($this->body, true));
+    }
+
+    /**
      * @return string
      */
     public function getBody()

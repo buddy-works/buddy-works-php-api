@@ -22,7 +22,6 @@ class BuddyTest extends \PHPUnit_Framework_TestCase
     public function testInstantiating()
     {
         $buddy = new Buddy();
-        $this->assertInstanceOf('Buddy\BuddyClient', $buddy->getClient());
         $this->assertInstanceOf('Buddy\BuddyOAuth', $buddy->getOAuth());
     }
 
