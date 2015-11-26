@@ -38,5 +38,4 @@ class Workspaces extends Api
             'domain' => $domain
         ])->getAsWorkspace();
     }
-
 }
