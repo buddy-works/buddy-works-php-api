@@ -15,25 +15,25 @@
 
 namespace Buddy\Objects;
 
-class Auth extends Object
+class Group extends Object
 {
-    /**
-     * @var string
-     */
-    private $accessToken;
-
     /**
      * @var int
      */
-    private $expiresIn;
+    protected $id;
 
     /**
      * @var string
      */
-    private $tokenType;
+    protected $name;
 
     /**
-     * Auth constructor.
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * Group constructor.
      * @param array $json
      * @param array $headers
      * @param int $status
@@ -41,32 +41,52 @@ class Auth extends Object
     public function __construct(array $json = [], array $headers = [], $status = 200)
     {
         parent::__construct($json, $headers, $status);
-        $this->setFromJson('accessToken', 'access_token');
-        $this->setFromJson('expiresIn', 'expires_in');
-        $this->setFromJson('tokenType', 'token_type');
-    }
-
-    /**
-     * @return string
-     */
-    public function getAccessToken()
-    {
-        return $this->accessToken;
+        $this->setFromJson('id');
+        $this->setFromJson('name');
+        $this->setFromJson('description');
     }
 
     /**
      * @return int
      */
-    public function getExpiresIn()
+    public function getId()
     {
-        return $this->expiresIn;
+        return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getTokenType()
+    public function getName()
     {
-        return $this->tokenType;
+        return $this->name;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setName($val)
+    {
+        $this->name = $val;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setDescription($val)
+    {
+        $this->description = $val;
+        return $this;
     }
 }

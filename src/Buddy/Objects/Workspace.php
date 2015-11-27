@@ -18,76 +18,50 @@ namespace Buddy\Objects;
 class Workspace extends Object
 {
     /**
-     * @var string
+     * @var int
      */
-    private $url;
+    protected $id;
 
     /**
      * @var string
      */
-    private $htmlUrl;
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $domain;
 
     /**
      * @var int
      */
-    private $id;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $domain;
-
-    /**
-     * @var int
-     */
-    private $ownerId;
+    protected $ownerId;
 
     /**
      * @var bool
      */
-    private $frozen;
+    protected $frozen;
 
     /**
      * @var string
      */
-    private $createDate;
+    protected $createDate;
 
     /**
      * Workspace constructor.
      * @param array $json
+     * @param array $headers
+     * @param int $status
      */
-    public function __construct(array $json)
+    public function __construct(array $json = [], array $headers = [], $status = 200)
     {
-        parent::__construct($json);
-        $this->setFromJson('url');
-        $this->setFromJson('htmlUrl', 'html_url');
+        parent::__construct($json, $headers, $status);
         $this->setFromJson('id');
         $this->setFromJson('name');
         $this->setFromJson('domain');
         $this->setFromJson('ownerId', 'owner_id');
         $this->setFromJson('frozen');
         $this->setFromJson('createDate', 'create_date');
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHtmlUrl()
-    {
-        return $this->htmlUrl;
     }
 
     /**

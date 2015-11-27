@@ -36,6 +36,31 @@ class Buddy
     private $apiWorkspaces;
 
     /**
+     * @var Apis\Projects
+     */
+    private $apiProjects;
+
+    /**
+     * @var Apis\Members
+     */
+    private $apiMembers;
+
+    /**
+     * @var Apis\Permissions
+     */
+    private $apiPermissions;
+
+    /**
+     * @var Apis\Groups
+     */
+    private $apiGroups;
+
+    /**
+     * @var Apis\Webhooks
+     */
+    private $apiWebhooks;
+
+    /**
      * Buddy constructor.
      * @param array $config
      */
@@ -44,6 +69,43 @@ class Buddy
         $this->client = new BuddyClient();
         $this->oauth = new BuddyOAuth($this->client, $config);
         $this->apiWorkspaces = new Apis\Workspaces($this->client, $config);
+        $this->apiProjects = new Apis\Projects($this->client, $config);
+        $this->apiMembers = new Apis\Members($this->client, $config);
+        $this->apiPermissions = new Apis\Permissions($this->client, $config);
+        $this->apiGroups = new Apis\Groups($this->client, $config);
+        $this->apiWebhooks = new Apis\Webhooks($this->client, $config);
+    }
+
+    /**
+     * @return Apis\Webhooks
+     */
+    public function getApiWebhooks()
+    {
+        return $this->apiWebhooks;
+    }
+
+    /**
+     * @return Apis\Groups
+     */
+    public function getApiGroups()
+    {
+        return $this->apiGroups;
+    }
+
+    /**
+     * @return Apis\Permissions
+     */
+    public function getApiPermissions()
+    {
+        return $this->apiPermissions;
+    }
+
+    /**
+     * @return Apis\Members
+     */
+    public function getApiMembers()
+    {
+        return $this->apiMembers;
     }
 
     /**
@@ -52,6 +114,14 @@ class Buddy
     public function getApiWorkspaces()
     {
         return $this->apiWorkspaces;
+    }
+
+    /**
+     * @return Apis\Projects
+     */
+    public function getApiProjects()
+    {
+        return $this->apiProjects;
     }
 
     /**

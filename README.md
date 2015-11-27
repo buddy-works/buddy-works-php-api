@@ -1,5 +1,6 @@
 # Buddy Works APIs PHP SDK
 [![Build Status](https://travis-ci.org/buddy-works/buddy-works-php-api.svg?branch=master)](https://travis-ci.org/buddy-works/buddy-works-php-api)
+
 Buddy's officially supported PHP client library.
 
 ## Installation
@@ -73,6 +74,31 @@ All requests will be called in behalf of the user whom provided token
 ## Apis
 
 For detailed info check [our documentation](https://buddy.works/api/reference/getting-started/overview)
+
+To start using api you should pass to Buddy constructor acquired access token.
+
+```php
+$buddy = new Buddy\Buddy([
+  'accessToken' => 'your access token'
+]);
+```
+
+From there every method called from this instance of Buddy will be called on behalf of user for which access token was generated.
+
+(You can also pass access tokens as last parameter to every api method)
+ 
+### Workspaces
+
+Get workspaces
+```php
+$resp = $buddy->getApiWorkspaces()->getWorkspaces([$accessToken]);
+```
+
+Get workspace
+```php
+$resp = $buddy->getApiWorkspaces()->getWorkspace($domain, [$accessToken]);
+```
+
  
 In progress...
 
@@ -90,6 +116,7 @@ Run command:
 ``` sh
 ./vendor/bin/phpunit
 ```
+> **Note:** It will test on provided account (add projects ie.)
 
 ## License
 

@@ -105,7 +105,7 @@ class BuddyClient
     {
         if (count($params) > 0) {
             foreach ($params as $k => $v) {
-                $url = preg_replace("/:{$k}/", urlencode($v));
+                $url = preg_replace("/:{$k}/", urlencode($v), $url);
             }
         }
         if (count($query) > 0) {

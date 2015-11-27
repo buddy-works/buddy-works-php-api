@@ -52,7 +52,7 @@ class BuddyResponse
      */
     public function getAsAuth()
     {
-        return new Objects\Auth(json_decode($this->body, true));
+        return new Objects\Auth($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
     }
 
     /**
@@ -60,7 +60,7 @@ class BuddyResponse
      */
     public function getAsWorkspaces()
     {
-        return new Objects\Workspaces(json_decode($this->body, true));
+        return new Objects\Workspaces($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
     }
 
     /**
@@ -68,7 +68,103 @@ class BuddyResponse
      */
     public function getAsWorkspace()
     {
-        return new Objects\Workspace(json_decode($this->body, true));
+        return new Objects\Workspace($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\User
+     */
+    public function getAsUser()
+    {
+        return new Objects\User($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Projects
+     */
+    public function getAsProjects()
+    {
+        return new Objects\Projects($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Project
+     */
+    public function getAsProject()
+    {
+        return new Objects\Project($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\PermissionSet
+     */
+    public function getAsPermissionSet()
+    {
+        return new Objects\PermissionSet($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\PermissionSets
+     */
+    public function getAsPermissionSets()
+    {
+        return new Objects\PermissionSets($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return array
+     */
+    public function getBodyJson()
+    {
+        return json_decode($this->getBody(), true);
+    }
+
+    /**
+     * @return Objects\Members
+     */
+    public function getAsMembers()
+    {
+        return new Objects\Members($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Groups
+     */
+    public function getAsGroups()
+    {
+        return new Objects\Groups($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Webhook
+     */
+    public function getAsWebhook()
+    {
+        return new Objects\Webhook($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Webhooks
+     */
+    public function getAsWebhooks()
+    {
+        return new Objects\Webhooks($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Group
+     */
+    public function getAsGroup()
+    {
+        return new Objects\Group($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAsBool()
+    {
+        return $this->getStatusCode() >= 200 && $this->getStatusCode() < 300;
     }
 
     /**

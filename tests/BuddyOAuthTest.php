@@ -71,9 +71,6 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
     public function testGetAuthorizeUrl()
     {
         $clientId = getenv('CLIENT_ID');
-        if (empty($clientId)){
-            return;
-        }
         $app = new Buddy([
             'clientId' => $clientId
         ]);
@@ -86,9 +83,6 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
     public function testGetAuthorizeUrlWithRedirectUrl()
     {
         $clientId = getenv('CLIENT_ID');
-        if (empty($clientId)){
-            return;
-        }
         $app = new Buddy([
             'clientId' => $clientId
         ]);

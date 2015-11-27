@@ -15,15 +15,15 @@
 
 namespace Buddy\Objects;
 
-class Workspaces extends Object
+class Groups extends Object
 {
     /**
      * @var array
      */
-    protected $workspaces;
+    protected $groups;
 
     /**
-     * Workspaces constructor.
+     * Groups constructor.
      * @param array $json
      * @param array $headers
      * @param int $status
@@ -31,14 +31,14 @@ class Workspaces extends Object
     public function __construct(array $json = [], array $headers = [], $status = 200)
     {
         parent::__construct($json, $headers, $status);
-        $this->setFromJsonAsArray('Buddy\Objects\Workspace', 'workspaces');
+        $this->setFromJsonAsArray('Buddy\Objects\Group', 'groups');
     }
 
     /**
      * @return array
      */
-    public function getWorkspaces()
+    public function getGroups()
     {
-        return $this->workspaces;
+        return $this->groups;
     }
 }

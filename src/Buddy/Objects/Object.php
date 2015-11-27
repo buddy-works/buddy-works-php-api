@@ -23,12 +23,54 @@ class Object
     protected $json;
 
     /**
+     * @var string
+     */
+    protected $url;
+
+    /**
+     * @var string
+     */
+    protected $htmlUrl;
+
+    /**
+     * @var array
+     */
+    protected $httpRequestHeaders;
+
+    /**
+     * @var int
+     */
+    protected $httpRequestStatus;
+
+    /**
      * Object constructor.
      * @param array $json
+     * @param array $headers
+     * @param int $status
      */
-    public function __construct(array $json)
+    public function __construct(array $json = [], array $headers = [], $status = 200)
     {
         $this->json = $json;
+        $this->httpRequestHeaders = $headers;
+        $this->httpRequestStatus = $status;
+        $this->setFromJson('url');
+        $this->setFromJson('htmlUrl', 'html_url');
+    }
+
+    /**
+     * @return int
+     */
+    public function getHttpRequestStatus()
+    {
+        return $this->httpRequestStatus;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHttpRequestHeaders()
+    {
+        return $this->httpRequestHeaders;
     }
 
     /**
@@ -41,7 +83,7 @@ class Object
             $jsonName = $propertyName;
         }
         if (isset($this->json[$jsonName])) {
-            $this[$propertyName] = $this->json[$jsonName];
+            $this->$propertyName = $this->json[$jsonName];
         }
     }
 
@@ -53,8 +95,8 @@ class Object
     protected function setFromJsonAsObject($className, $propertyName, $jsonName = null)
     {
         $this->setFromJson($propertyName, $jsonName);
-        if (isset($this[$propertyName])) {
-            $this[$propertyName] = new $className($this[$propertyName]);
+        if (isset($this->$propertyName)) {
+            $this->$propertyName = new $className($this->$propertyName);
         }
     }
 
@@ -66,13 +108,29 @@ class Object
     protected function setFromJsonAsArray($className, $propertyName, $jsonName = null)
     {
         $this->setFromJson($propertyName, $jsonName);
-        if (isset($this[$propertyName])) {
+        if (isset($this->$propertyName)) {
             $tmp = [];
-            foreach ($this[$propertyName] as $json) {
+            foreach ($this->$propertyName as $json) {
                 $tmp[] = new $className($json);
             }
-            $this[$propertyName] = $tmp;
+            $this->$propertyName = $tmp;
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHtmlUrl()
+    {
+        return $this->htmlUrl;
     }
 
     /**
