@@ -99,9 +99,10 @@ class BuddyClient
      * @param string $url
      * @param array $params
      * @param array $query
+     * @param string $path
      * @return string
      */
-    public function createUrl($url, array $params = [], array $query = [])
+    public function createUrl($url, array $params = [], array $query = [], $path = '/')
     {
         if (count($params) > 0) {
             foreach ($params as $k => $v) {
@@ -110,6 +111,11 @@ class BuddyClient
         }
         if (count($query) > 0) {
             $url .= '?' . http_build_query($query);
+        }
+        if ($path != '/' && $path != '') {
+            $path = urlencode($path);
+            $path = preg_replace('/%2F/g', '/', $path);
+            $url .= $path;
         }
         return self::API_ENDPOINT . $url;
     }

@@ -160,6 +160,110 @@ class BuddyResponse
     }
 
     /**
+     * @return Objects\Commit
+     */
+    public function getAsCommit()
+    {
+        return new Objects\Commit($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Commits
+     */
+    public function getAsCommits()
+    {
+        return new Objects\Commits($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\CompareCommits
+     */
+    public function getAsCompareCommits()
+    {
+        return new Objects\CompareCommits($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\SourceCommitContent
+     */
+    public function getAsSourceCommitContent()
+    {
+        return new Objects\SourceCommitContent($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Branch
+     */
+    public function getAsBranch()
+    {
+        return new Objects\Branch($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Branches
+     */
+    public function getAsBranches()
+    {
+        return new Objects\Branches($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Email
+     */
+    public function getAsEmail()
+    {
+        return new Objects\Email($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Emails
+     */
+    public function getAsEmails()
+    {
+        return new Objects\Emails($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\SshKeys
+     */
+    public function getAsSshKeys()
+    {
+        return new Objects\SshKeys($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\SshKey
+     */
+    public function getAsSshKey()
+    {
+        return new Objects\SshKey($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Tag
+     */
+    public function getAsTag()
+    {
+        return new Objects\Tag($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Tags
+     */
+    public function getAsTags()
+    {
+        return new Objects\Tags($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\SourceContents
+     */
+    public function getAsSourceContents()
+    {
+        return new Objects\SourceContents($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
      * @return bool
      */
     public function getAsBool()

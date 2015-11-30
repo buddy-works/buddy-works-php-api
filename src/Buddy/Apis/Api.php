@@ -46,12 +46,13 @@ class Api
      * @param string $url
      * @param array $params
      * @param array $query
+     * @param string $path
      * @return \Buddy\BuddyResponse
      * @throws BuddySDKException
      */
-    protected function getJson($accessToken, $url, array $params = [], array $query = [])
+    protected function getJson($accessToken, $url, array $params = [], array $query = [], $path = '/')
     {
-        return $this->client->getJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query));
+        return $this->client->getJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path));
     }
 
     /**
@@ -60,12 +61,13 @@ class Api
      * @param string $url
      * @param array $params
      * @param array $query
+     * @param string $path
      * @return \Buddy\BuddyResponse
      * @throws BuddySDKException
      */
-    protected function patchJson($accessToken, array $patchData, $url, array $params = [], array $query = [])
+    protected function patchJson($accessToken, array $patchData, $url, array $params = [], array $query = [], $path = '/')
     {
-        return $this->client->patchJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query), $patchData);
+        return $this->client->patchJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $patchData);
     }
 
     /**
@@ -74,12 +76,13 @@ class Api
      * @param string $url
      * @param array $params
      * @param array $query
+     * @param string $path
      * @return \Buddy\BuddyResponse
      * @throws BuddySDKException
      */
-    protected function deleteJson($accessToken, $deleteData, $url, array $params = [], array $query = [])
+    protected function deleteJson($accessToken, $deleteData, $url, array $params = [], array $query = [], $path = '/')
     {
-        return $this->client->deleteJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query), $deleteData);
+        return $this->client->deleteJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $deleteData);
     }
 
     /**
@@ -88,12 +91,28 @@ class Api
      * @param string $url
      * @param array $params
      * @param array $query
+     * @param string $path
      * @return \Buddy\BuddyResponse
      * @throws BuddySDKException
      */
-    protected function postJson($accessToken, array $postData, $url, array $params = [], array $query = [])
+    protected function postJson($accessToken, array $postData, $url, array $params = [], array $query = [], $path = '/')
     {
-        return $this->client->postJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query), $postData);
+        return $this->client->postJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $postData);
+    }
+
+    /**
+     * @param string $accessToken
+     * @param array $putData
+     * @param string $url
+     * @param array $params
+     * @param array $query
+     * @param string $path
+     * @return \Buddy\BuddyResponse
+     * @throws BuddySDKException
+     */
+    protected function putJson($accessToken, array $putData, $url, array $params = [], array $query = [], $path = '/')
+    {
+        return $this->client->putJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $putData);
     }
 
     /**
