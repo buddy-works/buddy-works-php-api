@@ -15,29 +15,25 @@
 
 namespace Buddy\Objects;
 
-class CommitFile extends ChangeStats
+class WebhookRequest extends Object
 {
-    const STATUS_MODIFIED = 'MODIFIED';
-    const STATUS_ADDED = 'ADDED';
-    const STATUS_DELETED = 'DELETED';
+    /**
+     * @var string
+     */
+    protected $postDate;
+
+    /**
+     * @var int
+     */
+    protected $responseStatus;
 
     /**
      * @var string
      */
-    protected $fileName;
+    protected $body;
 
     /**
-     * @var string
-     */
-    protected $status;
-
-    /**
-     * @var string
-     */
-    protected $patch;
-
-    /**
-     * CommitFile constructor.
+     * WebhookRequest constructor.
      * @param array $json
      * @param array $headers
      * @param int $status
@@ -45,32 +41,32 @@ class CommitFile extends ChangeStats
     public function __construct(array $json = [], array $headers = [], $status = 200)
     {
         parent::__construct($json, $headers, $status);
-        $this->setFromJson('fileName', 'file_name');
-        $this->setFromJson('status');
-        $this->setFromJson('patch');
+        $this->setFromJson('postDate', 'post_date');
+        $this->setFromJson('responseStatus', 'response_status');
+        $this->setFromJson('body');
     }
 
     /**
      * @return string
      */
-    public function getFileName()
+    public function getBody()
     {
-        return $this->fileName;
+        return $this->body;
+    }
+
+    /**
+     * @return int
+     */
+    public function getResponseStatus()
+    {
+        return $this->responseStatus;
     }
 
     /**
      * @return string
      */
-    public function getStatus()
+    public function getPostDate()
     {
-        return $this->status;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPatch()
-    {
-        return $this->patch;
+        return $this->postDate;
     }
 }

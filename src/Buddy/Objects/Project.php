@@ -17,6 +17,9 @@ namespace Buddy\Objects;
 
 class Project extends Object
 {
+    const STATUS_ACTIVE = 'ACTIVE';
+    const STATUS_CLOSED = 'CLOSED';
+
     /**
      * @var string
      */

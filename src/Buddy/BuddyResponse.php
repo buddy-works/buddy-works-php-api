@@ -240,6 +240,38 @@ class BuddyResponse
     }
 
     /**
+     * @return Objects\Scenario
+     */
+    public function getAsScenario()
+    {
+        return new Objects\Scenario($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\ScenarioAction
+     */
+    public function getAsScenarioAction()
+    {
+        return new Objects\ScenarioAction($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\ScenarioActions
+     */
+    public function getAsScenarioActions()
+    {
+        return new Objects\ScenarioActions($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Scenarios
+     */
+    public function getAsScenarios()
+    {
+        return new Objects\Scenarios($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
      * @return Objects\Tag
      */
     public function getAsTag()

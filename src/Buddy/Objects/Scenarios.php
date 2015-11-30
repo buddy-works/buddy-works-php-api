@@ -15,29 +15,15 @@
 
 namespace Buddy\Objects;
 
-class CommitFile extends ChangeStats
+class Scenarios extends Object
 {
-    const STATUS_MODIFIED = 'MODIFIED';
-    const STATUS_ADDED = 'ADDED';
-    const STATUS_DELETED = 'DELETED';
-
     /**
-     * @var string
+     * @var array
      */
-    protected $fileName;
+    protected $scenarios;
 
     /**
-     * @var string
-     */
-    protected $status;
-
-    /**
-     * @var string
-     */
-    protected $patch;
-
-    /**
-     * CommitFile constructor.
+     * Scenarios constructor.
      * @param array $json
      * @param array $headers
      * @param int $status
@@ -45,32 +31,14 @@ class CommitFile extends ChangeStats
     public function __construct(array $json = [], array $headers = [], $status = 200)
     {
         parent::__construct($json, $headers, $status);
-        $this->setFromJson('fileName', 'file_name');
-        $this->setFromJson('status');
-        $this->setFromJson('patch');
+        $this->setFromJsonAsArray('Buddy\Objects\Scenario', 'scenarios', 'release_scenarios');
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getFileName()
+    public function getScenarios()
     {
-        return $this->fileName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPatch()
-    {
-        return $this->patch;
+        return $this->scenarios;
     }
 }

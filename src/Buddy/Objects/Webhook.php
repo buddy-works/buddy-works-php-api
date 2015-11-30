@@ -49,6 +49,11 @@ class Webhook extends Object
     protected $events;
 
     /**
+     * @var array
+     */
+    protected $requests;
+
+    /**
      * Webhook constructor.
      * @param array $json
      * @param array $headers
@@ -62,6 +67,15 @@ class Webhook extends Object
         $this->setFromJson('secretKey', 'secret_key');
         $this->setFromJsonAsObject('Buddy\Objects\Project', 'projectFilter', 'project_filter');
         $this->setFromJson('events');
+        $this->setFromJsonAsArray('Buddy\Objects\WebhookRequest', 'requests');
+    }
+
+    /**
+     * @return array
+     */
+    public function getRequests()
+    {
+        return $this->requests;
     }
 
     /**
