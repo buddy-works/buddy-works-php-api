@@ -44,6 +44,18 @@ class BranchTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Buddy\Objects\Commit', $resp->getCommit());
     }
 
+    /**
+     * @expectedException \Buddy\Exceptions\BuddySDKException
+     * @expectedExceptionMessage Commit with revision must be provided
+     */
+    public function testAddBranchException()
+    {
+        $project = Utils::addProject();
+        $branch = new Branch();
+        $branch->setName(Utils::randomString());
+        Utils::getBuddy()->getApiBranches()->addBranch($branch, Utils::getWorkspaceDomain(), $project->getName());
+    }
+
     public function testGetBranch()
     {
         $project = Utils::addProject();
