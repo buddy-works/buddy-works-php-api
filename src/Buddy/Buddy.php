@@ -61,6 +61,51 @@ class Buddy
     private $apiWebhooks;
 
     /**
+     * @var Apis\Branches
+     */
+    private $apiBranches;
+
+    /**
+     * @var Apis\Commits
+     */
+    private $apiCommits;
+
+    /**
+     * @var Apis\Emails
+     */
+    private $apiEmails;
+
+    /**
+     * @var Apis\Profile
+     */
+    private $apiProfile;
+
+    /**
+     * @var Apis\Releases
+     */
+    private $apiReleases;
+
+    /**
+     * @var Apis\Scenarios
+     */
+    private $apiScenarios;
+
+    /**
+     * @var Apis\Source
+     */
+    private $apiSource;
+
+    /**
+     * @var Apis\SshKeys
+     */
+    private $apiSshKeys;
+
+    /**
+     * @var Apis\Tags
+     */
+    private $apiTags;
+
+    /**
      * Buddy constructor.
      * @param array $config
      */
@@ -74,6 +119,87 @@ class Buddy
         $this->apiPermissions = new Apis\Permissions($this->client, $config);
         $this->apiGroups = new Apis\Groups($this->client, $config);
         $this->apiWebhooks = new Apis\Webhooks($this->client, $config);
+        $this->apiBranches = new Apis\Branches($this->client, $config);
+        $this->apiCommits = new Apis\Commits($this->client, $config);
+        $this->apiEmails = new Apis\Emails($this->client, $config);
+        $this->apiProfile = new Apis\Profile($this->client, $config);
+        $this->apiReleases = new Apis\Releases($this->client, $config);
+        $this->apiScenarios = new Apis\Scenarios($this->client, $config);
+        $this->apiSource = new Apis\Source($this->client, $config);
+        $this->apiSshKeys = new Apis\SshKeys($this->client, $config);
+        $this->apiTags = new Apis\Tags($this->client, $config);
+    }
+
+    /**
+     * @return Apis\Tags
+     */
+    public function getApiTags()
+    {
+        return $this->apiTags;
+    }
+
+    /**
+     * @return Apis\SshKeys
+     */
+    public function getApiSshKeys()
+    {
+        return $this->apiSshKeys;
+    }
+
+    /**
+     * @return Apis\Source
+     */
+    public function getApiSource()
+    {
+        return $this->apiSource;
+    }
+
+    /**
+     * @return Apis\Scenarios
+     */
+    public function getApiScenarios()
+    {
+        return $this->apiScenarios;
+    }
+
+    /**
+     * @return Apis\Releases
+     */
+    public function getApiReleases()
+    {
+        return $this->apiReleases;
+    }
+
+    /**
+     * @return Apis\Profile
+     */
+    public function getApiProfile()
+    {
+        return $this->apiProfile;
+    }
+
+    /**
+     * @return Apis\Emails
+     */
+    public function getApiEmails()
+    {
+        return $this->apiEmails;
+    }
+
+    /**
+     * @return Apis\Commits
+     */
+    public function getApiCommits()
+    {
+        return $this->apiCommits;
+    }
+
+    /**
+     * @return Apis\Branches
+     */
+    public function getApiBranches()
+    {
+        return $this->apiBranches;
     }
 
     /**

@@ -38,7 +38,7 @@ class Branches extends Api
     /**
      * @param string $domain
      * @param string $projectName
-     * @param strign $name
+     * @param string $name
      * @param null|string $accessToken
      * @return \Buddy\Objects\Branch
      */

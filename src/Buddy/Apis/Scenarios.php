@@ -170,7 +170,7 @@ class Scenarios extends Api
     public function reorderScenarioActions(array $actionsIds, $domain, $projectName, $scenarioId, $accessToken = null)
     {
         $tmp = [];
-        foreach($actionsIds as $id){
+        foreach ($actionsIds as $id) {
             $tmp[] = [
                 'id' => $id
             ];

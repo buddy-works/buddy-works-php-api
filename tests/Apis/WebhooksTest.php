@@ -72,6 +72,7 @@ class WebhooksTest extends \PHPUnit_Framework_TestCase
         $resp = Utils::getBuddy()->getApiWebhooks()->getWebhook(Utils::getWorkspaceDomain(), $wh->getId());
         $this->assertInstanceOf('Buddy\Objects\Webhook', $resp);
         $this->assertEquals($wh->getId(), $resp->getId());
+        $this->assertInternalType('array', $resp->getRequests());
     }
 
     public function testDeleteWebhook()

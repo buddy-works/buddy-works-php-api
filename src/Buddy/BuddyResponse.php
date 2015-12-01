@@ -256,6 +256,22 @@ class BuddyResponse
     }
 
     /**
+     * @return Objects\Releases
+     */
+    public function getAsReleases()
+    {
+        return new Objects\Releases($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
+     * @return Objects\Release
+     */
+    public function getAsRelease()
+    {
+        return new Objects\Release($this->getBodyJson(), $this->getHeaders(), $this->getStatusCode());
+    }
+
+    /**
      * @return Objects\ScenarioActions
      */
     public function getAsScenarioActions()

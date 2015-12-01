@@ -113,8 +113,9 @@ class BuddyClient
             $url .= '?' . http_build_query($query);
         }
         if ($path != '/' && $path != '') {
+            $path = '/' . ltrim($path, '/');
             $path = urlencode($path);
-            $path = preg_replace('/%2F/g', '/', $path);
+            $path = preg_replace('/%2F/', '/', $path);
             $url .= $path;
         }
         return self::API_ENDPOINT . $url;

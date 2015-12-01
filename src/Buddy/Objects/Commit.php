@@ -35,7 +35,7 @@ class Commit extends Object
     /**
      * @var User
      */
-    protected $commiter;
+    protected $committer;
 
     /**
      * @var User
@@ -79,7 +79,7 @@ class Commit extends Object
         $this->setFromJson('revision');
         $this->setFromJson('authorDate', 'author_date');
         $this->setFromJson('commitDate', 'commit_date');
-        $this->setFromJsonAsObject('Buddy\Objects\User', 'commiter');
+        $this->setFromJsonAsObject('Buddy\Objects\User', 'committer');
         $this->setFromJsonAsObject('Buddy\Objects\User', 'author');
         $this->setFromJson('message');
         $this->setFromJsonAsObject('Buddy\Objects\ChangeStats', 'stats');
@@ -115,9 +115,9 @@ class Commit extends Object
     /**
      * @return User
      */
-    public function getCommiter()
+    public function getCommitter()
     {
-        return $this->commiter;
+        return $this->committer;
     }
 
     /**

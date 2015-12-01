@@ -69,11 +69,31 @@ class Branch extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setName($val)
+    {
+        $this->name = $val;
+        return $this;
+    }
+
+    /**
      * @return Commit
      */
     public function getCommit()
     {
         return $this->commit;
+    }
+
+    /**
+     * @param Commit $val
+     * @return $this
+     */
+    public function setCommit($val)
+    {
+        $this->commit = $val;
+        return $this;
     }
 
     /**

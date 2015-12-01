@@ -177,7 +177,7 @@ class SourceContent extends Object
     }
 
     /**
-     * @param strign $val
+     * @param string $val
      * @return $this
      */
     public function setContent($val)

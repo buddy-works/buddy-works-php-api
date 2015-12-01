@@ -20,6 +20,7 @@ use Buddy\Exceptions\BuddySDKException;
 use Buddy\Objects\Group;
 use Buddy\Objects\PermissionSet;
 use Buddy\Objects\Project;
+use Buddy\Objects\SourceContent;
 use Buddy\Objects\User;
 use Buddy\Objects\Webhook;
 use Buddy\Objects\Workspace;
@@ -164,6 +165,22 @@ class Utils
         $group->setName(Utils::randomString());
         $group->setDescription(Utils::randomString());
         return self::getBuddy()->getApiGroups()->addGroup($group, self::getWorkspaceDomain());
+    }
+
+    /**
+     * @param Project $project
+     * @return \Buddy\Objects\SourceCommitContent
+     */
+    public static function addFile(Project $project)
+    {
+        $base = base64_encode(self::randomString());
+        $msg = self::randomString();
+        $path = self::randomString();
+        $content = new SourceContent();
+        $content->setPath($path);
+        $content->setMessage($msg);
+        $content->setContent($base);
+        return self::getBuddy()->getApiSource()->addFile($content, Utils::getWorkspaceDomain(), $project->getName());
     }
 
     /**

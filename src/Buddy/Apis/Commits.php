@@ -34,7 +34,7 @@ class Commits extends Api
 
     /**
      * @param string $domain
-     * @param strign $projectName
+     * @param string $projectName
      * @param string $revision
      * @param null|string $accessToken
      * @return \Buddy\Objects\Commit
