@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-namespace Test\Apis;
+namespace Buddy\Tests\Apis;
 
 use Buddy\Objects\Project;
 use Buddy\Objects\User;

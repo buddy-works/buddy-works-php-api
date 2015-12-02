@@ -39,6 +39,7 @@ class BuddyClient
     }
 
     /**
+     * @codeCoverageIgnore
      * @param string $url
      * @param string $method
      * @param array $options
@@ -96,6 +97,7 @@ class BuddyClient
     }
 
     /**
+     * @codeCoverageIgnore
      * @param string $url
      * @param array $params
      * @param array $query
@@ -176,6 +178,7 @@ class BuddyClient
     }
 
     /**
+     * @codeCoverageIgnore
      * @param string $url
      * @param array $params
      * @return BuddyResponse
@@ -190,6 +193,7 @@ class BuddyClient
     }
 
     /**
+     * @codeCoverageIgnore
      * @param string $url
      * @return BuddyResponse
      * @throws BuddyResponseException

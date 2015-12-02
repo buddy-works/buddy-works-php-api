@@ -137,6 +137,16 @@ class User extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setName($val)
+    {
+        $this->name = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getAvatarUrl()
@@ -150,6 +160,16 @@ class User extends Object
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setTitle($val)
+    {
+        $this->title = $val;
+        return $this;
     }
 
     /**

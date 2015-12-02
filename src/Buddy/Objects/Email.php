@@ -49,6 +49,16 @@ class Email extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setEmail($val)
+    {
+        $this->email = $val;
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function getConfirmed()

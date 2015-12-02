@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 
-namespace Buddy\Apis;
+namespace Buddy\Tests\Apis;
 
 use Buddy\Objects\Branch;
 use Buddy\Tests\Utils;
 
-class BranchTest extends \PHPUnit_Framework_TestCase
+class BranchesTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetBranches()
     {

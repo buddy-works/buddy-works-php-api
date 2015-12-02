@@ -13,9 +13,8 @@
  * limitations under the License.
  */
 
-namespace Tests\Apis;
+namespace Buddy\Tests\Apis;
 
-use Buddy\Buddy;
 use Buddy\Objects\Webhook;
 use Buddy\Tests\Utils;
 

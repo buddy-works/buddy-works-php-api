@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-namespace Buddy\Apis;
+namespace Buddy\Tests\Apis;
 
 use Buddy\Objects\CommitFile;
 use Buddy\Tests\Utils;

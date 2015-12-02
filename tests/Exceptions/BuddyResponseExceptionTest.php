@@ -13,9 +13,8 @@
  * limitations under the License.
  */
 
-namespace Tests\Exceptions;
+namespace Buddy\Tests\Exceptions;
 
-use Buddy\BuddyClient;
 use Buddy\Exceptions\BuddyResponseException;
 
 class BuddyResponseExceptionTest extends \PHPUnit_Framework_TestCase

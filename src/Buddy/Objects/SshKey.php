@@ -55,6 +55,26 @@ class SshKey extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setContent($val)
+    {
+        $this->content = $val;
+        return $this;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setTitle($val)
+    {
+        $this->title = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getTitle()
