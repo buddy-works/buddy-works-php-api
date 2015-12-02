@@ -48,6 +48,7 @@ class BuddyResponse
     }
 
     /**
+     * @codeCoverageIgnore
      * @return Objects\Auth
      */
     public function getAsAuth()
@@ -248,6 +249,7 @@ class BuddyResponse
     }
 
     /**
+     * @codeCoverageIgnore
      * @return Objects\ScenarioAction
      */
     public function getAsScenarioAction()
@@ -256,6 +258,7 @@ class BuddyResponse
     }
 
     /**
+     * @codeCoverageIgnore
      * @return Objects\Releases
      */
     public function getAsReleases()
@@ -264,6 +267,7 @@ class BuddyResponse
     }
 
     /**
+     * @codeCoverageIgnore
      * @return Objects\Release
      */
     public function getAsRelease()
@@ -288,6 +292,7 @@ class BuddyResponse
     }
 
     /**
+     * @codeCoverageIgnore
      * @return Objects\Tag
      */
     public function getAsTag()
