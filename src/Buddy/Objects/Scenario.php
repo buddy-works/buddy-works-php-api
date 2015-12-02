@@ -106,6 +106,16 @@ class Scenario extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setName($val)
+    {
+        $this->name = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getBranch()
@@ -114,11 +124,31 @@ class Scenario extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setBranch($val)
+    {
+        $this->branch = $val;
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function getAutomatic()
     {
         return $this->automatic;
+    }
+
+    /**
+     * @param bool $val
+     * @return $this
+     */
+    public function setAutomatic($val)
+    {
+        $this->automatic = $val;
+        return $this;
     }
 
     /**

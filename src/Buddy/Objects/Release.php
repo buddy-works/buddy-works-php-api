@@ -117,6 +117,16 @@ class Release extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setRevision($val)
+    {
+        $this->revision = $val;
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -162,6 +172,16 @@ class Release extends Object
     public function getComment()
     {
         return $this->comment;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setComment($val)
+    {
+        $this->comment = $val;
+        return $this;
     }
 
     /**

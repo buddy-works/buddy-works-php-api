@@ -83,6 +83,7 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 
     public function testEditProject()
     {
+        sleep(2);
         $project = Utils::addProject();
         $editProject = new Project();
         $editProject->setName(Utils::randomString())
@@ -94,6 +95,7 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 
     public function testEditProjectWithoutName()
     {
+        sleep(2);
         $project = Utils::addProject();
         $editProject = new Project();
         $editProject->setDisplayName(Utils::randomString());

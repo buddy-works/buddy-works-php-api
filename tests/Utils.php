@@ -20,6 +20,7 @@ use Buddy\Exceptions\BuddySDKException;
 use Buddy\Objects\Group;
 use Buddy\Objects\PermissionSet;
 use Buddy\Objects\Project;
+use Buddy\Objects\Scenario;
 use Buddy\Objects\SourceContent;
 use Buddy\Objects\User;
 use Buddy\Objects\Webhook;
@@ -180,7 +181,23 @@ class Utils
         $content->setPath($path);
         $content->setMessage($msg);
         $content->setContent($base);
-        return self::getBuddy()->getApiSource()->addFile($content, Utils::getWorkspaceDomain(), $project->getName());
+        $resp = self::getBuddy()->getApiSource()->addFile($content, Utils::getWorkspaceDomain(), $project->getName());
+        sleep(3);
+        return $resp;
+    }
+
+    /**
+     * @param Project $project
+     * @return \Buddy\Objects\Scenario
+     */
+    public static function addScenario(Project $project)
+    {
+        Utils::addFile($project);
+        $scenario = new Scenario();
+        $scenario->setName(Utils::randomString());
+        $scenario->setAutomatic(true);
+        $scenario->setBranch('master');
+        return Utils::getBuddy()->getApiScenarios()->addScenario($scenario, Utils::getWorkspaceDomain(), $project->getName());
     }
 
     /**

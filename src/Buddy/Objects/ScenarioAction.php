@@ -199,11 +199,31 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setName($val)
+    {
+        $this->name = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setType($val)
+    {
+        $this->type = $val;
+        return $this;
     }
 
     /**
@@ -231,11 +251,31 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setLocalPath($val)
+    {
+        $this->localPath = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getRemotePath()
     {
         return $this->remotePath;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setRemotePath($val)
+    {
+        $this->remotePath = $val;
+        return $this;
     }
 
     /**
@@ -247,11 +287,31 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setWorkingDirectory($val)
+    {
+        $this->workingDirectory = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getBucketName()
     {
         return $this->bucketName;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setBucketName($val)
+    {
+        $this->bucketName = $val;
+        return $this;
     }
 
     /**
@@ -263,11 +323,31 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setAccessKey($val)
+    {
+        $this->accessKey = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getSecretKey()
     {
         return $this->secretKey;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setSecretKey($val)
+    {
+        $this->secretKey = $val;
+        return $this;
     }
 
     /**
@@ -279,11 +359,31 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param bool $val
+     * @return $this
+     */
+    public function setPublicAccess($val)
+    {
+        $this->publicAccess = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getCloudfrontId()
     {
         return $this->cloudfrontId;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setCloudfrontId($val)
+    {
+        $this->cloudfrontId = $val;
+        return $this;
     }
 
     /**
@@ -295,11 +395,31 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param bool $val
+     * @return $this
+     */
+    public function setReducedRedundancy($val)
+    {
+        $this->reducedRedundancy = $val;
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getCommands()
     {
         return $this->commands;
+    }
+
+    /**
+     * @param array $val
+     * @return $this
+     */
+    public function setCommands($val)
+    {
+        $this->commands = $val;
+        return $this;
     }
 
     /**
@@ -311,11 +431,31 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setLogin($val)
+    {
+        $this->login = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setPassword($val)
+    {
+        $this->password = $val;
+        return $this;
     }
 
     /**
@@ -327,11 +467,41 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param bool $val
+     * @return $this
+     */
+    public function setActiveMode($val)
+    {
+        $this->activeMode = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getHost()
     {
         return $this->host;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setHost($val)
+    {
+        $this->host = $val;
+        return $this;
+    }
+
+    /**
+     * @param int $val
+     * @return $this
+     */
+    public function setPort($val)
+    {
+        $this->port = $val;
+        return $this;
     }
 
     /**
@@ -351,6 +521,16 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setAuthenticationMode($val)
+    {
+        $this->authenticationMode = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getServerKey()
@@ -359,10 +539,30 @@ class ScenarioAction extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setServerKey($val)
+    {
+        $this->serverKey = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getPassphrase()
     {
         return $this->passphrase;
+    }
+
+    /**
+     * @param string $val
+     * @return $this
+     */
+    public function setPassphrase($val)
+    {
+        $this->passphrase = $val;
+        return $this;
     }
 }
