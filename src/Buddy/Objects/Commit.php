@@ -97,6 +97,16 @@ class Commit extends Object
     }
 
     /**
+     * @param string $val
+     * @return $this
+     */
+    public function setRevision($val)
+    {
+        $this->revision = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getAuthorDate()

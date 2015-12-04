@@ -1,39 +1,44 @@
 {
-	"name": "buddy-works/buddy-works-php-api",
-	"description": "Buddy Works SDK for PHP",
-	"keywords": ["buddy", "buddy works", "sdk", "api"],
-	"type": "library",
-	"homepage": "https://github.com/buddy-works/buddy-works-php-api",
-	"license": "Apache 2.0",
-	"authors": [
-		{
-			"name": "Mike Hankus",
-			"email": "mikeh@buddy.works"
-		},
-		{
-			"name": "Paul Kapala",
-			"email": "paulk@buddy.works"
-		}
-	],
-	"require": {
-		"php": ">=5.5.0",
-		"guzzlehttp/guzzle": "~5.0",
-		"ext-mbstring": "*"
-	},
-	"require-dev": {
-		"squizlabs/php_codesniffer": "2.*",
-		"phpunit/phpunit": "~4.0",
-		"mockery/mockery": "~0.8"
-	},
-	"autoload": {
-		"psr-4": {
-			"Buddy\\": "src/Buddy/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Buddy\\Tests\\": "tests/"
-		}
-	}
-
+  "name": "buddy-works/buddy-works-php-api",
+  "description": "Buddy Works SDK for PHP",
+  "keywords": [
+    "buddy",
+    "buddy works",
+    "sdk",
+    "api"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/buddy-works/buddy-works-php-api",
+  "license": "Apache 2.0",
+  "authors": [
+    {
+      "name": "Mike Hankus",
+      "email": "mikeh@buddy.works"
+    },
+    {
+      "name": "Paul Kapala",
+      "email": "paulk@buddy.works"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "guzzlehttp/guzzle": "~5.0",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "2.*",
+    "phpunit/phpunit": "~4.0",
+    "mockery/mockery": "~0.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "Buddy\\": "src/Buddy/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Buddy\\Tests\\": "tests/",
+      "Buddy\\Examples\\": "examples/"
+    }
+  }
 }

@@ -91,16 +91,35 @@ From there every method called from this instance of Buddy will be called on beh
 
 Get workspaces
 ```php
-$resp = $buddy->getApiWorkspaces()->getWorkspaces([$accessToken]);
+try {
+    $resp = $buddy->getApiWorkspaces()->getWorkspaces([$accessToken]);
+    var_dump($resp);
+    exit;
+} catch (Buddy\Exceptions\BuddyResponseException $e) {
+    echo $e->getMessage();
+    exit;
+} catch (Buddy\Exceptions\BuddySDKException $e) {
+    echo $e->getMessage();
+    exit;
+}
 ```
 
 Get workspace
 ```php
-$resp = $buddy->getApiWorkspaces()->getWorkspace($domain, [$accessToken]);
+try {
+    $resp = $buddy->getApiWorkspaces()->getWorkspace($domain, [$accessToken]);
+    var_dump($resp);
+    exit;
+} catch (Buddy\Exceptions\BuddyResponseException $e) {
+    echo $e->getMessage();
+    exit;
+} catch (Buddy\Exceptions\BuddySDKException $e) {
+    echo $e->getMessage();
+    exit;
+}
 ```
 
- 
-In progress...
+For more examples check [here](https://github.com/buddy-works/buddy-works-php-api/blob/master/examples)
 
 ## Tests
 

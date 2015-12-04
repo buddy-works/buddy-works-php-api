@@ -16,6 +16,7 @@
 namespace Buddy\Tests\Apis;
 
 use Buddy\Objects\Branch;
+use Buddy\Objects\Commit;
 use Buddy\Tests\Utils;
 
 class BranchesTest extends \PHPUnit_Framework_TestCase
@@ -33,9 +34,11 @@ class BranchesTest extends \PHPUnit_Framework_TestCase
     {
         $project = Utils::addProject();
         $file = Utils::addFile($project);
+        $commit = new Commit();
+        $commit->setRevision($file->getCommit()->getRevision());
         $branch = new Branch();
         $branch->setName(Utils::randomString());
-        $branch->setCommit($file->getCommit());
+        $branch->setCommit($commit);
         $resp = Utils::getBuddy()->getApiBranches()->addBranch($branch, Utils::getWorkspaceDomain(), $project->getName());
         $this->assertInstanceOf('Buddy\Objects\Branch', $resp);
         $this->assertEquals($branch->getName(), $resp->getName());

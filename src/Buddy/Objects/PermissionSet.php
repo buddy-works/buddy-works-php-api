@@ -86,6 +86,16 @@ class PermissionSet extends Object
     }
 
     /**
+     * @param int $val
+     * @return $this
+     */
+    public function setId($val)
+    {
+        $this->id = $val;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getName()

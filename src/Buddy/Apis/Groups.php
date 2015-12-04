@@ -97,16 +97,15 @@ class Groups extends Api
     /**
      * @param string $domain
      * @param int $groupId
-     * @param array $filters
      * @param null|string $accessToken
      * @return \Buddy\Objects\Members
      */
-    public function getGroupMembers($domain, $groupId, array $filters = [], $accessToken = null)
+    public function getGroupMembers($domain, $groupId, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/groups/:group_id/members', [
             'domain' => $domain,
             'group_id' => $groupId
-        ], $filters)->getAsMembers();
+        ])->getAsMembers();
     }
 
     /**

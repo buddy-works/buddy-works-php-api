@@ -37,6 +37,7 @@ class Releases extends Api
     }
 
     /**
+     * @codeCoverageIgnore
      * @param Release $release
      * @param string $domain
      * @param string $projectName

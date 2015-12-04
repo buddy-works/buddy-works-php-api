@@ -15,6 +15,7 @@
 
 namespace Buddy\Tests\Apis;
 
+use Buddy\Objects\PermissionSet;
 use Buddy\Objects\Project;
 use Buddy\Objects\User;
 use Buddy\Tests\Utils;
@@ -136,10 +137,14 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
         $project = Utils::addProject();
         $user = Utils::addUser();
         $perm = Utils::addPermission();
-        $user->setPermissionSet($perm);
-        $resp = Utils::getBuddy()->getApiProjects()->addProjectMember($user, Utils::getWorkspaceDomain(), $project->getName());
+        $perm2 = new PermissionSet();
+        $perm2->setId($perm->getId());
+        $member = new User();
+        $member->setId($user->getId());
+        $member->setPermissionSet($perm2);
+        $resp = Utils::getBuddy()->getApiProjects()->addProjectMember($member, Utils::getWorkspaceDomain(), $project->getName());
         $this->assertInstanceOf('Buddy\Objects\User', $resp);
-        $this->assertEquals($user->getId(), $resp->getId());
+        $this->assertEquals($member->getId(), $resp->getId());
     }
 
     public function testGetProjectMember()
