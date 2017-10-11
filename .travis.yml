@@ -10,6 +10,8 @@ sudo: false
 
 addons:
   apt:
+    sources:
+      - debian-sid
     packages:
       - libssl1.0.0
 
