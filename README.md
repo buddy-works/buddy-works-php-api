@@ -1,5 +1,5 @@
 # Buddy Works APIs PHP SDK
-[![Build Status](https://travis-ci.org/buddy-works/buddy-works-php-api.svg?branch=master)](https://travis-ci.org/buddy-works/buddy-works-php-api)
+[![buddy pipeline](https://app.buddy.works/monitor/buddy-works-php-api/pipelines/pipeline/61877/badge.svg?token=7de97367c9cdc3c6db31aa114057b65cea1a7bafc71cf0595a2931011526a0a3 "buddy pipeline")](https://app.buddy.works/monitor/buddy-works-php-api/pipelines/pipeline/61877)
 
 Official PHP client library for [Buddy Build Server with CI](https://buddy.works).
 
