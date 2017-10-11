@@ -15,95 +15,93 @@
 
 namespace Buddy\Apis;
 
-use Buddy\Objects\User;
-
 class Members extends Api
 {
     /**
      * @param string $domain
      * @param array $filters
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Members
+     * @return \Buddy\BuddyResponse
      */
     public function getWorkspaceMembers($domain, array $filters = [], $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/members', [
             'domain' => $domain
-        ], $filters)->getAsMembers();
+        ], $filters);
     }
 
     /**
-     * @param User $user
      * @param string $domain
+     * @param string $email
      * @param null|string $accessToken
-     * @return User
+     * @return \Buddy\BuddyResponse
      */
-    public function addWorkspaceMember(User $user, $domain, $accessToken = null)
+    public function addWorkspaceMember($domain, $email, $accessToken = null)
     {
         return $this->postJson($accessToken, [
-            'email' => $user->getEmail()
+            'email' => $email
         ], '/workspaces/:domain/members', [
             'domain' => $domain
-        ])->getAsUser();
+        ]);
     }
 
     /**
      * @param string $domain
-     * @param int $memberId
+     * @param int $userId
      * @param null|string $accessToken
-     * @return User
+     * @return \Buddy\BuddyResponse
      */
-    public function getWorkspaceMember($domain, $memberId, $accessToken = null)
+    public function getWorkspaceMember($domain, $userId, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/members/:member_id', [
             'domain' => $domain,
-            'member_id' => $memberId
-        ])->getAsUser();
+            'member_id' => $userId
+        ]);
     }
 
     /**
-     * @param User $user
      * @param string $domain
-     * @param int $memberId
+     * @param int $userId
+     * @param bool $isAdmin
      * @param null|string $accessToken
-     * @return User
+     * @return \Buddy\BuddyResponse
      */
-    public function editWorkspaceMember(User $user, $domain, $memberId, $accessToken = null)
+    public function editWorkspaceMember($domain, $userId, $isAdmin, $accessToken = null)
     {
         return $this->patchJson($accessToken, [
-            'admin' => $user->getAdmin()
+            'admin' => $isAdmin
         ], '/workspaces/:domain/members/:member_id', [
             'domain' => $domain,
-            'member_id' => $memberId
-        ])->getAsUser();
+            'member_id' => $userId
+        ]);
     }
 
     /**
      * @param string $domain
-     * @param int $memberId
+     * @param int $userId
      * @param null|string $accessToken
-     * @return bool
+     * @return \Buddy\BuddyResponse
      */
-    public function deleteWorkspaceMember($domain, $memberId, $accessToken = null)
+    public function deleteWorkspaceMember($domain, $userId, $accessToken = null)
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/members/:member_id', [
             'domain' => $domain,
-            'member_id' => $memberId
-        ])->getAsBool();
+            'member_id' => $userId
+        ]);
     }
 
     /**
      * @param string $domain
-     * @param int $memberId
+     * @param int $userId
      * @param array $filters
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Projects
+     * @return \Buddy\BuddyResponse
      */
-    public function getWorkspaceMemberProjects($domain, $memberId, array $filters = [], $accessToken = null)
+    public function getWorkspaceMemberProjects($domain, $userId, array $filters = [], $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/members/:member_id/projects', [
             'domain' => $domain,
-            'member_id' => $memberId
-        ], $filters)->getAsProjects();
+            'member_id' => $userId
+        ], $filters);
     }
 }

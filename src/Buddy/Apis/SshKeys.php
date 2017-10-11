@@ -15,53 +15,48 @@
 
 namespace Buddy\Apis;
 
-use Buddy\Objects\SshKey;
-
 class SshKeys extends Api
 {
     /**
      * @param null|string $accessToken
-     * @return \Buddy\Objects\SshKeys
+     * @return \Buddy\BuddyResponse
      */
-    public function getAuthenticatedUserKeys($accessToken = null)
+    public function getKeys($accessToken = null)
     {
-        return $this->getJson($accessToken, '/user/keys')->getAsSshKeys();
+        return $this->getJson($accessToken, '/user/keys');
     }
 
     /**
-     * @param SshKey $key
+     * @param array $data
      * @param null|string $accessToken
-     * @return SshKey
+     * @return \Buddy\BuddyResponse
      */
-    public function addAuthenticatedUserKey(SshKey $key, $accessToken = null)
+    public function addKey($data, $accessToken = null)
     {
-        return $this->postJson($accessToken, [
-            'title' => $key->getTitle(),
-            'content' => $key->getContent()
-        ], '/user/keys')->getAsSshKey();
+        return $this->postJson($accessToken, $data, '/user/keys');
     }
 
     /**
      * @param int $keyId
      * @param null|string $accessToken
-     * @return bool
+     * @return \Buddy\BuddyResponse
      */
-    public function deleteAuthenticatedUserKey($keyId, $accessToken = null)
+    public function deleteKey($keyId, $accessToken = null)
     {
         return $this->deleteJson($accessToken, null, '/user/keys/:key_id', [
             'key_id' => $keyId
-        ])->getAsBool();
+        ]);
     }
 
     /**
      * @param int $keyId
      * @param null|string $accessToken
-     * @return SshKey
+     * @return \Buddy\BuddyResponse
      */
-    public function getAuthenticatedUserKey($keyId, $accessToken = null)
+    public function getKey($keyId, $accessToken = null)
     {
         return $this->getJson($accessToken, '/user/keys/:key_id', [
             'key_id' => $keyId
-        ])->getAsSshKey();
+        ]);
     }
 }

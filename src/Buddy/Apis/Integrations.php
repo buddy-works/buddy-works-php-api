@@ -13,32 +13,28 @@
  * limitations under the License.
  */
 
-namespace Buddy\Objects;
+namespace Buddy\Apis;
 
-class Scenarios extends Object
+class Integrations extends Api
 {
     /**
-     * @var array
+     * @param null|string $accessToken
+     * @return \Buddy\BuddyResponse
      */
-    protected $scenarios;
-
-    /**
-     * Scenarios constructor.
-     * @param array $json
-     * @param array $headers
-     * @param int $status
-     */
-    public function __construct(array $json = [], array $headers = [], $status = 200)
+    public function getIntegrations($accessToken = null)
     {
-        parent::__construct($json, $headers, $status);
-        $this->setFromJsonAsArray('Buddy\Objects\Scenario', 'scenarios', 'release_scenarios');
+        return $this->getJson($accessToken, '/user/integrations');
     }
 
     /**
-     * @return array
+     * @param int $integrationId
+     * @param null|string $accessToken
+     * @return \Buddy\BuddyResponse
      */
-    public function getScenarios()
+    public function getIntegration($integrationId, $accessToken = null)
     {
-        return $this->scenarios;
+        return $this->getJson($accessToken, '/user/integrations/:integration_id', [
+            'integration_id' => $integrationId
+        ]);
     }
 }

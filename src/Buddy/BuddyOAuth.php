@@ -23,12 +23,13 @@ class BuddyOAuth
     const SCOPE_PROJECT_DELETE = 'PROJECT_DELETE';
     const SCOPE_REPOSITORY_READ = 'REPOSITORY_READ';
     const SCOPE_REPOSITORY_WRITE = 'REPOSITORY_WRITE';
-    const SCOPE_RELEASE_INFO = 'RELEASE_INFO';
-    const SCOPE_RELEASE_RUN = 'RELEASE_RUN';
-    const SCOPE_RELEASE_MANAGE = 'RELEASE_MANAGE';
+    const SCOPE_EXECUTION_INFO = 'EXECUTION_INFO';
+    const SCOPE_EXECUTION_RUN = 'EXECUTION_RUN';
+    const SCOPE_EXECUTION_MANAGE = 'EXECUTION_MANAGE';
     const SCOPE_USER_INFO = 'USER_INFO';
     const SCOPE_USER_KEY = 'USER_KEY';
     const SCOPE_USER_EMAIL = 'USER_EMAIL';
+    const SCOPE_INTEGRATION_INFO = 'INTEGRATION_INFO';
     const SCOPE_MEMBER_EMAIL = 'MEMBER_EMAIL';
     const SCOPE_MANAGE_EMAILS = 'MANAGE_EMAILS';
     const SCOPE_WEBHOOK_INFO = 'WEBHOOK_INFO';
@@ -90,7 +91,7 @@ class BuddyOAuth
     /**
      * @param string $state
      * @param null|string $redirectUrl
-     * @return Objects\Auth
+     * @return array
      * @throws BuddySDKException
      */
     public function getAccessToken($state, $redirectUrl = null)
@@ -116,6 +117,6 @@ class BuddyOAuth
         if (isset($redirectUrl)) {
             $params['redirect_uri'] = $redirectUrl;
         }
-        return $this->client->post($this->client->createUrl('/oauth2/token'), $params)->getAsAuth();
+        return $this->client->post($this->client->createUrl('/oauth2/token'), $params)->getBody();
     }
 }

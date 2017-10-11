@@ -124,10 +124,8 @@ class Api
     {
         if (isset($accessToken)) {
             return $accessToken;
-
         } else if (isset($this->options['accessToken'])) {
             return $this->options['accessToken'];
-
         } else {
             throw new BuddySDKException('No access token provided');
         }

@@ -19,23 +19,23 @@ class Workspaces extends Api
 {
     /**
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Workspaces
+     * @return \Buddy\BuddyResponse
      * @throws \Buddy\Exceptions\BuddySDKException
      */
     public function getWorkspaces($accessToken = null)
     {
-        return $this->getJson($accessToken, '/workspaces')->getAsWorkspaces();
+        return $this->getJson($accessToken, '/workspaces');
     }
 
     /**
      * @param string $domain
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Workspace
+     * @return \Buddy\BuddyResponse
      */
     public function getWorkspace($domain, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain', [
             'domain' => $domain
-        ])->getAsWorkspace();
+        ]);
     }
 }

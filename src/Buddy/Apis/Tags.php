@@ -21,14 +21,14 @@ class Tags extends Api
      * @param string $domain
      * @param string $projectName
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Tags
+     * @return \Buddy\BuddyResponse
      */
     public function getTags($domain, $projectName, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/tags', [
             'domain' => $domain,
             'project_name' => $projectName
-        ])->getAsTags();
+        ]);
     }
 
     /**
@@ -36,7 +36,7 @@ class Tags extends Api
      * @param string $projectName
      * @param string $name
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Tag
+     * @return \Buddy\BuddyResponse
      */
     public function getTag($domain, $projectName, $name, $accessToken = null)
     {
@@ -44,6 +44,6 @@ class Tags extends Api
             'domain' => $domain,
             'project_name' => $projectName,
             'name' => $name
-        ])->getAsTag();
+        ]);
     }
 }

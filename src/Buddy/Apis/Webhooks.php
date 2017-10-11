@@ -15,98 +15,79 @@
 
 namespace Buddy\Apis;
 
-use Buddy\Objects\Project;
-use Buddy\Objects\Webhook;
-
 class Webhooks extends Api
 {
+    const EVENT_PUSH = 'PUSH';
+    const EVENT_EXECUTION_STARTED = 'EXECUTION_STARTED';
+    const EVENT_EXECUTION_SUCCESSFUL = 'EXECUTION_SUCCESSFUL';
+    const EVENT_EXECUTION_FAILED = 'EXECUTION_FAILED';
+    const EVENT_EXECUTION_FINISHED = 'EXECUTION_FINISHED';
+
     /**
      * @param string $domain
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Webhooks
+     * @return \Buddy\BuddyResponse
      */
     public function getWebhooks($domain, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/webhooks', [
             'domain' => $domain
-        ])->getAsWebhooks();
+        ]);
     }
 
     /**
-     * @param Webhook $webhook
+     * @param array $data
      * @param string $domain
      * @param null|string $accessToken
-     * @return Webhook
+     * @return \Buddy\BuddyResponse
      */
-    public function addWebhook(Webhook $webhook, $domain, $accessToken = null)
+    public function addWebhook($data, $domain, $accessToken = null)
     {
-        $data = [
-            'target_url' => $webhook->getTargetUrl(),
-            'secret_key' => $webhook->getSecretKey(),
-            'events' => $webhook->getEvents()
-        ];
-        $projectFilter = $webhook->getProjectFilter();
-        if ($projectFilter instanceof Project) {
-            $data['project_filter'] = [
-                'name' => $projectFilter->getName()
-            ];
-        }
         return $this->postJson($accessToken, $data, '/workspaces/:domain/webhooks', [
             'domain' => $domain
-        ])->getAsWebhook();
+        ]);
     }
 
     /**
      * @param string $domain
      * @param int $webhookId
      * @param null|string $accessToken
-     * @return Webhook
+     * @return \Buddy\BuddyResponse
      */
     public function getWebhook($domain, $webhookId, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/webhooks/:webhook_id', [
             'domain' => $domain,
             'webhook_id' => $webhookId
-        ])->getAsWebhook();
+        ]);
     }
 
     /**
-     * @param Webhook $webhook
+     * @param array $data
      * @param string $domain
      * @param int $webhookId
      * @param null|string $accessToken
-     * @return Webhook
+     * @return \Buddy\BuddyResponse
      */
-    public function editWebhook(Webhook $webhook, $domain, $webhookId, $accessToken = null)
+    public function editWebhook($data, $domain, $webhookId, $accessToken = null)
     {
-        $data = [
-            'target_url' => $webhook->getTargetUrl(),
-            'secret_key' => $webhook->getSecretKey(),
-            'events' => $webhook->getEvents()
-        ];
-        $projectFilter = $webhook->getProjectFilter();
-        if (isset($projectFilter)) {
-            $data['project_filter'] = [
-                'name' => $projectFilter->getName()
-            ];
-        }
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/webhooks/:webhook_id', [
             'domain' => $domain,
             'webhook_id' => $webhookId
-        ])->getAsWebhook();
+        ]);
     }
 
     /**
      * @param string $domain
      * @param int $webhookId
      * @param null|string $accessToken
-     * @return bool
+     * @return \Buddy\BuddyResponse
      */
     public function deleteWebhook($domain, $webhookId, $accessToken = null)
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/webhooks/:webhook_id', [
             'domain' => $domain,
             'webhook_id' => $webhookId
-        ])->getAsBool();
+        ]);
     }
 }

@@ -15,30 +15,24 @@
 
 namespace Buddy\Apis;
 
-use Buddy\Objects\User;
-
 class Profile extends Api
 {
     /**
      * @param null|string $accessToken
-     * @return \Buddy\Objects\User
+     * @return \Buddy\BuddyResponse
      */
     public function getAuthenticatedUser($accessToken = null)
     {
-        return $this->getJson($accessToken, '/user')->getAsUser();
+        return $this->getJson($accessToken, '/user');
     }
 
     /**
-     * @param User $user
+     * @param array $data
      * @param null|string $accessToken
-     * @return User
+     * @return \Buddy\BuddyResponse
      */
-    public function editAuthenticatedUser(User $user, $accessToken = null)
+    public function editAuthenticatedUser($data, $accessToken = null)
     {
-        return $this->patchJson($accessToken, [
-            'name' => $user->getName(),
-            'title' => $user->getTitle(),
-
-        ], '/user')->getAsUser();
+        return $this->patchJson($accessToken, $data, '/user');
     }
 }

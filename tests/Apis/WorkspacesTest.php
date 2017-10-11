@@ -35,13 +35,10 @@ class WorkspacesTest extends \PHPUnit_Framework_TestCase
         $buddy = new Buddy();
         $this->assertInstanceOf('Buddy\Apis\Workspaces', $buddy->getApiWorkspaces());
         $resp = $buddy->getApiWorkspaces()->getWorkspaces($token);
-        $this->assertInstanceOf('Buddy\Objects\Workspaces', $resp);
-        $this->assertNotEmpty($resp->getUrl());
-        $this->assertNotEmpty($resp->getHtmlUrl());
-        $this->assertInternalType('array', $resp->getWorkspaces());
-        $this->assertInternalType('array', $resp->getJson());
-        $this->assertInternalType('int', $resp->getHttpRequestStatus());
-        $this->assertInternalType('array', $resp->getHttpRequestHeaders());
+        $this->assertInstanceOf('Buddy\BuddyResponse', $resp);
+        $this->assertInternalType('array', $resp->getBody());
+        $this->assertInternalType('array', $resp->getHeaders());
+        $this->assertInternalType('int', $resp->getStatusCode());
     }
 
     public function testGetWorkspace()
@@ -49,18 +46,12 @@ class WorkspacesTest extends \PHPUnit_Framework_TestCase
         $buddy = new Buddy([
             'accessToken' => getenv('TOKEN_ALL')
         ]);
-        $arr = $buddy->getApiWorkspaces()->getWorkspaces()->getWorkspaces();
-        $this->assertGreaterThan(0, count($arr));
-        $resp = $buddy->getApiWorkspaces()->getWorkspace($arr[0]->getDomain());
-        $this->assertInstanceOf('Buddy\Objects\Workspace', $resp);
-        $this->assertNotEmpty($resp->getCreateDate());
-        $this->assertNotEmpty($resp->getHtmlUrl());
-        $this->assertNotEmpty($resp->getUrl());
-        $this->assertNotEmpty($resp->getDomain());
-        $this->assertNotEmpty($resp->getId());
-        $this->assertNotEmpty($resp->getName());
-        $this->assertNotEmpty($resp->getOwnerId());
-        $this->assertInternalType('bool', $resp->getFrozen());
-        $this->assertInternalType('array', $resp->getJson());
+        $body = $buddy->getApiWorkspaces()->getWorkspaces()->getBody();
+        $this->assertGreaterThan(0, $body['workspaces']);
+        $resp = $buddy->getApiWorkspaces()->getWorkspace($body['workspaces'][0]['domain']);
+        $this->assertInstanceOf('Buddy\BuddyResponse', $resp);
+        $this->assertInternalType('array', $resp->getBody());
+        $this->assertInternalType('array', $resp->getHeaders());
+        $this->assertInternalType('int', $resp->getStatusCode());
     }
 }

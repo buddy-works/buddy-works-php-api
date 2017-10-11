@@ -15,85 +15,82 @@
 
 namespace Buddy\Apis;
 
-use Buddy\Objects\PermissionSet;
-
 class Permissions extends Api
 {
+    const PIPELINE_ACCESS_LEVEL_DENIED = 'DENIED';
+    const PIPELINE_ACCESS_LEVEL_READ_ONLY = 'READ_ONLY';
+    const PIPELINE_ACCESS_LEVEL_RUN_ONLY = 'RUN_ONLY';
+    const PIPELINE_ACCESS_LEVEL_READ_WRITE = 'READ_WRITE';
+
+    const REPOSITORY_ACCESS_LEVEL_DENIED = 'DENIED';
+    const REPOSITORY_ACCESS_LEVEL_READ_ONLY = 'READ_ONLY';
+    const REPOSITORY_ACCESS_LEVEL_READ_WRITE = 'READ_WRITE';
+
     /**
      * @param string $domain
      * @param null|string $accessToken
-     * @return \Buddy\Objects\PermissionSets
+     * @return \Buddy\BuddyResponse
      */
     public function getWorkspacePermissions($domain, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/permissions', [
             'domain' => $domain
-        ])->getAsPermissionSets();
+        ]);
     }
 
     /**
-     * @param PermissionSet $permission
+     * @param array $data
      * @param string $domain
      * @param null|string $accessToken
-     * @return PermissionSet
+     * @return \Buddy\BuddyResponse
      */
-    public function addWorkspacePermission(PermissionSet $permission, $domain, $accessToken = null)
+    public function addWorkspacePermission($data, $domain, $accessToken = null)
     {
-        return $this->postJson($accessToken, [
-           'name' => $permission->getName(),
-            'description' => $permission->getDescription(),
-            'repository_access_level' => $permission->getRepositoryAccessLevel(),
-            'release_scenario_access_level' => $permission->getReleaseScenarioAccessLevel()
-        ], '/workspaces/:domain/permissions', [
+        return $this->postJson($accessToken, $data, '/workspaces/:domain/permissions', [
             'domain' => $domain
-        ])->getAsPermissionSet();
+        ]);
     }
 
     /**
      * @param string $domain
      * @param int $permissionId
      * @param null|string $accessToken
-     * @return PermissionSet
+     * @return \Buddy\BuddyResponse
      */
     public function getWorkspacePermission($domain, $permissionId, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/permissions/:permission_set_id', [
             'domain' => $domain,
             'permission_set_id' => $permissionId
-        ])->getAsPermissionSet();
+        ]);
     }
 
     /**
-     * @param PermissionSet $permission
+     * @param array $data
      * @param string $domain
      * @param int $permissionId
      * @param null|string $accessToken
-     * @return PermissionSet
+     * @return \Buddy\BuddyResponse
      */
-    public function editWorkspacePermission(PermissionSet $permission, $domain, $permissionId, $accessToken = null)
+    public function editWorkspacePermission($data, $domain, $permissionId, $accessToken = null)
     {
-        return $this->patchJson($accessToken, [
-            'description' => $permission->getDescription(),
-            'name' => $permission->getName(),
-            'repository_access_level' => $permission->getRepositoryAccessLevel(),
-            'release_scenario_access_level' => $permission->getReleaseScenarioAccessLevel()
-        ], '/workspaces/:domain/permissions/:permission_set_id', [
+        return $this->patchJson($accessToken, $data, '/workspaces/:domain/permissions/:permission_set_id', [
             'domain' => $domain,
             'permission_set_id' => $permissionId
-        ])->getAsPermissionSet();
+        ]);
     }
 
     /**
      * @param string $domain
      * @param int $permissionId
      * @param null|string $accessToken
-     * @return bool
+     * @return \Buddy\BuddyResponse
      */
     public function deleteWorkspacePermission($domain, $permissionId, $accessToken = null)
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/permissions/:permission_set_id', [
             'domain' => $domain,
             'permission_set_id' => $permissionId
-        ])->getAsBool();
+        ]);
     }
 }

@@ -15,88 +15,75 @@
 
 namespace Buddy\Apis;
 
-use Buddy\Exceptions\BuddySDKException;
-use Buddy\Objects\PermissionSet;
-use Buddy\Objects\Project;
-use Buddy\Objects\User;
-
 class Projects extends Api
 {
     /**
      * @param string $domain
      * @param array $filters
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Projects
+     * @return \Buddy\BuddyResponse
      */
     public function getProjects($domain, array $filters = [], $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects', [
             'domain' => $domain
-        ], $filters)->getAsProjects();
+        ], $filters);
     }
 
     /**
-     * @param Project $project
+     * @param array $data
      * @param string $domain
      * @param null|string $accessToken
-     * @return Project
+     * @return \Buddy\BuddyResponse
      */
-    public function addProject(Project $project, $domain, $accessToken = null)
+    public function addProject($data, $domain, $accessToken = null)
     {
-        return $this->postJson($accessToken, [
-            'name' => $project->getName(),
-            'display_name' => $project->getDisplayName()
-
-        ], '/workspaces/:domain/projects', [
+        return $this->postJson($accessToken, $data, '/workspaces/:domain/projects', [
             'domain' => $domain
-
-        ])->getAsProject();
+        ]);
     }
 
     /**
      * @param string $domain
      * @param string $projectName
      * @param null|string $accessToken
-     * @return Project
+     * @return \Buddy\BuddyResponse
      */
     public function getProject($domain, $projectName, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name', [
             'domain' => $domain,
             'project_name' => $projectName
-        ])->getAsProject();
+        ]);
     }
 
     /**
-     * @param Project $project
+     * @param array $data
      * @param string $domain
      * @param string $projectName
      * @param null|string $accessToken
-     * @return Project
+     * @return \Buddy\BuddyResponse
      */
-    public function editProject(Project $project, $domain, $projectName, $accessToken = null)
+    public function editProject($data, $domain, $projectName, $accessToken = null)
     {
-        return $this->patchJson($accessToken, [
-            'name' => $project->getName(),
-            'display_name' => $project->getDisplayName()
-        ], '/workspaces/:domain/projects/:project_name', [
+        return $this->patchJson($accessToken, $data, '/workspaces/:domain/projects/:project_name', [
             'domain' => $domain,
             'project_name' => $projectName
-        ])->getAsProject();
+        ]);
     }
 
     /**
      * @param string $domain
      * @param string $projectName
      * @param null|string $accessToken
-     * @return bool
+     * @return \Buddy\BuddyResponse
      */
     public function deleteProject($domain, $projectName, $accessToken = null)
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/projects/:project_name', [
             'domain' => $domain,
             'project_name' => $projectName
-        ])->getAsBool();
+        ]);
     }
 
     /**
@@ -104,94 +91,87 @@ class Projects extends Api
      * @param string $projectName
      * @param array $filters
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Members
+     * @return \Buddy\BuddyResponse
      */
     public function getProjectMembers($domain, $projectName, array $filters = [], $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/members', [
             'domain' => $domain,
             'project_name' => $projectName
-        ], $filters)->getAsMembers();
+        ], $filters);
     }
 
     /**
-     * @param User $user
      * @param string $domain
      * @param string $projectName
+     * @param int $userId
+     * @param int $permissionId
      * @param null|string $accessToken
-     * @return User
-     * @throws BuddySDKException
+     * @return \Buddy\BuddyResponse
      */
-    public function addProjectMember(User $user, $domain, $projectName, $accessToken = null)
+    public function addProjectMember($domain, $projectName, $userId, $permissionId, $accessToken = null)
     {
-        if (!($user->getPermissionSet() instanceof PermissionSet)) {
-            throw new BuddySDKException('PermissionSet must be set');
-        }
         return $this->postJson($accessToken, [
-            'id' => $user->getId(),
+            'id' => $userId,
             'permission_set' => [
-                'id' => $user->getPermissionSet()->getId()
+                'id' => $permissionId
             ]
         ], '/workspaces/:domain/projects/:project_name/members', [
             'domain' => $domain,
             'project_name' => $projectName
-        ])->getAsUser();
+        ]);
     }
 
     /**
      * @param string $domain
      * @param string $projectName
-     * @param int $memberId
+     * @param int $userId
      * @param null|string $accessToken
-     * @return User
+     * @return \Buddy\BuddyResponse
      */
-    public function getProjectMember($domain, $projectName, $memberId, $accessToken = null)
+    public function getProjectMember($domain, $projectName, $userId, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/members/:member_id', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'member_id' => $memberId
-        ])->getAsUser();
+            'member_id' => $userId
+        ]);
     }
 
     /**
-     * @param User $user
      * @param string $domain
      * @param string $projectName
-     * @param int $memberId
+     * @param int $userId
+     * @param int $permissionId
      * @param null|string $accessToken
-     * @return User
-     * @throws BuddySDKException
+     * @return \Buddy\BuddyResponse
      */
-    public function editProjectMember(User $user, $domain, $projectName, $memberId, $accessToken = null)
+    public function editProjectMember($domain, $projectName, $userId, $permissionId, $accessToken = null)
     {
-        if (!($user->getPermissionSet() instanceof PermissionSet)) {
-            throw new BuddySDKException('PermissionSet must be set');
-        }
         return $this->patchJson($accessToken, [
             'permission_set' => [
-                'id' => $user->getPermissionSet()->getId()
+                'id' => $permissionId
             ]
         ], '/workspaces/:domain/projects/:project_name/members/:member_id', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'member_id' => $memberId
-        ])->getAsUser();
+            'member_id' => $userId
+        ]);
     }
 
     /**
      * @param string $domain
      * @param string $projectName
-     * @param int $memberId
+     * @param int $userId
      * @param null|string $accessToken
-     * @return bool
+     * @return \Buddy\BuddyResponse
      */
-    public function deleteProjectMember($domain, $projectName, $memberId, $accessToken = null)
+    public function deleteProjectMember($domain, $projectName, $userId, $accessToken = null)
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/projects/:project_name/members/:member_id', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'member_id' => $memberId
-        ])->getAsBool();
+            'member_id' => $userId
+        ]);
     }
 }

@@ -34,15 +34,15 @@ try {
 }
 ```
 
-scopes is array of strings - [help](https://buddy.works/api/reference/getting-started/oauth#supported-scopes)
+`scopes` are arrays of strings - [help](https://buddy.works/api/reference/getting-started/oauth#supported-scopes)
 
-state should be an unguessable random string. It is used to protect against cross-site request forgery attacks.
+`state` should be an unguessable random string. It is used to protect against cross-site request forgery attacks.
 
-redirectUrl is optional [more](https://buddy.works/api/reference/getting-started/oauth#web-application-flow)
+`redirectUrl` is optional [more](https://buddy.works/api/reference/getting-started/oauth#web-application-flow)
 
-You should redirect your user to returned url, after authorization he should get back to your page (configured in application or passed to the method).
+You should redirect the user to the created URL. Upon authorization, the user should get back to your page (configured in application or passed to the method)
 
-After that you should call next method to acquire access token
+`query params` will get you the code & state. State should be the same as you passed before. Code is used in next step to exchange for access token:
 
 ```php
 $buddy = new Buddy\Buddy([
@@ -58,22 +58,22 @@ try {
   echo 'Buddy SDK return an error: ' . $e->getMessage();
   exit;
 }
-$accessToken = $auth->getAccessToken();
+var_dump($auth);
 ```
 
 State should be the same as in getAuthorizeUrl method. 
 
 ## Usage of direct tokens
 
-You can also use [api tokens](https://app.buddy.works/api-tokens).
+You can also use [API Tokens](https://app.buddy.works/api-tokens).
 
-That functionality is provided for testing purpose and will only work for individual tokens generated per user.
+That functionality is provided for testing purposes and will only work for individual tokens generated per user.
 
-All requests will be called in behalf of the user whom provided token 
+All requests will be called on behalf of the user who provided token.
 
-## Apis
+## API's
 
-For detailed info check [our documentation](https://buddy.works/api/reference/getting-started/overview)
+For detailed info what send for which method, error codes, rates & limits - check [Buddy documentation](https://buddy.works/api/reference/getting-started/overview)
 
 To start using api you should pass to Buddy constructor acquired access token.
 
@@ -82,10 +82,6 @@ $buddy = new Buddy\Buddy([
   'accessToken' => 'your access token'
 ]);
 ```
-
-From there every method called from this instance of Buddy will be called on behalf of user for which access token was generated.
-
-(You can also pass access tokens as last parameter to every api method)
  
 ### Workspaces
 
@@ -106,36 +102,408 @@ try {
 
 Get workspace
 ```php
-try {
-    $resp = $buddy->getApiWorkspaces()->getWorkspace($domain, [$accessToken]);
-    var_dump($resp);
-    exit;
-} catch (Buddy\Exceptions\BuddyResponseException $e) {
-    echo $e->getMessage();
-    exit;
-} catch (Buddy\Exceptions\BuddySDKException $e) {
-    echo $e->getMessage();
-    exit;
-}
+    $buddy->getApiWorkspaces()->getWorkspace($domain, [$accessToken]);
 ```
 
-For more examples check [here](https://github.com/buddy-works/buddy-works-php-api/blob/master/examples)
+### Webhooks
 
-## Tests
-
-Add 2 direct tokens in your Buddy profile:
- - one with all scopes
- - second only with USER INFO scope
- 
-Add application & get client id, client secret
-
-Copy file tests/env.php.dist -> tests/env.php and fill up variables
-
-Run command:
-``` sh
-./vendor/bin/phpunit
+Get webhooks
+```php
+    $buddy->getApiWebhooks()->getWebhooks($domain, [$accessToken]);
 ```
-> **Note:** It will test on provided account (add projects ie.)
+
+Add webhook
+```php
+    $buddy->getApiWebhooks()->addWebhook($data, $domain, [$accessToken]);
+```
+
+Get webhook
+```php
+    $buddy->getApiWebhooks()->getWebhook($domain, $webhookId, [$accessToken]);
+```
+
+Edit webhook
+```php
+    $buddy->getApiWebhooks()->editWebhook($data, $domain, $webhookId, [$accessToken]);
+```
+
+Delete webhook
+```php
+    $buddy->getApiWebhooks()->deleteWebhook($domain, $webhookId, [$accessToken]);
+```
+
+### Tags
+
+Get tags
+```php
+    $buddy->getApiTags()->getTags($domain, $projectName, [$accessToken]);
+```
+
+Get tag
+```php
+    $buddy->getApiTags()->getTag($domain, $projectName, $name, [$accessToken]);
+```
+
+### Ssh Keys
+
+Get keys
+```php
+    $buddy->getApiSshKeys()->getKeys([$accessToken]);
+```
+
+Add key
+```php
+    $buddy->getApiSshKeys()->addKey($data, [$accessToken]);
+```
+
+Delete key
+```php
+    $buddy->getApiSshKeys()->deleteKey($keyId, [$accessToken]);
+```
+
+Get key
+```php
+    $buddy->getApiSshKeys()->getKey($keyId, [$accessToken]);
+```
+
+### Source
+
+Get contents
+```php
+    $buddy->getApiSource()->getContents($domain, $projectName, [$path], [$filters], [$accessToken]);
+```
+
+Add file
+```php
+    $buddy->getApiSource()->addFile($data, $domain, $projectName, [$accessToken]);
+```
+
+Edit file
+```php
+    $buddy->getApiSource()->editFile($data, $domain, $projectName, $path, [$accessToken]);
+```
+
+Delete file
+```php
+    $buddy->getApiSource()->deleteFile($data, $domain, $projectName, $path, [$accessToken]);
+```
+
+### Projects
+
+Get projects
+```php
+    $buddy->getApiProjects()->getProjects($domain, [$filters], [$accessToken]);
+```
+
+Add project
+```php
+    $buddy->getApiProjects()->addProject($data, $domain, [$accessToken]);
+```
+
+Get projects
+```php
+    $buddy->getApiProjects()->getProject($domain, $projectName, [$accessToken]);
+```
+
+Edit project
+```php
+    $buddy->getApiProjects()->editProject($data, $domain, $projectName, [$accessToken]);
+```
+
+Delete project
+```php
+    $buddy->getApiProjects()->deleteProject($domain, $projectName, [$accessToken]);
+```
+
+Get project members
+```php
+    $buddy->getApiProjects()->getProjectMembers($domain, $projectName, [$filters], [$accessToken]);
+```
+
+Add project member
+```php
+    $buddy->getApiProjects()->addProjectMember($domain, $projectName, $userId, $permissionId, [$accessToken]);
+```
+
+Get project member
+```php
+    $buddy->getApiProjects()->getProjectMember($domain, $projectName, $userId, [$accessToken]);
+```
+
+Edit project member
+```php
+    $buddy->getApiProjects()->editProjectMember($domain, $projectName, $userId, $permissionId, [$accessToken]);
+```
+
+Delete project member
+```php
+    $buddy->getApiProjects()->deleteProjectMember($domain, $projectName, $userId, [$accessToken]);
+```
+
+### Profile
+
+Get user
+```php
+    $buddy->getApiProfile()->getAuthenticatedUser([$accessToken]);
+```
+
+Edit user
+```php
+    $buddy->getApiProfile()->editAuthenticatedUser($data, [$accessToken]);
+```
+
+### Pipelines
+
+Get pipelines
+```php
+    $buddy->getApiPipelines()->getPipelines($domain, $projectName, [$filters], [$accessToken]);
+```
+
+Add pipeline
+```php
+    $buddy->getApiPipelines()->addPipeline($data, $domain, $projectName, [$accessToken]);
+```
+
+Get pipeline
+```php
+    $buddy->getApiPipelines()->getPipeline($domain, $projectName, $pipelineId, [$accessToken]);
+```
+
+Edit pipeline
+```php
+    $buddy->getApiPipelines()->editPipeline($data, $domain, $projectName, $pipelineId, [$accessToken]);
+```
+
+Delete pipeline
+```php
+    $buddy->getApiPipelines()->deletePipeline($domain, $projectName, $pipelineId, [$accessToken]);
+```
+
+Get pipeline actions
+```php
+    $buddy->getApiPipelines()->getPipelineActions($domain, $projectName, $pipelineId, [$accessToken]);
+```
+
+Add pipeline action
+```php
+    $buddy->getApiPipelines()->addPipelineAction($data, $domain, $projectName, $pipelineId, [$accessToken]);
+```
+
+Get pipeline action
+```php
+    $buddy->getApiPipelines()->getPipelineAction($domain, $projectName, $pipelineId, $actionId, [$accessToken]);
+```
+
+Edit pipeline action
+```php
+    $buddy->getApiPipelines()->editPipelineAction($data, $domain, $projectName, $pipelineId, $actionId, [$accessToken]);
+```
+
+Delete pipeline action
+```php
+    $buddy->getApiPipelines()->deletePipelineAction($domain, $projectName, $pipelineId, $actionId, [$accessToken]);
+```
+
+### Permissions
+
+Get permissions
+```php
+    $buddy->getApiPermissions()->getWorkspacePermissions($domain, [$accessToken]);
+```
+
+Add permission
+```php
+    $buddy->getApiPermissions()->addWorkspacePermission($data, $domain, [$accessToken]);
+```
+
+Get permission
+```php
+    $buddy->getApiPermissions()->getWorkspacePermission($domain, $permissionId, [$accessToken]);
+```
+
+Edit permission
+```php
+    $buddy->getApiPermissions()->editWorkspacePermission($data, $domain, $permissionId, [$accessToken]);
+```
+
+Delete permission
+```php
+    $buddy->getApiPermissions()->deleteWorkspacePermission($domain, $permissionId, [$accessToken]);
+```
+
+### Members
+
+Get members
+```php
+    $buddy->getApiMembers()->getWorkspaceMembers($domain, [$filters], [$accessToken]);
+```
+
+Add member
+```php
+    $buddy->getApiMembers()->addWorkspaceMember($domain, $email, [$accessToken]);
+```
+
+Get member
+```php
+    $buddy->getApiMembers()->getWorkspaceMember($domain, $userId, [$accessToken]);
+```
+
+Edit member
+```php
+    $buddy->getApiMembers()->editWorkspaceMember($domain, $userId, $isAdmin, [$accessToken]);
+```
+
+Delete member
+```php
+    $buddy->getApiMembers()->deleteWorkspaceMember($domain, $userId, [$accessToken]);
+```
+
+Get member projects
+```php
+    $buddy->getApiMembers()->getWorkspaceMemberProjects($domain, $userId, [$filters], [$accessToken]);
+```
+
+### Integrations
+
+Get integrations
+```php
+    $buddy->getApiIntegrations()->getIntegrations([$accessToken]);
+```
+
+Get integration
+```php
+    $buddy->getApiIntegrations()->getIntegration($integrationId, [$accessToken]);
+```
+
+### Groups
+
+Get groups
+```php
+    $buddy->getApiGroups()->getGroups($domain, [$accessToken]);
+```
+
+Add group
+```php
+    $buddy->getApiGroups()->addGroup($data, $domain, [$accessToken]);
+```
+
+Get group
+```php
+    $buddy->getApiGroups()->getGroup($domain, $groupId, [$accessToken]);
+```
+
+Edit group
+```php
+    $buddy->getApiGroups()->editGroup($data, $domain, $groupId, [$accessToken]);
+```
+
+Delete group
+```php
+    $buddy->getApiGroups()->deleteGroup($domain, $groupId, [$accessToken]);
+```
+
+Get group members
+```php
+    $buddy->getApiGroups()->getGroupMembers($domain, $groupId, [$accessToken]);
+```
+
+Add group member
+```php
+    $buddy->getApiGroups()->addGroupMember($domain, $groupId, $userId, [$accessToken]);
+```
+
+Get group member
+```php
+    $buddy->getApiGroups()->getGroupMember($domain, $groupId, $userId, [$accessToken]);
+```
+
+Delete group member
+```php
+    $buddy->getApiGroups()->deleteGroupMember($domain, $groupId, $userId, [$accessToken]);
+```
+
+### Executions
+
+Get executions
+```php
+    $buddy->getApiExecutions()->getExecutions($domain, $projectName, $pipelineId, [$filters], [$accessToken]);
+```
+
+Run execution
+```php
+    $buddy->getApiExecutions()->runExecution($data, $domain, $projectName, $pipelineId, [$accessToken]);
+```
+
+Get execution
+```php
+    $buddy->getApiExecutions()->getExecution($domain, $projectName, $pipelineId, $executionId, [$accessToken]);
+```
+
+Cancel execution
+```php
+    $buddy->getApiExecutions()->cancelExecution($domain, $projectName, $pipelineId, $executionId, [$accessToken]);
+```
+
+Retry execution
+```php
+    $buddy->getApiExecutions()->retryRelease($domain, $projectName, $pipelineId, $executionId, [$accessToken]);
+```
+
+### Emails
+
+Get emails
+```php
+    $buddy->getApiEmails()->getAuthenticatedUserEmails([$accessToken]);
+```
+
+Add email
+```php
+    $buddy->getApiEmails()->addAuthenticatedUserEmail($email, [$accessToken]);
+```
+
+Delete email
+```php
+    $buddy->getApiEmails()->deleteAuthenticatedUserEmail($email, [$accessToken]);  
+```
+
+### Commits
+
+Get commits
+```php
+    $buddy->getApiCommits()->getCommits($domain, $projectName, [$filters], [$accessToken]);
+```
+
+Get commit
+```php
+    $buddy->getApiCommits()->getCommit($domain, $projectName, $revision, [$accessToken]);
+```
+
+Compare commits
+```php
+    $buddy->getApiCommits()->getCompare($domain, $projectName, $base, $head, [$filters], [$accessToken]);
+```
+
+### Branches
+
+Get branches
+```php
+    $buddy->getApiBranches()->getBranches($domain, $projectName, [$accessToken]);
+```
+
+Get branch
+```php
+    $buddy->getApiBranches()->getBranch($domain, $projectName, $name, [$accessToken]);
+```
+
+Add branch
+```php
+    $buddy->getApiBranches()->addBranch($data, $domain, $projectName, [$accessToken]);
+```
+
+Delete branch
+```php
+    $buddy->getApiBranches()->deleteBranch($domain, $projectName, $name, [$force], [$accessToken]);
+```
 
 ## License
 

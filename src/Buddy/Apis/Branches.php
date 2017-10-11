@@ -15,24 +15,20 @@
 
 namespace Buddy\Apis;
 
-use Buddy\Exceptions\BuddySDKException;
-use Buddy\Objects\Branch;
-use Buddy\Objects\Commit;
-
 class Branches extends Api
 {
     /**
      * @param string $domain
      * @param string $projectName
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Branches
+     * @return \Buddy\BuddyResponse
      */
     public function getBranches($domain, $projectName, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/branches', [
            'domain' => $domain,
-            'project_name' => $projectName
-        ])->getAsBranches();
+           'project_name' => $projectName
+        ]);
     }
 
     /**
@@ -40,7 +36,7 @@ class Branches extends Api
      * @param string $projectName
      * @param string $name
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Branch
+     * @return \Buddy\BuddyResponse
      */
     public function getBranch($domain, $projectName, $name, $accessToken = null)
     {
@@ -48,31 +44,22 @@ class Branches extends Api
             'domain' => $domain,
             'project_name' => $projectName,
             'name' => $name
-        ])->getAsBranch();
+        ]);
     }
 
     /**
-     * @param Branch $branch
+     * @param array $data
      * @param string $domain
      * @param string $projectName
      * @param null|string $accessToken
-     * @return Branch
-     * @throws BuddySDKException
+     * @return \Buddy\BuddyResponse
      */
-    public function addBranch(Branch $branch, $domain, $projectName, $accessToken = null)
+    public function addBranch($data, $domain, $projectName, $accessToken = null)
     {
-        if (!($branch->getCommit() instanceof Commit)) {
-            throw new BuddySDKException('Commit with revision must be provided');
-        }
-        return $this->postJson($accessToken, [
-            'name' => $branch->getName(),
-            'commit' => [
-                'revision' => $branch->getCommit()->getRevision()
-            ]
-        ], '/workspaces/:domain/projects/:project_name/repository/branches', [
+        return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/branches', [
             'domain' => $domain,
             'project_name' => $projectName
-        ])->getAsBranch();
+        ]);
     }
 
     /**
@@ -81,7 +68,7 @@ class Branches extends Api
      * @param string $name
      * @param bool|false $force
      * @param null|string $accessToken
-     * @return bool
+     * @return \Buddy\BuddyResponse
      */
     public function deleteBranch($domain, $projectName, $name, $force = false, $accessToken = null)
     {
@@ -91,6 +78,6 @@ class Branches extends Api
             'name' => $name
         ], [
             'force' => $force
-        ])->getAsBool();
+        ]);
     }
 }

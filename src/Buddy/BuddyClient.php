@@ -56,7 +56,6 @@ class BuddyClient
         $request = $this->guzzle->createRequest($method, $url, $options);
         try {
             $rawResponse = $this->guzzle->send($request);
-
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
                 $rawResponse = $e->getResponse();

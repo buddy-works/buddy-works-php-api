@@ -15,40 +15,38 @@
 
 namespace Buddy\Apis;
 
-use Buddy\Objects\Email;
-
 class Emails extends Api
 {
     /**
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Emails
+     * @return \Buddy\BuddyResponse
      */
     public function getAuthenticatedUserEmails($accessToken = null)
     {
-        return $this->getJson($accessToken, '/user/emails')->getAsEmails();
-    }
-
-    /**
-     * @param Email $email
-     * @param null|string $accessToken
-     * @return Email
-     */
-    public function addAuthenticatedUserEmail(Email $email, $accessToken = null)
-    {
-        return $this->postJson($accessToken, [
-            'email' => $email->getEmail()
-        ], '/user/emails')->getAsEmail();
+        return $this->getJson($accessToken, '/user/emails');
     }
 
     /**
      * @param string $email
      * @param null|string $accessToken
-     * @return bool
+     * @return \Buddy\BuddyResponse
+     */
+    public function addAuthenticatedUserEmail($email, $accessToken = null)
+    {
+        return $this->postJson($accessToken, [
+            'email' => $email
+        ], '/user/emails');
+    }
+
+    /**
+     * @param string $email
+     * @param null|string $accessToken
+     * @return \Buddy\BuddyResponse
      */
     public function deleteAuthenticatedUserEmail($email, $accessToken = null)
     {
         return $this->deleteJson($accessToken, null, '/user/emails/:email', [
             'email' => $email
-        ])->getAsBool();
+        ]);
     }
 }

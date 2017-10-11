@@ -22,14 +22,14 @@ class Commits extends Api
      * @param string $projectName
      * @param array $filters
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Commits
+     * @return \Buddy\BuddyResponse
      */
     public function getCommits($domain, $projectName, array $filters = [], $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/commits', [
             'domain' => $domain,
             'project_name' => $projectName
-        ], $filters)->getAsCommits();
+        ], $filters);
     }
 
     /**
@@ -37,7 +37,7 @@ class Commits extends Api
      * @param string $projectName
      * @param string $revision
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Commit
+     * @return \Buddy\BuddyResponse
      */
     public function getCommit($domain, $projectName, $revision, $accessToken = null)
     {
@@ -45,7 +45,7 @@ class Commits extends Api
             'domain' => $domain,
             'project_name' => $projectName,
             'revision' => $revision
-        ])->getAsCommit();
+        ]);
     }
 
     /**
@@ -55,7 +55,7 @@ class Commits extends Api
      * @param string $head
      * @param array $filters
      * @param null|string $accessToken
-     * @return \Buddy\Objects\CompareCommits
+     * @return \Buddy\BuddyResponse
      */
     public function getCompare($domain, $projectName, $base, $head, array $filters = [], $accessToken = null)
     {
@@ -64,6 +64,6 @@ class Commits extends Api
             'project_name' => $projectName,
             'base' => $base,
             'head' => $head
-        ], $filters)->getAsCompareCommits();
+        ], $filters);
     }
 }

@@ -81,14 +81,14 @@ class Buddy
     private $apiProfile;
 
     /**
-     * @var Apis\Releases
+     * @var Apis\Executions
      */
-    private $apiReleases;
+    private $apiExecutions;
 
     /**
-     * @var Apis\Scenarios
+     * @var Apis\Pipelines
      */
-    private $apiScenarios;
+    private $apiPipelines;
 
     /**
      * @var Apis\Source
@@ -104,6 +104,11 @@ class Buddy
      * @var Apis\Tags
      */
     private $apiTags;
+
+    /**
+     * @var Apis\Integrations
+     */
+    private $apiIntegrations;
 
     /**
      * Buddy constructor.
@@ -123,11 +128,20 @@ class Buddy
         $this->apiCommits = new Apis\Commits($this->client, $config);
         $this->apiEmails = new Apis\Emails($this->client, $config);
         $this->apiProfile = new Apis\Profile($this->client, $config);
-        $this->apiReleases = new Apis\Releases($this->client, $config);
-        $this->apiScenarios = new Apis\Scenarios($this->client, $config);
+        $this->apiExecutions = new Apis\Executions($this->client, $config);
+        $this->apiPipelines = new Apis\Pipelines($this->client, $config);
         $this->apiSource = new Apis\Source($this->client, $config);
         $this->apiSshKeys = new Apis\SshKeys($this->client, $config);
         $this->apiTags = new Apis\Tags($this->client, $config);
+        $this->apiIntegrations = new Apis\Integrations($this->client, $config);
+    }
+
+    /**
+     * @return Apis\Integrations
+     */
+    public function getApiIntegrations()
+    {
+        return $this->apiIntegrations;
     }
 
     /**
@@ -155,19 +169,19 @@ class Buddy
     }
 
     /**
-     * @return Apis\Scenarios
+     * @return Apis\Pipelines
      */
-    public function getApiScenarios()
+    public function getApiPipelines()
     {
-        return $this->apiScenarios;
+        return $this->apiPipelines;
     }
 
     /**
-     * @return Apis\Releases
+     * @return Apis\Executions
      */
-    public function getApiReleases()
+    public function getApiExecutions()
     {
-        return $this->apiReleases;
+        return $this->apiExecutions;
     }
 
     /**

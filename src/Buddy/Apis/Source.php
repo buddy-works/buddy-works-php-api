@@ -15,8 +15,6 @@
 
 namespace Buddy\Apis;
 
-use Buddy\Objects\SourceContent;
-
 class Source extends Api
 {
     /**
@@ -25,71 +23,60 @@ class Source extends Api
      * @param string $path
      * @param array $filters
      * @param null|string $accessToken
-     * @return \Buddy\Objects\SourceContents
+     * @return \Buddy\BuddyResponse
      */
     public function getContents($domain, $projectName, $path = '/', array $filters = [], $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/contents', [
             'domain' => $domain,
             'project_name' => $projectName
-        ], $filters, $path)->getAsSourceContents();
+        ], $filters, $path);
     }
 
     /**
-     * @param SourceContent $content
+     * @param array $data
      * @param string $domain
      * @param string $projectName
      * @param null|string $accessToken
-     * @return \Buddy\Objects\SourceCommitContent
+     * @return \Buddy\BuddyResponse
      */
-    public function addFile(SourceContent $content, $domain, $projectName, $accessToken = null)
+    public function addFile($data, $domain, $projectName, $accessToken = null)
     {
-        return $this->postJson($accessToken, [
-            'path' => $content->getPath(),
-            'message' => $content->getMessage(),
-            'content' => $content->getContent(),
-            'branch' => $content->getBranch()
-        ], '/workspaces/:domain/projects/:project_name/repository/contents', [
+        return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/contents', [
             'domain' => $domain,
             'project_name' => $projectName
-        ])->getAsSourceCommitContent();
+        ]);
     }
 
     /**
-     * @param SourceContent $content
+     * @param array $data
      * @param string $domain
      * @param string $projectName
      * @param string $path
      * @param null|string $accessToken
-     * @return \Buddy\Objects\SourceCommitContent
+     * @return \Buddy\BuddyResponse
      */
-    public function editFile(SourceContent $content, $domain, $projectName, $path, $accessToken = null)
+    public function editFile($data, $domain, $projectName, $path, $accessToken = null)
     {
-        return $this->putJson($accessToken, [
-            'message' => $content->getMessage(),
-            'content' => $content->getContent()
-        ], '/workspaces/:domain/projects/:project_name/repository/contents', [
+        return $this->putJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/contents', [
             'domain' => $domain,
             'project_name' => $projectName
-        ], [], $path)->getAsSourceCommitContent();
+        ], [], $path);
     }
 
     /**
-     * @param SourceContent $content
+     * @param array $data
      * @param string $domain
      * @param string $projectName
      * @param string $path
      * @param null|string $accessToken
-     * @return \Buddy\Objects\Commit
+     * @return \Buddy\BuddyResponse
      */
-    public function deleteFile(SourceContent $content, $domain, $projectName, $path, $accessToken = null)
+    public function deleteFile($data, $domain, $projectName, $path, $accessToken = null)
     {
-        return $this->deleteJson($accessToken, [
-            'message' => $content->getMessage(),
-            'branch' => $content->getBranch()
-        ], '/workspaces/:domain/projects/:project_name/repository/contents', [
+        return $this->deleteJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/contents', [
             'domain' => $domain,
             'project_name' => $projectName
-        ], [], $path)->getAsCommit();
+        ], [], $path);
     }
 }
