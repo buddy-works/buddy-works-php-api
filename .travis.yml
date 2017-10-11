@@ -8,7 +8,10 @@ php:
 
 sudo: false
 
-dist: trusty
+addons:
+  apt:
+    packages:
+      - libssl1.0.0
 
 before_install:
   - travis_retry composer self-update
