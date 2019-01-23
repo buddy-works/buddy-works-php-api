@@ -99,7 +99,7 @@ class Pipelines extends Api
      */
     public function getPipelines($domain, $projectName, array $filters = [], $accessToken = null)
     {
-        return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/release_scenarios', [
+        return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines', [
             'domain' => $domain,
             'project_name' => $projectName
         ], $filters);
