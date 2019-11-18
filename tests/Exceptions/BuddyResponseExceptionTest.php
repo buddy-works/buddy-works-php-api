@@ -16,15 +16,16 @@
 namespace Buddy\Tests\Exceptions;
 
 use Buddy\Exceptions\BuddyResponseException;
+use PHPUnit\Framework\TestCase;
 
-class BuddyResponseExceptionTest extends \PHPUnit_Framework_TestCase
+class BuddyResponseExceptionTest extends TestCase
 {
     public function test()
     {
         $exp = new BuddyResponseException(500, [], 'test');
         $this->assertEquals('test', $exp->getBody());
         $this->assertEquals(500, $exp->getStatusCode());
-        $this->assertInternalType('array', $exp->getHeaders());
+        $this->assertIsArray($exp->getHeaders());
         $this->assertEquals('Something went wrong', $exp->getMessage());
     }
 
