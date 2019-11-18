@@ -3,3 +3,4 @@ tests/env.php
 tests/BuddyTestCredentials.php
 /.idea
 .phpunit.result.cache
+.php_cs.cache
