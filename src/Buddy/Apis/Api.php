@@ -50,7 +50,7 @@ class Api
     /**
      * @throws BuddySDKException
      */
-    protected function patchJson(string $accessToken, array $patchData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
+    protected function patchJson(?string $accessToken, array $patchData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
     {
         return $this->client->patchJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $patchData);
     }
@@ -58,7 +58,7 @@ class Api
     /**
      * @throws BuddySDKException
      */
-    protected function deleteJson(string $accessToken, ?array $deleteData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
+    protected function deleteJson(?string $accessToken, ?array $deleteData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
     {
         return $this->client->deleteJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $deleteData);
     }
@@ -66,7 +66,7 @@ class Api
     /**
      * @throws BuddySDKException
      */
-    protected function postJson(string $accessToken, array $postData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
+    protected function postJson(?string $accessToken, array $postData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
     {
         return $this->client->postJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $postData);
     }
@@ -74,7 +74,7 @@ class Api
     /**
      * @throws BuddySDKException
      */
-    protected function putJson(string $accessToken, array $putData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
+    protected function putJson(?string $accessToken, array $putData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
     {
         return $this->client->putJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $putData);
     }
