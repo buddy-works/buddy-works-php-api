@@ -17,9 +17,11 @@ declare(strict_types=1);
 
 namespace Buddy\Exceptions;
 
+use Exception;
+
 /**
  * Class BuddySDKException.
  */
-class BuddySDKException extends \Exception
+class BuddySDKException extends Exception
 {
 }

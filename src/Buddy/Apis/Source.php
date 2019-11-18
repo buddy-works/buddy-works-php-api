@@ -17,17 +17,11 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Source extends Api
 {
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string      $path
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getContents($domain, $projectName, $path = '/', array $filters = [], $accessToken = null)
+    public function getContents(string $domain, string $projectName, string $path = '/', array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/contents', [
             'domain' => $domain,
@@ -35,15 +29,7 @@ class Source extends Api
         ], $filters, $path);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addFile($data, $domain, $projectName, $accessToken = null)
+    public function addFile(array $data, string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/contents', [
             'domain' => $domain,
@@ -51,16 +37,7 @@ class Source extends Api
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string      $path
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editFile($data, $domain, $projectName, $path, $accessToken = null)
+    public function editFile(array $data, string $domain, string $projectName, string $path, ?string $accessToken = null): BuddyResponse
     {
         return $this->putJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/contents', [
             'domain' => $domain,
@@ -68,16 +45,7 @@ class Source extends Api
         ], [], $path);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string      $path
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteFile($data, $domain, $projectName, $path, $accessToken = null)
+    public function deleteFile(array $data, string $domain, string $projectName, string $path, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/contents', [
             'domain' => $domain,

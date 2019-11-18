@@ -17,38 +17,23 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Emails extends Api
 {
-    /**
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getAuthenticatedUserEmails($accessToken = null)
+    public function getAuthenticatedUserEmails(?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/user/emails');
     }
 
-    /**
-     * @param string      $email
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addAuthenticatedUserEmail($email, $accessToken = null)
+    public function addAuthenticatedUserEmail(string $email, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, [
             'email' => $email,
         ], '/user/emails');
     }
 
-    /**
-     * @param string      $email
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteAuthenticatedUserEmail($email, $accessToken = null)
+    public function deleteAuthenticatedUserEmail(string $email, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/user/emails/:email', [
             'email' => $email,

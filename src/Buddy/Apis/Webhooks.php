@@ -17,6 +17,8 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Webhooks extends Api
 {
     const EVENT_PUSH = 'PUSH';
@@ -25,41 +27,21 @@ class Webhooks extends Api
     const EVENT_EXECUTION_FAILED = 'EXECUTION_FAILED';
     const EVENT_EXECUTION_FINISHED = 'EXECUTION_FINISHED';
 
-    /**
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getWebhooks($domain, $accessToken = null)
+    public function getWebhooks(string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/webhooks', [
             'domain' => $domain,
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addWebhook($data, $domain, $accessToken = null)
+    public function addWebhook(array $data, string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/webhooks', [
             'domain' => $domain,
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $webhookId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getWebhook($domain, $webhookId, $accessToken = null)
+    public function getWebhook(string $domain, int $webhookId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/webhooks/:webhook_id', [
             'domain' => $domain,
@@ -67,15 +49,7 @@ class Webhooks extends Api
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param int         $webhookId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editWebhook($data, $domain, $webhookId, $accessToken = null)
+    public function editWebhook(array $data, string $domain, int $webhookId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/webhooks/:webhook_id', [
             'domain' => $domain,
@@ -83,14 +57,7 @@ class Webhooks extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $webhookId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteWebhook($domain, $webhookId, $accessToken = null)
+    public function deleteWebhook(string $domain, int $webhookId, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/webhooks/:webhook_id', [
             'domain' => $domain,

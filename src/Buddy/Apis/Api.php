@@ -18,6 +18,7 @@ declare(strict_types=1);
 namespace Buddy\Apis;
 
 use Buddy\BuddyClient;
+use Buddy\BuddyResponse;
 use Buddy\Exceptions\BuddySDKException;
 
 class Api
@@ -32,9 +33,6 @@ class Api
      */
     protected $options;
 
-    /**
-     * Api constructor.
-     */
     public function __construct(BuddyClient $client, array $options = [])
     {
         $this->client = $client;
@@ -42,84 +40,51 @@ class Api
     }
 
     /**
-     * @param string $accessToken
-     * @param string $url
-     * @param string $path
-     *
      * @throws BuddySDKException
-     *
-     * @return \Buddy\BuddyResponse
      */
-    protected function getJson($accessToken, $url, array $params = [], array $query = [], $path = '/')
+    protected function getJson(?string $accessToken, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
     {
         return $this->client->getJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path));
     }
 
     /**
-     * @param string $accessToken
-     * @param string $url
-     * @param string $path
-     *
      * @throws BuddySDKException
-     *
-     * @return \Buddy\BuddyResponse
      */
-    protected function patchJson($accessToken, array $patchData, $url, array $params = [], array $query = [], $path = '/')
+    protected function patchJson(string $accessToken, array $patchData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
     {
         return $this->client->patchJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $patchData);
     }
 
     /**
-     * @param string     $accessToken
-     * @param array|null $deleteData
-     * @param string     $url
-     * @param string     $path
-     *
      * @throws BuddySDKException
-     *
-     * @return \Buddy\BuddyResponse
      */
-    protected function deleteJson($accessToken, $deleteData, $url, array $params = [], array $query = [], $path = '/')
+    protected function deleteJson(string $accessToken, ?array $deleteData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
     {
         return $this->client->deleteJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $deleteData);
     }
 
     /**
-     * @param string $accessToken
-     * @param string $url
-     * @param string $path
-     *
      * @throws BuddySDKException
-     *
-     * @return \Buddy\BuddyResponse
      */
-    protected function postJson($accessToken, array $postData, $url, array $params = [], array $query = [], $path = '/')
+    protected function postJson(string $accessToken, array $postData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
     {
         return $this->client->postJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $postData);
     }
 
     /**
-     * @param string $accessToken
-     * @param string $url
-     * @param string $path
-     *
      * @throws BuddySDKException
-     *
-     * @return \Buddy\BuddyResponse
      */
-    protected function putJson($accessToken, array $putData, $url, array $params = [], array $query = [], $path = '/')
+    protected function putJson(string $accessToken, array $putData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
     {
         return $this->client->putJson($this->getAccessToken($accessToken), $this->client->createUrl($url, $params, $query, $path), $putData);
     }
 
     /**
-     * @param string $accessToken
-     *
      * @throws BuddySDKException
      *
-     * @return string
+     * @return string|mixed
      */
-    protected function getAccessToken($accessToken)
+    protected function getAccessToken(?string $accessToken = null)
     {
         if (isset($accessToken)) {
             return $accessToken;

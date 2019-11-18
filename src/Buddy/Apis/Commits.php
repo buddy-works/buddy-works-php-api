@@ -17,16 +17,11 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Commits extends Api
 {
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getCommits($domain, $projectName, array $filters = [], $accessToken = null)
+    public function getCommits(string $domain, string $projectName, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/commits', [
             'domain' => $domain,
@@ -34,15 +29,7 @@ class Commits extends Api
         ], $filters);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string      $revision
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getCommit($domain, $projectName, $revision, $accessToken = null)
+    public function getCommit(string $domain, string $projectName, string $revision, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/commits/:revision', [
             'domain' => $domain,
@@ -51,16 +38,7 @@ class Commits extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string      $base
-     * @param string      $head
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getCompare($domain, $projectName, $base, $head, array $filters = [], $accessToken = null)
+    public function getCompare(string $domain, string $projectName, string $base, string $head, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/comparison/:base...:head', [
             'domain' => $domain,

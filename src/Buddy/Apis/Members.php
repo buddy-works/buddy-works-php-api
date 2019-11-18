@@ -17,29 +17,18 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Members extends Api
 {
-    /**
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getWorkspaceMembers($domain, array $filters = [], $accessToken = null)
+    public function getWorkspaceMembers(string $domain, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/members', [
             'domain' => $domain,
         ], $filters);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $email
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addWorkspaceMember($domain, $email, $accessToken = null)
+    public function addWorkspaceMember(string $domain, string $email, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, [
             'email' => $email,
@@ -48,14 +37,7 @@ class Members extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $userId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getWorkspaceMember($domain, $userId, $accessToken = null)
+    public function getWorkspaceMember(string $domain, int $userId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/members/:member_id', [
             'domain' => $domain,
@@ -63,15 +45,7 @@ class Members extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $userId
-     * @param bool        $isAdmin
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editWorkspaceMember($domain, $userId, $isAdmin, $accessToken = null)
+    public function editWorkspaceMember(string $domain, int $userId, bool $isAdmin, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, [
             'admin' => $isAdmin,
@@ -81,14 +55,7 @@ class Members extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $userId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteWorkspaceMember($domain, $userId, $accessToken = null)
+    public function deleteWorkspaceMember(string $domain, int $userId, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/members/:member_id', [
             'domain' => $domain,
@@ -96,14 +63,7 @@ class Members extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $userId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getWorkspaceMemberProjects($domain, $userId, array $filters = [], $accessToken = null)
+    public function getWorkspaceMemberProjects(string $domain, int $userId, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/members/:member_id/projects', [
             'domain' => $domain,

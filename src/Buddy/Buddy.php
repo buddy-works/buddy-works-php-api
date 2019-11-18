@@ -17,6 +17,23 @@ declare(strict_types=1);
 
 namespace Buddy;
 
+use Buddy\Apis\Branches;
+use Buddy\Apis\Commits;
+use Buddy\Apis\Emails;
+use Buddy\Apis\Executions;
+use Buddy\Apis\Groups;
+use Buddy\Apis\Integrations;
+use Buddy\Apis\Members;
+use Buddy\Apis\Permissions;
+use Buddy\Apis\Pipelines;
+use Buddy\Apis\Profile;
+use Buddy\Apis\Projects;
+use Buddy\Apis\Source;
+use Buddy\Apis\SshKeys;
+use Buddy\Apis\Tags;
+use Buddy\Apis\Webhooks;
+use Buddy\Apis\Workspaces;
+
 class Buddy
 {
     /**
@@ -116,28 +133,28 @@ class Buddy
     {
         $this->client = new BuddyClient();
         $this->oauth = new BuddyOAuth($this->client, $config);
-        $this->apiWorkspaces = new Apis\Workspaces($this->client, $config);
-        $this->apiProjects = new Apis\Projects($this->client, $config);
-        $this->apiMembers = new Apis\Members($this->client, $config);
-        $this->apiPermissions = new Apis\Permissions($this->client, $config);
-        $this->apiGroups = new Apis\Groups($this->client, $config);
-        $this->apiWebhooks = new Apis\Webhooks($this->client, $config);
-        $this->apiBranches = new Apis\Branches($this->client, $config);
-        $this->apiCommits = new Apis\Commits($this->client, $config);
-        $this->apiEmails = new Apis\Emails($this->client, $config);
-        $this->apiProfile = new Apis\Profile($this->client, $config);
-        $this->apiExecutions = new Apis\Executions($this->client, $config);
-        $this->apiPipelines = new Apis\Pipelines($this->client, $config);
-        $this->apiSource = new Apis\Source($this->client, $config);
-        $this->apiSshKeys = new Apis\SshKeys($this->client, $config);
-        $this->apiTags = new Apis\Tags($this->client, $config);
-        $this->apiIntegrations = new Apis\Integrations($this->client, $config);
+        $this->apiWorkspaces = new Workspaces($this->client, $config);
+        $this->apiProjects = new Projects($this->client, $config);
+        $this->apiMembers = new Members($this->client, $config);
+        $this->apiPermissions = new Permissions($this->client, $config);
+        $this->apiGroups = new Groups($this->client, $config);
+        $this->apiWebhooks = new Webhooks($this->client, $config);
+        $this->apiBranches = new Branches($this->client, $config);
+        $this->apiCommits = new Commits($this->client, $config);
+        $this->apiEmails = new Emails($this->client, $config);
+        $this->apiProfile = new Profile($this->client, $config);
+        $this->apiExecutions = new Executions($this->client, $config);
+        $this->apiPipelines = new Pipelines($this->client, $config);
+        $this->apiSource = new Source($this->client, $config);
+        $this->apiSshKeys = new SshKeys($this->client, $config);
+        $this->apiTags = new Tags($this->client, $config);
+        $this->apiIntegrations = new Integrations($this->client, $config);
     }
 
     /**
      * @return Apis\Integrations
      */
-    public function getApiIntegrations()
+    public function getApiIntegrations(): Integrations
     {
         return $this->apiIntegrations;
     }
@@ -145,7 +162,7 @@ class Buddy
     /**
      * @return Apis\Tags
      */
-    public function getApiTags()
+    public function getApiTags(): Tags
     {
         return $this->apiTags;
     }
@@ -153,7 +170,7 @@ class Buddy
     /**
      * @return Apis\SshKeys
      */
-    public function getApiSshKeys()
+    public function getApiSshKeys(): SshKeys
     {
         return $this->apiSshKeys;
     }
@@ -161,7 +178,7 @@ class Buddy
     /**
      * @return Apis\Source
      */
-    public function getApiSource()
+    public function getApiSource(): Source
     {
         return $this->apiSource;
     }
@@ -169,7 +186,7 @@ class Buddy
     /**
      * @return Apis\Pipelines
      */
-    public function getApiPipelines()
+    public function getApiPipelines(): Pipelines
     {
         return $this->apiPipelines;
     }
@@ -177,7 +194,7 @@ class Buddy
     /**
      * @return Apis\Executions
      */
-    public function getApiExecutions()
+    public function getApiExecutions(): Executions
     {
         return $this->apiExecutions;
     }
@@ -185,7 +202,7 @@ class Buddy
     /**
      * @return Apis\Profile
      */
-    public function getApiProfile()
+    public function getApiProfile(): Profile
     {
         return $this->apiProfile;
     }
@@ -193,7 +210,7 @@ class Buddy
     /**
      * @return Apis\Emails
      */
-    public function getApiEmails()
+    public function getApiEmails(): Emails
     {
         return $this->apiEmails;
     }
@@ -201,7 +218,7 @@ class Buddy
     /**
      * @return Apis\Commits
      */
-    public function getApiCommits()
+    public function getApiCommits(): Commits
     {
         return $this->apiCommits;
     }
@@ -209,7 +226,7 @@ class Buddy
     /**
      * @return Apis\Branches
      */
-    public function getApiBranches()
+    public function getApiBranches(): Branches
     {
         return $this->apiBranches;
     }
@@ -217,7 +234,7 @@ class Buddy
     /**
      * @return Apis\Webhooks
      */
-    public function getApiWebhooks()
+    public function getApiWebhooks(): Webhooks
     {
         return $this->apiWebhooks;
     }
@@ -225,7 +242,7 @@ class Buddy
     /**
      * @return Apis\Groups
      */
-    public function getApiGroups()
+    public function getApiGroups(): Groups
     {
         return $this->apiGroups;
     }
@@ -233,7 +250,7 @@ class Buddy
     /**
      * @return Apis\Permissions
      */
-    public function getApiPermissions()
+    public function getApiPermissions(): Permissions
     {
         return $this->apiPermissions;
     }
@@ -241,7 +258,7 @@ class Buddy
     /**
      * @return Apis\Members
      */
-    public function getApiMembers()
+    public function getApiMembers(): Members
     {
         return $this->apiMembers;
     }
@@ -249,7 +266,7 @@ class Buddy
     /**
      * @return Apis\Workspaces
      */
-    public function getApiWorkspaces()
+    public function getApiWorkspaces(): Workspaces
     {
         return $this->apiWorkspaces;
     }
@@ -257,15 +274,12 @@ class Buddy
     /**
      * @return Apis\Projects
      */
-    public function getApiProjects()
+    public function getApiProjects(): Projects
     {
         return $this->apiProjects;
     }
 
-    /**
-     * @return BuddyOAuth
-     */
-    public function getOAuth()
+    public function getOAuth(): BuddyOAuth
     {
         return $this->oauth;
     }

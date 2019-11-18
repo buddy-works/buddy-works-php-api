@@ -17,25 +17,16 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Integrations extends Api
 {
-    /**
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getIntegrations($accessToken = null)
+    public function getIntegrations(?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/user/integrations');
     }
 
-    /**
-     * @param int         $integrationId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getIntegration($integrationId, $accessToken = null)
+    public function getIntegration(int $integrationId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/user/integrations/:integration_id', [
             'integration_id' => $integrationId,

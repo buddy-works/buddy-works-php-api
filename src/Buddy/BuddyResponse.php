@@ -38,12 +38,8 @@ class BuddyResponse
 
     /**
      * BuddyResponse constructor.
-     *
-     * @param int    $statusCode
-     * @param array  $headers
-     * @param string $body
      */
-    public function __construct($statusCode, $headers, $body)
+    public function __construct(int $statusCode, array $headers, string $body)
     {
         $this->statusCode = $statusCode;
         $this->headers = $headers;
@@ -54,34 +50,22 @@ class BuddyResponse
         }
     }
 
-    /**
-     * @return bool
-     */
-    public function isOk()
+    public function isOk(): bool
     {
         return $this->getStatusCode() >= 200 && $this->getStatusCode() < 300;
     }
 
-    /**
-     * @return array
-     */
-    public function getBody()
+    public function getBody(): array
     {
         return $this->body;
     }
 
-    /**
-     * @return array
-     */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    /**
-     * @return int
-     */
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }

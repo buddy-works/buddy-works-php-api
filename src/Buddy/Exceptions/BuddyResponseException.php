@@ -17,6 +17,8 @@ declare(strict_types=1);
 
 namespace Buddy\Exceptions;
 
+use Exception;
+
 class BuddyResponseException extends BuddySDKException
 {
     /**
@@ -54,30 +56,21 @@ class BuddyResponseException extends BuddySDKException
             } elseif (!empty($body['errors']) && is_array($body['errors']) && !empty($body['errors'][0]) && !empty($body['errors'][0]['message'])) {
                 $this->message = $body['errors'][0]['message'];
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
         }
     }
 
-    /**
-     * @return array
-     */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    /**
-     * @return string
-     */
-    public function getBody()
+    public function getBody(): string
     {
         return $this->body;
     }
 
-    /**
-     * @return int
-     */
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }

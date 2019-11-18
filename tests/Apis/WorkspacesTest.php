@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 
 class WorkspacesTest extends TestCase
 {
-    public function testApiException()
+    public function testApiException(): void
     {
         $this->expectException('Buddy\Exceptions\BuddySDKException');
         $this->expectExceptionMessage('No access token provided');
@@ -30,7 +30,7 @@ class WorkspacesTest extends TestCase
         $buddy->getApiWorkspaces()->getWorkspaces();
     }
 
-    public function testGetWorkspaces()
+    public function testGetWorkspaces(): void
     {
         $token = getenv('TOKEN_ALL');
         $buddy = new Buddy();
@@ -42,7 +42,7 @@ class WorkspacesTest extends TestCase
         $this->assertIsInt($resp->getStatusCode());
     }
 
-    public function testGetWorkspace()
+    public function testGetWorkspace(): void
     {
         $buddy = new Buddy([
             'accessToken' => getenv('TOKEN_ALL'),

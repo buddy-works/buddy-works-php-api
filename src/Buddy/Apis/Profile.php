@@ -17,25 +17,16 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Profile extends Api
 {
-    /**
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getAuthenticatedUser($accessToken = null)
+    public function getAuthenticatedUser(?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/user');
     }
 
-    /**
-     * @param array       $data
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editAuthenticatedUser($data, $accessToken = null)
+    public function editAuthenticatedUser(array $data, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/user');
     }

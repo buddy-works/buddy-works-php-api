@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 
 class BuddyTest extends TestCase
 {
-    public function testInstantiating()
+    public function testInstantiating(): void
     {
         $buddy = new Buddy();
         $this->assertInstanceOf('Buddy\BuddyOAuth', $buddy->getOAuth());
