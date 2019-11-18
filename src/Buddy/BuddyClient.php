@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,14 +17,13 @@
 
 namespace Buddy;
 
-use Buddy\Exceptions\BuddySDKException;
 use Buddy\Exceptions\BuddyResponseException;
+use Buddy\Exceptions\BuddySDKException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 class BuddyClient
 {
-
     const API_ENDPOINT = 'https://api.buddy.works';
 
     /**
@@ -40,18 +41,21 @@ class BuddyClient
 
     /**
      * @codeCoverageIgnore
+     *
      * @param string $url
      * @param string $method
-     * @param array $options
-     * @return BuddyResponse
+     * @param array  $options
+     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
+     *
+     * @return BuddyResponse
      */
     private function request($url, $method, $options = [])
     {
         array_merge($options, [
             'timeout' => 60,
-            'connect_timeout' => 30
+            'connect_timeout' => 30,
         ]);
         $request = $this->guzzle->createRequest($method, $url, $options);
         try {
@@ -65,42 +69,44 @@ class BuddyClient
         }
         $httpStatusCode = $rawResponse->getStatusCode();
         if ($httpStatusCode >= 200 && $httpStatusCode < 300) {
-            return new BuddyResponse($rawResponse->getStatusCode(), $rawResponse->getHeaders(), (string)$rawResponse->getBody());
-        } else {
-            throw new BuddyResponseException($rawResponse->getStatusCode(), $rawResponse->getHeaders(), (string)$rawResponse->getBody());
+            return new BuddyResponse($rawResponse->getStatusCode(), $rawResponse->getHeaders(), (string) $rawResponse->getBody());
         }
+        throw new BuddyResponseException($rawResponse->getStatusCode(), $rawResponse->getHeaders(), (string) $rawResponse->getBody());
     }
 
     /**
-     * @param string $accessToken
-     * @param string $url
-     * @param string $method
-     * @param null|array $body
-     * @return BuddyResponse
+     * @param string     $accessToken
+     * @param string     $url
+     * @param string     $method
+     * @param array|null $body
+     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
+     *
+     * @return BuddyResponse
      */
     private function requestJson($accessToken, $url, $method, $body = null)
     {
         $options = [
             'headers' => [
-                'Authorization' => 'Bearer ' . $accessToken,
+                'Authorization' => 'Bearer '.$accessToken,
                 'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
-            ]
+                'Content-Type' => 'application/json',
+            ],
         ];
         if (isset($body)) {
             $options['json'] = $body;
         }
+
         return $this->request($url, $method, $options);
     }
 
     /**
      * @codeCoverageIgnore
+     *
      * @param string $url
-     * @param array $params
-     * @param array $query
      * @param string $path
+     *
      * @return string
      */
     public function createUrl($url, array $params = [], array $query = [], $path = '/')
@@ -111,20 +117,22 @@ class BuddyClient
             }
         }
         if (count($query) > 0) {
-            $url .= '?' . http_build_query($query);
+            $url .= '?'.http_build_query($query);
         }
         if ($path != '/' && $path != '') {
-            $path = '/' . ltrim($path, '/');
+            $path = '/'.ltrim($path, '/');
             $path = urlencode($path);
             $path = preg_replace('/%2F/', '/', $path);
             $url .= $path;
         }
-        return self::API_ENDPOINT . $url;
+
+        return self::API_ENDPOINT.$url;
     }
 
     /**
      * @param string $accessToken
      * @param string $url
+     *
      * @return BuddyResponse
      */
     public function getJson($accessToken, $url)
@@ -133,9 +141,10 @@ class BuddyClient
     }
 
     /**
-     * @param string $accessToken
-     * @param string $url
-     * @param null|array $body
+     * @param string     $accessToken
+     * @param string     $url
+     * @param array|null $body
+     *
      * @return BuddyResponse
      */
     public function deleteJson($accessToken, $url, $body = null)
@@ -146,7 +155,8 @@ class BuddyClient
     /**
      * @param string $accessToken
      * @param string $url
-     * @param array $body
+     * @param array  $body
+     *
      * @return BuddyResponse
      */
     public function postJson($accessToken, $url, $body)
@@ -157,7 +167,8 @@ class BuddyClient
     /**
      * @param string $accessToken
      * @param string $url
-     * @param array $body
+     * @param array  $body
+     *
      * @return BuddyResponse
      */
     public function putJson($accessToken, $url, $body)
@@ -168,7 +179,8 @@ class BuddyClient
     /**
      * @param string $accessToken
      * @param string $url
-     * @param array $body
+     * @param array  $body
+     *
      * @return BuddyResponse
      */
     public function patchJson($accessToken, $url, $body)
@@ -178,25 +190,30 @@ class BuddyClient
 
     /**
      * @codeCoverageIgnore
+     *
      * @param string $url
-     * @param array $params
-     * @return BuddyResponse
+     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
+     *
+     * @return BuddyResponse
      */
     public function post($url, array $params)
     {
         return $this->request($url, 'POST', [
-            'body' => $params
+            'body' => $params,
         ]);
     }
 
     /**
      * @codeCoverageIgnore
+     *
      * @param string $url
-     * @return BuddyResponse
+     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
+     *
+     * @return BuddyResponse
      */
     public function get($url)
     {

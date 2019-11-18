@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -29,11 +31,11 @@ class Executions extends Api
     const OPERATION_CANCEL = 'CANCEL';
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param array $filters
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getExecutions($domain, $projectName, $pipelineId, array $filters = [], $accessToken = null)
@@ -41,16 +43,17 @@ class Executions extends Api
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/executions', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'pipeline_id' => $pipelineId
+            'pipeline_id' => $pipelineId,
         ], $filters);
     }
 
     /**
-     * @param array $data
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param null|string $accessToken
+     * @param array       $data
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function runExecution($data, $domain, $projectName, $pipelineId, $accessToken = null)
@@ -58,16 +61,17 @@ class Executions extends Api
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/executions', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'pipeline_id' => $pipelineId
+            'pipeline_id' => $pipelineId,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param int $executionId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param int         $executionId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getExecution($domain, $projectName, $pipelineId, $executionId, $accessToken = null)
@@ -76,37 +80,39 @@ class Executions extends Api
             'domain' => $domain,
             'project_name' => $projectName,
             'pipeline_id' => $pipelineId,
-            'execution_id' => $executionId
+            'execution_id' => $executionId,
         ]);
     }
 
     /**
-     * @param string $operation
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param int $executionId
-     * @param null|string $accessToken
+     * @param string      $operation
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param int         $executionId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     private function cancelOrRetry($operation, $domain, $projectName, $pipelineId, $executionId, $accessToken = null)
     {
         return $this->patchJson($accessToken, [
-            'operation' => $operation
+            'operation' => $operation,
         ], '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/executions/:execution_id', [
             'domain' => $domain,
             'project_name' => $projectName,
             'pipeline_id' => $pipelineId,
-            'execution_id' => $executionId
+            'execution_id' => $executionId,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param int $executionId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param int         $executionId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function cancelExecution($domain, $projectName, $pipelineId, $executionId, $accessToken = null)
@@ -115,11 +121,12 @@ class Executions extends Api
     }
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param int $executionId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param int         $executionId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function retryRelease($domain, $projectName, $pipelineId, $executionId, $accessToken = null)

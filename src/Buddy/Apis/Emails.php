@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,7 +20,8 @@ namespace Buddy\Apis;
 class Emails extends Api
 {
     /**
-     * @param null|string $accessToken
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getAuthenticatedUserEmails($accessToken = null)
@@ -27,26 +30,28 @@ class Emails extends Api
     }
 
     /**
-     * @param string $email
-     * @param null|string $accessToken
+     * @param string      $email
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function addAuthenticatedUserEmail($email, $accessToken = null)
     {
         return $this->postJson($accessToken, [
-            'email' => $email
+            'email' => $email,
         ], '/user/emails');
     }
 
     /**
-     * @param string $email
-     * @param null|string $accessToken
+     * @param string      $email
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function deleteAuthenticatedUserEmail($email, $accessToken = null)
     {
         return $this->deleteJson($accessToken, null, '/user/emails/:email', [
-            'email' => $email
+            'email' => $email,
         ]);
     }
 }

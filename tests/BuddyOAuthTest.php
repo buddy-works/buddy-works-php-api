@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -17,7 +19,6 @@
 namespace Buddy\Tests;
 
 use Buddy\Buddy;
-use Buddy\BuddyClient;
 use Buddy\BuddyOAuth;
 use PHPUnit\Framework\TestCase;
 
@@ -36,7 +37,7 @@ class BuddyOAuthTest extends TestCase
         $this->expectException('Buddy\Exceptions\BuddySDKException');
         $this->expectExceptionMessage('Please provide at least one scope');
         $app = new Buddy([
-            'clientId' => 'foo'
+            'clientId' => 'foo',
         ]);
         $app->getOAuth()->getAuthorizeUrl([], 'test');
     }
@@ -46,7 +47,7 @@ class BuddyOAuthTest extends TestCase
         $this->expectException('Buddy\Exceptions\BuddySDKException');
         $this->expectExceptionMessage('Please provide state');
         $app = new Buddy([
-            'clientId' => 'foo'
+            'clientId' => 'foo',
         ]);
         $app->getOAuth()->getAuthorizeUrl([BuddyOAuth::SCOPE_MANAGE_EMAILS], '');
     }
@@ -55,10 +56,10 @@ class BuddyOAuthTest extends TestCase
     {
         $clientId = getenv('CLIENT_ID');
         $app = new Buddy([
-            'clientId' => $clientId
+            'clientId' => $clientId,
         ]);
         $url = $app->getOAuth()->getAuthorizeUrl([
-            BuddyOAuth::SCOPE_MANAGE_EMAILS
+            BuddyOAuth::SCOPE_MANAGE_EMAILS,
         ], 'foo');
         $this->assertNotEmpty($url);
     }
@@ -67,10 +68,10 @@ class BuddyOAuthTest extends TestCase
     {
         $clientId = getenv('CLIENT_ID');
         $app = new Buddy([
-            'clientId' => $clientId
+            'clientId' => $clientId,
         ]);
         $url = $app->getOAuth()->getAuthorizeUrl([
-            BuddyOAuth::SCOPE_MANAGE_EMAILS
+            BuddyOAuth::SCOPE_MANAGE_EMAILS,
         ], 'foo', 'http://127.0.0.1');
         $this->assertNotEmpty($url);
     }
@@ -83,7 +84,7 @@ class BuddyOAuthTest extends TestCase
         $_GET['state'] = 'foo';
         $app = new Buddy([
             'clientId' => 'clientId',
-            'clientSecret' => 'secret'
+            'clientSecret' => 'secret',
         ]);
         $app->getOAuth()->getAccessToken('foo');
     }
@@ -96,7 +97,7 @@ class BuddyOAuthTest extends TestCase
         $_GET['code'] = 'code';
         $_GET['state'] = 'foo';
         $app = new Buddy([
-            'clientSecret' => 'secret'
+            'clientSecret' => 'secret',
         ]);
         $app->getOAuth()->getAccessToken('foo');
     }
@@ -109,7 +110,7 @@ class BuddyOAuthTest extends TestCase
         $_GET['code'] = 'code';
         $_GET['state'] = 'foo';
         $app = new Buddy([
-            'clientId' => 'clientId'
+            'clientId' => 'clientId',
         ]);
         $app->getOAuth()->getAccessToken('foo');
     }
@@ -122,7 +123,7 @@ class BuddyOAuthTest extends TestCase
         $_GET['code'] = 'code';
         $app = new Buddy([
             'clientId' => 'clientId',
-            'clientSecret' => 'secret'
+            'clientSecret' => 'secret',
         ]);
         $app->getOAuth()->getAccessToken('foo');
     }
@@ -136,7 +137,7 @@ class BuddyOAuthTest extends TestCase
         $_GET['code'] = 'code';
         $app = new Buddy([
             'clientId' => 'clientId',
-            'clientSecret' => 'secret'
+            'clientSecret' => 'secret',
         ]);
         $app->getOAuth()->getAccessToken('state');
     }
@@ -150,9 +151,8 @@ class BuddyOAuthTest extends TestCase
         $_GET['code'] = 'code';
         $app = new Buddy([
             'clientId' => 'clientId',
-            'clientSecret' => 'secret'
+            'clientSecret' => 'secret',
         ]);
         $app->getOAuth()->getAccessToken('state', 'http://12.0.0.1');
     }
-
 }
