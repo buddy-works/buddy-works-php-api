@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,9 +20,11 @@ namespace Buddy\Apis;
 class Workspaces extends Api
 {
     /**
-     * @param null|string $accessToken
-     * @return \Buddy\BuddyResponse
+     * @param string|null $accessToken
+     *
      * @throws \Buddy\Exceptions\BuddySDKException
+     *
+     * @return \Buddy\BuddyResponse
      */
     public function getWorkspaces($accessToken = null)
     {
@@ -28,14 +32,15 @@ class Workspaces extends Api
     }
 
     /**
-     * @param string $domain
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getWorkspace($domain, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain', [
-            'domain' => $domain
+            'domain' => $domain,
         ]);
     }
 }

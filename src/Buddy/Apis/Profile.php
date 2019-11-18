@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,7 +20,8 @@ namespace Buddy\Apis;
 class Profile extends Api
 {
     /**
-     * @param null|string $accessToken
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getAuthenticatedUser($accessToken = null)
@@ -27,8 +30,9 @@ class Profile extends Api
     }
 
     /**
-     * @param array $data
-     * @param null|string $accessToken
+     * @param array       $data
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function editAuthenticatedUser($data, $accessToken = null)

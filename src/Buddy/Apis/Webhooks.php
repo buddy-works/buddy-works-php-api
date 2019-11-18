@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -24,70 +26,75 @@ class Webhooks extends Api
     const EVENT_EXECUTION_FINISHED = 'EXECUTION_FINISHED';
 
     /**
-     * @param string $domain
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getWebhooks($domain, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/webhooks', [
-            'domain' => $domain
+            'domain' => $domain,
         ]);
     }
 
     /**
-     * @param array $data
-     * @param string $domain
-     * @param null|string $accessToken
+     * @param array       $data
+     * @param string      $domain
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function addWebhook($data, $domain, $accessToken = null)
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/webhooks', [
-            'domain' => $domain
+            'domain' => $domain,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param int $webhookId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param int         $webhookId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getWebhook($domain, $webhookId, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/webhooks/:webhook_id', [
             'domain' => $domain,
-            'webhook_id' => $webhookId
+            'webhook_id' => $webhookId,
         ]);
     }
 
     /**
-     * @param array $data
-     * @param string $domain
-     * @param int $webhookId
-     * @param null|string $accessToken
+     * @param array       $data
+     * @param string      $domain
+     * @param int         $webhookId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function editWebhook($data, $domain, $webhookId, $accessToken = null)
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/webhooks/:webhook_id', [
             'domain' => $domain,
-            'webhook_id' => $webhookId
+            'webhook_id' => $webhookId,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param int $webhookId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param int         $webhookId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function deleteWebhook($domain, $webhookId, $accessToken = null)
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/webhooks/:webhook_id', [
             'domain' => $domain,
-            'webhook_id' => $webhookId
+            'webhook_id' => $webhookId,
         ]);
     }
 }

@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -18,24 +20,26 @@ namespace Buddy\Apis;
 class Tags extends Api
 {
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getTags($domain, $projectName, $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/tags', [
             'domain' => $domain,
-            'project_name' => $projectName
+            'project_name' => $projectName,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param string $name
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param string      $name
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getTag($domain, $projectName, $name, $accessToken = null)
@@ -43,7 +47,7 @@ class Tags extends Api
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/tags/:name', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'name' => $name
+            'name' => $name,
         ]);
     }
 }

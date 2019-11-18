@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -38,7 +40,7 @@ class Utils
      */
     public static function randomString()
     {
-        return time() . substr(md5(rand()), 0, 9);
+        return time().substr(md5(rand()), 0, 9);
     }
 
     /**
@@ -46,7 +48,7 @@ class Utils
      */
     public static function randomEmail()
     {
-        return self::randomString() . '@mailinator.com';
+        return self::randomString().'@mailinator.com';
     }
 
     /**
@@ -64,46 +66,52 @@ class Utils
     {
         if (!self::$buddy) {
             self::$buddy = new Buddy([
-                'accessToken' => getenv('TOKEN_ALL')
+                'accessToken' => getenv('TOKEN_ALL'),
             ]);
         }
+
         return self::$buddy;
     }
 
     /**
-     * @return array
      * @throws BuddySDKException
+     *
+     * @return array
      */
     public static function getWorkspace()
     {
-        if (!self::$workspace){
+        if (!self::$workspace) {
             $array = self::getBuddy()->getApiWorkspaces()->getWorkspaces()->getBody();
-            if (empty($array['workspaces']) || count($array['workspaces']) == 0){
+            if (empty($array['workspaces']) || count($array['workspaces']) == 0) {
                 throw new BuddySDKException('You dont have any workspaces');
             }
             self::$workspace = $array['workspaces'][0];
         }
+
         return self::$workspace;
     }
 
     /**
-     * @return string
      * @throws BuddySDKException
+     *
+     * @return string
      */
     public static function getWorkspaceDomain()
     {
         $workspace = self::getWorkspace();
+
         return $workspace['domain'];
     }
 
     /**
-     * @return array
      * @throws BuddySDKException
+     *
+     * @return array
      */
     public static function addProject()
     {
         return Utils::getBuddy()->getApiProjects()->addProject([
-            'name' => Utils::randomString()
+            'name' => Utils::randomString(),
         ], self::getWorkspaceDomain())->getBody();
     }
 
@@ -117,10 +125,12 @@ class Utils
 
     /**
      * @param string $projectName
-     * @param int $userId
-     * @param int $permissionId
-     * @return array
+     * @param int    $userId
+     * @param int    $permissionId
+     *
      * @throws BuddySDKException
+     *
+     * @return array
      */
     public static function addUser2Project($projectName, $userId, $permissionId)
     {
@@ -130,6 +140,7 @@ class Utils
     /**
      * @param int $groupId
      * @param int $userId
+     *
      * @return array
      */
     public static function addUser2Group($groupId, $userId)
@@ -146,7 +157,7 @@ class Utils
             'name' => self::randomString(),
             'description' => self::randomString(),
             'pipeline_access_level' => Permissions::PIPELINE_ACCESS_LEVEL_READ_WRITE,
-            'repository_access_level' => Permissions::REPOSITORY_ACCESS_LEVEL_READ_WRITE
+            'repository_access_level' => Permissions::REPOSITORY_ACCESS_LEVEL_READ_WRITE,
         ], self::getWorkspaceDomain())->getBody();
     }
 
@@ -157,12 +168,13 @@ class Utils
     {
         return self::getBuddy()->getApiGroups()->addGroup([
             'name' => self::randomString(),
-            'description' => self::randomString()
+            'description' => self::randomString(),
         ], self::getWorkspaceDomain())->getBody();
     }
 
     /**
      * @param string $projectName
+     *
      * @return array
      */
     public static function addFile($projectName)
@@ -170,23 +182,26 @@ class Utils
         $resp = self::getBuddy()->getApiSource()->addFile([
             'content' => base64_encode(self::randomString()),
             'message' => self::randomString(),
-            'path' => self::randomString()
+            'path' => self::randomString(),
         ], self::getWorkspaceDomain(), $projectName)->getBody();
         sleep(3);
+
         return $resp;
     }
 
     /**
      * @param string $projectName
+     *
      * @return array
      */
     public static function addScenario($projectName)
     {
         Utils::addFile($projectName);
+
         return Utils::getBuddy()->getApiPipelines()->addPipeline([
             'name' => self::randomString(),
             'ref_name' => 'master',
-            'trigger_mode' => Pipelines::PIPELINE_TRIGGER_MODE_ON_EVERY_PUSH
+            'trigger_mode' => Pipelines::PIPELINE_TRIGGER_MODE_ON_EVERY_PUSH,
         ], self::getWorkspaceDomain(), $projectName)->getBody();
     }
 
@@ -197,7 +212,7 @@ class Utils
     {
         return Utils::getBuddy()->getApiWebhooks()->addWebhook([
             'events' => [Webhooks::EVENT_EXECUTION_FAILED],
-            'target_url' => 'http://wp.pl'
+            'target_url' => 'http://wp.pl',
         ], self::getWorkspaceDomain())->getBody();
     }
 }

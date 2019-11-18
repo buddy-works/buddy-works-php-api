@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -36,8 +38,9 @@ class BuddyResponse
 
     /**
      * BuddyResponse constructor.
-     * @param int $statusCode
-     * @param array $headers
+     *
+     * @param int    $statusCode
+     * @param array  $headers
      * @param string $body
      */
     public function __construct($statusCode, $headers, $body)
@@ -47,7 +50,7 @@ class BuddyResponse
         try {
             $this->body = json_decode($body, true);
         } catch (Exception $e) {
-            $this->body = array();
+            $this->body = [];
         }
     }
 

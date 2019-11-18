@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,7 +17,7 @@
 
 namespace Buddy;
 
-use \Buddy\Exceptions\BuddySDKException;
+use Buddy\Exceptions\BuddySDKException;
 
 class BuddyOAuth
 {
@@ -48,7 +50,7 @@ class BuddyOAuth
 
     /**
      * BuddyOAuth constructor.
-     * @param BuddyClient $client
+     *
      * @param $options
      */
     public function __construct(BuddyClient $client, $options)
@@ -58,11 +60,12 @@ class BuddyOAuth
     }
 
     /**
-     * @param array $scopes
-     * @param string $state
-     * @param null|string $redirectUrl
-     * @return string
+     * @param string      $state
+     * @param string|null $redirectUrl
+     *
      * @throws BuddySDKException
+     *
+     * @return string
      */
     public function getAuthorizeUrl(array $scopes, $state, $redirectUrl = null)
     {
@@ -75,24 +78,27 @@ class BuddyOAuth
         if (empty($this->options['clientId'])) {
             throw new BuddySDKException('Please provide clientId');
         }
-        $query = array(
+        $query = [
             'type' => 'web_server',
             'response_type' => 'code',
             'client_id' => $this->options['clientId'],
             'scope' => join(' ', $scopes),
-            'state' => $state
-        );
+            'state' => $state,
+        ];
         if (isset($redirectUrl)) {
             $query['redirect_uri'] = $redirectUrl;
         }
+
         return $this->client->createUrl('/oauth2/authorize', [], $query);
     }
 
     /**
-     * @param string $state
-     * @param null|string $redirectUrl
-     * @return array
+     * @param string      $state
+     * @param string|null $redirectUrl
+     *
      * @throws BuddySDKException
+     *
+     * @return array
      */
     public function getAccessToken($state, $redirectUrl = null)
     {
@@ -112,11 +118,12 @@ class BuddyOAuth
             'code' => $_GET['code'],
             'client_id' => $this->options['clientId'],
             'client_secret' => $this->options['clientSecret'],
-            'grant_type' => 'authorization_code'
+            'grant_type' => 'authorization_code',
         ];
         if (isset($redirectUrl)) {
             $params['redirect_uri'] = $redirectUrl;
         }
+
         return $this->client->post($this->client->createUrl('/oauth2/token'), $params)->getBody();
     }
 }

@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -32,8 +34,6 @@ class Api
 
     /**
      * Api constructor.
-     * @param BuddyClient $client
-     * @param array $options
      */
     public function __construct(BuddyClient $client, array $options = [])
     {
@@ -44,11 +44,11 @@ class Api
     /**
      * @param string $accessToken
      * @param string $url
-     * @param array $params
-     * @param array $query
      * @param string $path
-     * @return \Buddy\BuddyResponse
+     *
      * @throws BuddySDKException
+     *
+     * @return \Buddy\BuddyResponse
      */
     protected function getJson($accessToken, $url, array $params = [], array $query = [], $path = '/')
     {
@@ -57,13 +57,12 @@ class Api
 
     /**
      * @param string $accessToken
-     * @param array $patchData
      * @param string $url
-     * @param array $params
-     * @param array $query
      * @param string $path
-     * @return \Buddy\BuddyResponse
+     *
      * @throws BuddySDKException
+     *
+     * @return \Buddy\BuddyResponse
      */
     protected function patchJson($accessToken, array $patchData, $url, array $params = [], array $query = [], $path = '/')
     {
@@ -71,14 +70,14 @@ class Api
     }
 
     /**
-     * @param string $accessToken
+     * @param string     $accessToken
      * @param array|null $deleteData
-     * @param string $url
-     * @param array $params
-     * @param array $query
-     * @param string $path
-     * @return \Buddy\BuddyResponse
+     * @param string     $url
+     * @param string     $path
+     *
      * @throws BuddySDKException
+     *
+     * @return \Buddy\BuddyResponse
      */
     protected function deleteJson($accessToken, $deleteData, $url, array $params = [], array $query = [], $path = '/')
     {
@@ -87,13 +86,12 @@ class Api
 
     /**
      * @param string $accessToken
-     * @param array $postData
      * @param string $url
-     * @param array $params
-     * @param array $query
      * @param string $path
-     * @return \Buddy\BuddyResponse
+     *
      * @throws BuddySDKException
+     *
+     * @return \Buddy\BuddyResponse
      */
     protected function postJson($accessToken, array $postData, $url, array $params = [], array $query = [], $path = '/')
     {
@@ -102,13 +100,12 @@ class Api
 
     /**
      * @param string $accessToken
-     * @param array $putData
      * @param string $url
-     * @param array $params
-     * @param array $query
      * @param string $path
-     * @return \Buddy\BuddyResponse
+     *
      * @throws BuddySDKException
+     *
+     * @return \Buddy\BuddyResponse
      */
     protected function putJson($accessToken, array $putData, $url, array $params = [], array $query = [], $path = '/')
     {
@@ -117,17 +114,19 @@ class Api
 
     /**
      * @param string $accessToken
-     * @return string
+     *
      * @throws BuddySDKException
+     *
+     * @return string
      */
     protected function getAccessToken($accessToken)
     {
         if (isset($accessToken)) {
             return $accessToken;
-        } else if (isset($this->options['accessToken'])) {
-            return $this->options['accessToken'];
-        } else {
-            throw new BuddySDKException('No access token provided');
         }
+        if (isset($this->options['accessToken'])) {
+            return $this->options['accessToken'];
+        }
+        throw new BuddySDKException('No access token provided');
     }
 }

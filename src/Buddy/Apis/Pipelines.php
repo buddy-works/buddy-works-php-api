@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -91,40 +93,42 @@ class Pipelines extends Api
     const SERVICE_TYPE_ELASTICSEARCH = 'ELASTICSEARCH';
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param array $filters
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getPipelines($domain, $projectName, array $filters = [], $accessToken = null)
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines', [
             'domain' => $domain,
-            'project_name' => $projectName
+            'project_name' => $projectName,
         ], $filters);
     }
 
     /**
-     * @param array $data
-     * @param string $domain
-     * @param string $projectName
-     * @param null|string $accessToken
+     * @param array       $data
+     * @param string      $domain
+     * @param string      $projectName
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function addPipeline($data, $domain, $projectName, $accessToken = null)
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines', [
             'domain' => $domain,
-            'project_name' => $projectName
+            'project_name' => $projectName,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getPipeline($domain, $projectName, $pipelineId, $accessToken = null)
@@ -132,16 +136,17 @@ class Pipelines extends Api
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'pipeline_id' => $pipelineId
+            'pipeline_id' => $pipelineId,
         ]);
     }
 
     /**
-     * @param array $data
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param null|string $accessToken
+     * @param array       $data
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function editPipeline($data, $domain, $projectName, $pipelineId, $accessToken = null)
@@ -149,15 +154,16 @@ class Pipelines extends Api
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'pipeline_id' => $pipelineId
+            'pipeline_id' => $pipelineId,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function deletePipeline($domain, $projectName, $pipelineId, $accessToken = null)
@@ -165,15 +171,16 @@ class Pipelines extends Api
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'pipeline_id' => $pipelineId
+            'pipeline_id' => $pipelineId,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getPipelineActions($domain, $projectName, $pipelineId, $accessToken = null)
@@ -181,16 +188,17 @@ class Pipelines extends Api
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/actions', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'pipeline_id' => $pipelineId
+            'pipeline_id' => $pipelineId,
         ]);
     }
 
     /**
-     * @param array $data
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param null|string $accessToken
+     * @param array       $data
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function addPipelineAction($data, $domain, $projectName, $pipelineId, $accessToken = null)
@@ -198,16 +206,17 @@ class Pipelines extends Api
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/actions', [
             'domain' => $domain,
             'project_name' => $projectName,
-            'pipeline_id' => $pipelineId
+            'pipeline_id' => $pipelineId,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param int $actionId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param int         $actionId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function getPipelineAction($domain, $projectName, $pipelineId, $actionId, $accessToken = null)
@@ -216,17 +225,18 @@ class Pipelines extends Api
             'domain' => $domain,
             'project_name' => $projectName,
             'pipeline_id' => $pipelineId,
-            'action_id' => $actionId
+            'action_id' => $actionId,
         ]);
     }
 
     /**
-     * @param array $data
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param int $actionId
-     * @param null|string $accessToken
+     * @param array       $data
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param int         $actionId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function editPipelineAction($data, $domain, $projectName, $pipelineId, $actionId, $accessToken = null)
@@ -235,16 +245,17 @@ class Pipelines extends Api
             'domain' => $domain,
             'project_name' => $projectName,
             'pipeline_id' => $pipelineId,
-            'action_id' => $actionId
+            'action_id' => $actionId,
         ]);
     }
 
     /**
-     * @param string $domain
-     * @param string $projectName
-     * @param int $pipelineId
-     * @param int $actionId
-     * @param null|string $accessToken
+     * @param string      $domain
+     * @param string      $projectName
+     * @param int         $pipelineId
+     * @param int         $actionId
+     * @param string|null $accessToken
+     *
      * @return \Buddy\BuddyResponse
      */
     public function deletePipelineAction($domain, $projectName, $pipelineId, $actionId, $accessToken = null)
@@ -253,7 +264,7 @@ class Pipelines extends Api
             'domain' => $domain,
             'project_name' => $projectName,
             'pipeline_id' => $pipelineId,
-            'action_id' => $actionId
+            'action_id' => $actionId,
         ]);
     }
 }

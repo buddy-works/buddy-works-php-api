@@ -1,8 +1,10 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License at.
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -34,8 +36,9 @@ class BuddyResponseException extends BuddySDKException
 
     /**
      * BuddyResponseException constructor.
-     * @param int $statusCode
-     * @param array $headers
+     *
+     * @param int    $statusCode
+     * @param array  $headers
      * @param string $body
      */
     public function __construct($statusCode, $headers, $body)
@@ -48,7 +51,7 @@ class BuddyResponseException extends BuddySDKException
             $body = json_decode($this->body, true);
             if (!empty($body['error'])) {
                 $this->message = $body['error'];
-            } else if (!empty($body['errors']) && is_array($body['errors']) && !empty($body['errors'][0]) && !empty($body['errors'][0]['message'])) {
+            } elseif (!empty($body['errors']) && is_array($body['errors']) && !empty($body['errors'][0]) && !empty($body['errors'][0]['message'])) {
                 $this->message = $body['errors'][0]['message'];
             }
         } catch (\Exception $e) {
