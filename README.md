@@ -1,6 +1,9 @@
 # Buddy Works APIs PHP SDK
 
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg)](https://php.net/)
 [![buddy branch](https://app.buddy.works/buddy-works/buddy-works-php-api/repository/branch/master/badge.svg?token=6fef7735534f7f297de0ec15826a916542070669eddb03fc5f6f44b469022918 "buddy branch")](https://app.buddy.works/buddy-works/buddy-works-php-api/repository/branch/master)
+[![Latest Stable Version](https://poser.pugx.org/buddy-works/buddy-works-php-api/v/stable?format=flat)](https://packagist.org/packages/buddy-works/buddy-works-php-api)
+![GitHub](https://img.shields.io/github/license/buddy-works/buddy-works-php-api)
 
 Official PHP client library for [Buddy Build Server with CI](https://buddy.works).
 
@@ -12,7 +15,12 @@ This library is distributed on `packagist` and is working with `composer`. In or
 composer require buddy-works/buddy-works-php-api
 ```
 
-> **Note:** This version of the Buddy SDK for PHP requires PHP 5.5 or greater.
+### Compatibility
+
+| PHP version | SDK version |
+| --------------- | ---------------------- |
+| ^7.2 | 1.2.0 |
+| 5.5  | 1.1.1 |
  
 ## Usage of OAUTH
 
