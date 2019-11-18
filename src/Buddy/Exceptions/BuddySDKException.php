@@ -19,9 +19,6 @@ namespace Buddy\Exceptions;
 
 use Exception;
 
-/**
- * Class BuddySDKException.
- */
 class BuddySDKException extends Exception
 {
 }

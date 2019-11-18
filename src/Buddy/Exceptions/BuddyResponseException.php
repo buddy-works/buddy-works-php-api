@@ -49,6 +49,7 @@ class BuddyResponseException extends BuddySDKException
         $this->headers = $headers;
         $this->body = $body;
         $this->message = 'Something went wrong';
+        parent::__construct($this->message);
         try {
             $body = json_decode($this->body, true);
             if (!empty($body['error'])) {
