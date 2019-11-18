@@ -19,49 +19,32 @@ namespace Buddy\Tests;
 use Buddy\Buddy;
 use Buddy\BuddyClient;
 use Buddy\BuddyOAuth;
+use PHPUnit\Framework\TestCase;
 
-class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
+class BuddyOAuthTest extends TestCase
 {
-    public function testConstructor()
-    {
-        $opts = [
-            'clientId' => 'foo',
-            'clientSecret' => 'bar'
-        ];
-        $oauth = new BuddyOAuth(new BuddyClient(), $opts);
-        $this->assertInstanceOf('Buddy\BuddyClient', \PHPUnit_Framework_Assert::readAttribute($oauth, 'client'));
-        $this->assertEquals($opts, \PHPUnit_Framework_Assert::readAttribute($oauth, 'options'));
-
-    }
-
-    /**
-     * @expectedException \Buddy\Exceptions\BuddySDKException
-     * @expectedExceptionMessage Please provide clientId
-     */
     public function testGetAuthorizeUrlWithoutClientId()
     {
+        $this->expectException('Buddy\Exceptions\BuddySDKException');
+        $this->expectExceptionMessage('Please provide clientId');
         $app = new Buddy();
         $app->getOAuth()->getAuthorizeUrl([BuddyOAuth::SCOPE_MANAGE_EMAILS], 'test');
     }
 
-    /**
-     * @expectedException \Buddy\Exceptions\BuddySDKException
-     * @expectedExceptionMessage Please provide at least one scope
-     */
     public function testGetAuthorizeUrlWithoutScopes()
     {
+        $this->expectException('Buddy\Exceptions\BuddySDKException');
+        $this->expectExceptionMessage('Please provide at least one scope');
         $app = new Buddy([
             'clientId' => 'foo'
         ]);
         $app->getOAuth()->getAuthorizeUrl([], 'test');
     }
 
-    /**
-     * @expectedException \Buddy\Exceptions\BuddySDKException
-     * @expectedExceptionMessage Please provide state
-     */
     public function testGetAuthorizeUrlWithoutState()
     {
+        $this->expectException('Buddy\Exceptions\BuddySDKException');
+        $this->expectExceptionMessage('Please provide state');
         $app = new Buddy([
             'clientId' => 'foo'
         ]);
@@ -92,12 +75,10 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($url);
     }
 
-    /**
-     * @expectedException \Buddy\Exceptions\BuddySDKException
-     * @expectedExceptionMessage No code provided
-     */
     public function testGetAccessTokenWithoutCode()
     {
+        $this->expectException('Buddy\Exceptions\BuddySDKException');
+        $this->expectExceptionMessage('No code provided');
         $_GET = [];
         $_GET['state'] = 'foo';
         $app = new Buddy([
@@ -107,12 +88,10 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
         $app->getOAuth()->getAccessToken('foo');
     }
 
-    /**
-     * @expectedException \Buddy\Exceptions\BuddySDKException
-     * @expectedExceptionMessage Please provide clientId
-     */
     public function testGetAccessTokenWithoutClientId()
     {
+        $this->expectException('Buddy\Exceptions\BuddySDKException');
+        $this->expectExceptionMessage('Please provide clientId');
         $_GET = [];
         $_GET['code'] = 'code';
         $_GET['state'] = 'foo';
@@ -122,12 +101,10 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
         $app->getOAuth()->getAccessToken('foo');
     }
 
-    /**
-     * @expectedException \Buddy\Exceptions\BuddySDKException
-     * @expectedExceptionMessage Please provide clientSecret
-     */
     public function testGetAccessTokenWithoutClientSecret()
     {
+        $this->expectException('Buddy\Exceptions\BuddySDKException');
+        $this->expectExceptionMessage('Please provide clientSecret');
         $_GET = [];
         $_GET['code'] = 'code';
         $_GET['state'] = 'foo';
@@ -137,12 +114,10 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
         $app->getOAuth()->getAccessToken('foo');
     }
 
-    /**
-     * @expectedException \Buddy\Exceptions\BuddySDKException
-     * @expectedExceptionMessage State does not match
-     */
     public function testGetAccessTokenWithoutState()
     {
+        $this->expectException('Buddy\Exceptions\BuddySDKException');
+        $this->expectExceptionMessage('State does not match');
         $_GET = [];
         $_GET['code'] = 'code';
         $app = new Buddy([
@@ -152,12 +127,10 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
         $app->getOAuth()->getAccessToken('foo');
     }
 
-    /**
-     * @expectedException \Buddy\Exceptions\BuddyResponseException
-     * @expectedExceptionMessage Invalid client_id
-     */
     public function testGetAccessToken()
     {
+        $this->expectException('Buddy\Exceptions\BuddyResponseException');
+        $this->expectExceptionMessage('Invalid client_id');
         $_GET = [];
         $_GET['state'] = 'state';
         $_GET['code'] = 'code';
@@ -168,12 +141,10 @@ class BuddyOAuthTest extends \PHPUnit_Framework_TestCase
         $app->getOAuth()->getAccessToken('state');
     }
 
-    /**
-     * @expectedException \Buddy\Exceptions\BuddyResponseException
-     * @expectedExceptionMessage Invalid client_id
-     */
     public function testGetAccessTokenWithRedirectUrl()
     {
+        $this->expectException('Buddy\Exceptions\BuddyResponseException');
+        $this->expectExceptionMessage('Invalid client_id');
         $_GET = [];
         $_GET['state'] = 'state';
         $_GET['code'] = 'code';

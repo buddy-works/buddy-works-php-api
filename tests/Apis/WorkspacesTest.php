@@ -16,15 +16,14 @@
 namespace Buddy\Tests\Apis;
 
 use Buddy\Buddy;
+use PHPUnit\Framework\TestCase;
 
-class WorkspacesTest extends \PHPUnit_Framework_TestCase
+class WorkspacesTest extends TestCase
 {
-    /**
-     * @expectedException \Buddy\Exceptions\BuddySDKException
-     * @expectedExceptionMessage No access token provided
-     */
     public function testApiException()
     {
+        $this->expectException('Buddy\Exceptions\BuddySDKException');
+        $this->expectExceptionMessage('No access token provided');
         $buddy = new Buddy();
         $buddy->getApiWorkspaces()->getWorkspaces();
     }
@@ -36,9 +35,9 @@ class WorkspacesTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Buddy\Apis\Workspaces', $buddy->getApiWorkspaces());
         $resp = $buddy->getApiWorkspaces()->getWorkspaces($token);
         $this->assertInstanceOf('Buddy\BuddyResponse', $resp);
-        $this->assertInternalType('array', $resp->getBody());
-        $this->assertInternalType('array', $resp->getHeaders());
-        $this->assertInternalType('int', $resp->getStatusCode());
+        $this->assertIsArray($resp->getBody());
+        $this->assertIsArray($resp->getHeaders());
+        $this->assertIsInt($resp->getStatusCode());
     }
 
     public function testGetWorkspace()
@@ -50,8 +49,8 @@ class WorkspacesTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(0, $body['workspaces']);
         $resp = $buddy->getApiWorkspaces()->getWorkspace($body['workspaces'][0]['domain']);
         $this->assertInstanceOf('Buddy\BuddyResponse', $resp);
-        $this->assertInternalType('array', $resp->getBody());
-        $this->assertInternalType('array', $resp->getHeaders());
-        $this->assertInternalType('int', $resp->getStatusCode());
+        $this->assertIsArray($resp->getBody());
+        $this->assertIsArray($resp->getHeaders());
+        $this->assertIsInt($resp->getStatusCode());
     }
 }

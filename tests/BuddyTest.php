@@ -16,8 +16,9 @@
 namespace Buddy\Tests;
 
 use Buddy\Buddy;
+use PHPUnit\Framework\TestCase;
 
-class BuddyTest extends \PHPUnit_Framework_TestCase
+class BuddyTest extends TestCase
 {
     public function testInstantiating()
     {

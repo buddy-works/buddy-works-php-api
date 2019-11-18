@@ -1,5 +1,6 @@
 {
   "name": "buddy-works/buddy-works-php-api",
+  "type": "library",
   "description": "Buddy Works SDK for PHP",
   "keywords": [
     "buddy",
@@ -7,7 +8,6 @@
     "sdk",
     "api"
   ],
-  "type": "library",
   "homepage": "https://github.com/buddy-works/buddy-works-php-api",
   "license": "Apache-2.0",
   "authors": [
@@ -22,13 +22,12 @@
   ],
   "require": {
     "php": ">=5.5.0",
-    "guzzlehttp/guzzle": "~5.0",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "guzzlehttp/guzzle": "~5.0"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "2.*",
-    "phpunit/phpunit": "~4.0",
-    "mockery/mockery": "~0.8"
+    "phpunit/phpunit": "^8.4",
+    "rector/rector": "^0.5.22"
   },
   "autoload": {
     "psr-4": {
