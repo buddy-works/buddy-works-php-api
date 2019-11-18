@@ -1,5 +1,6 @@
 # Buddy Works APIs PHP SDK
-[![buddy pipeline](https://app.buddy.works/monitor/buddy-works-php-api/pipelines/pipeline/61877/badge.svg?token=7de97367c9cdc3c6db31aa114057b65cea1a7bafc71cf0595a2931011526a0a3 "buddy pipeline")](https://app.buddy.works/monitor/buddy-works-php-api/pipelines/pipeline/61877)
+
+[![buddy pipeline](https://app.buddy.works/buddy-works/buddy-works-php-api/pipelines/pipeline/223785/badge.svg?token=6fef7735534f7f297de0ec15826a916542070669eddb03fc5f6f44b469022918 "buddy pipeline")](https://app.buddy.works/buddy-works/buddy-works-php-api/pipelines/pipeline/223785)
 
 Official PHP client library for [Buddy Build Server with CI](https://buddy.works).
 
