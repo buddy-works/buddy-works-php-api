@@ -60,16 +60,11 @@ class BuddyOAuth
     }
 
     /**
-     * @param string      $state
-     * @param string|null $redirectUrl
-     *
      * @throws BuddySDKException
-     *
-     * @return string
      */
-    public function getAuthorizeUrl(array $scopes, $state, $redirectUrl = null)
+    public function getAuthorizeUrl(array $scopes, string $state, ?string $redirectUrl = null): string
     {
-        if (count($scopes) == 0) {
+        if (count($scopes) === 0) {
             throw new BuddySDKException('Please provide at least one scope');
         }
         if (empty($state)) {
@@ -93,14 +88,9 @@ class BuddyOAuth
     }
 
     /**
-     * @param string      $state
-     * @param string|null $redirectUrl
-     *
      * @throws BuddySDKException
-     *
-     * @return array
      */
-    public function getAccessToken($state, $redirectUrl = null)
+    public function getAccessToken(string $state, ?string $redirectUrl = null): array
     {
         if (empty($_GET['state']) || $_GET['state'] != $state) {
             throw new BuddySDKException('State does not match');

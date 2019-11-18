@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 
 class BuddyResponseExceptionTest extends TestCase
 {
-    public function test()
+    public function test(): void
     {
         $exp = new BuddyResponseException(500, [], 'test');
         $this->assertEquals('test', $exp->getBody());
@@ -31,13 +31,13 @@ class BuddyResponseExceptionTest extends TestCase
         $this->assertEquals('Something went wrong', $exp->getMessage());
     }
 
-    public function testJsonError()
+    public function testJsonError(): void
     {
         $exp = new BuddyResponseException(500, [], '{"error":"test"}');
         $this->assertEquals('test', $exp->getMessage());
     }
 
-    public function testJsonError2()
+    public function testJsonError2(): void
     {
         $exp = new BuddyResponseException(500, [], '{"errors":[{"message":"test"}]}');
         $this->assertEquals('test', $exp->getMessage());

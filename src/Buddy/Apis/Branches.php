@@ -17,16 +17,11 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Branches extends Api
 {
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getBranches($domain, $projectName, $accessToken = null)
+    public function getBranches(string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/branches', [
            'domain' => $domain,
@@ -34,15 +29,7 @@ class Branches extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string      $name
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getBranch($domain, $projectName, $name, $accessToken = null)
+    public function getBranch(string $domain, string $projectName, string $name, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/branches/:name', [
             'domain' => $domain,
@@ -51,15 +38,7 @@ class Branches extends Api
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addBranch($data, $domain, $projectName, $accessToken = null)
+    public function addBranch(array $data, string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/branches', [
             'domain' => $domain,
@@ -68,15 +47,9 @@ class Branches extends Api
     }
 
     /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string      $name
-     * @param bool|false  $force
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
+     * @param bool|false $force
      */
-    public function deleteBranch($domain, $projectName, $name, $force = false, $accessToken = null)
+    public function deleteBranch(string $domain, string $projectName, string $name, bool $force = false, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/projects/:project_name/repository/branches/:name', [
             'domain' => $domain,

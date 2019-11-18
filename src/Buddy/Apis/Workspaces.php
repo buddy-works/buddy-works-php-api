@@ -17,27 +17,20 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+use Buddy\Exceptions\BuddySDKException;
+
 class Workspaces extends Api
 {
     /**
-     * @param string|null $accessToken
-     *
-     * @throws \Buddy\Exceptions\BuddySDKException
-     *
-     * @return \Buddy\BuddyResponse
+     * @throws BuddySDKException
      */
-    public function getWorkspaces($accessToken = null)
+    public function getWorkspaces(?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces');
     }
 
-    /**
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getWorkspace($domain, $accessToken = null)
+    public function getWorkspace(string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain', [
             'domain' => $domain,

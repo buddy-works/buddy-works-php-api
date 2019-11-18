@@ -17,6 +17,8 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Permissions extends Api
 {
     const PIPELINE_ACCESS_LEVEL_DENIED = 'DENIED';
@@ -28,41 +30,21 @@ class Permissions extends Api
     const REPOSITORY_ACCESS_LEVEL_READ_ONLY = 'READ_ONLY';
     const REPOSITORY_ACCESS_LEVEL_READ_WRITE = 'READ_WRITE';
 
-    /**
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getWorkspacePermissions($domain, $accessToken = null)
+    public function getWorkspacePermissions(string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/permissions', [
             'domain' => $domain,
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addWorkspacePermission($data, $domain, $accessToken = null)
+    public function addWorkspacePermission(array $data, string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/permissions', [
             'domain' => $domain,
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $permissionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getWorkspacePermission($domain, $permissionId, $accessToken = null)
+    public function getWorkspacePermission(string $domain, int $permissionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/permissions/:permission_set_id', [
             'domain' => $domain,
@@ -70,15 +52,7 @@ class Permissions extends Api
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param int         $permissionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editWorkspacePermission($data, $domain, $permissionId, $accessToken = null)
+    public function editWorkspacePermission(array $data, string $domain, int $permissionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/permissions/:permission_set_id', [
             'domain' => $domain,
@@ -86,14 +60,7 @@ class Permissions extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $permissionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteWorkspacePermission($domain, $permissionId, $accessToken = null)
+    public function deleteWorkspacePermission(string $domain, int $permissionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/permissions/:permission_set_id', [
             'domain' => $domain,

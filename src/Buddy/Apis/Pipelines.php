@@ -17,6 +17,8 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Pipelines extends Api
 {
     const PIPELINE_TRIGGER_MODE_MANUAL = 'MANUAL';
@@ -92,14 +94,7 @@ class Pipelines extends Api
     const SERVICE_TYPE_MEMCACHED = 'MEMCACHED';
     const SERVICE_TYPE_ELASTICSEARCH = 'ELASTICSEARCH';
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getPipelines($domain, $projectName, array $filters = [], $accessToken = null)
+    public function getPipelines(string $domain, string $projectName, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines', [
             'domain' => $domain,
@@ -107,15 +102,7 @@ class Pipelines extends Api
         ], $filters);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addPipeline($data, $domain, $projectName, $accessToken = null)
+    public function addPipeline(array $data, string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines', [
             'domain' => $domain,
@@ -123,15 +110,7 @@ class Pipelines extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getPipeline($domain, $projectName, $pipelineId, $accessToken = null)
+    public function getPipeline(string $domain, string $projectName, int $pipelineId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id', [
             'domain' => $domain,
@@ -140,16 +119,7 @@ class Pipelines extends Api
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editPipeline($data, $domain, $projectName, $pipelineId, $accessToken = null)
+    public function editPipeline(array $data, string $domain, string $projectName, int $pipelineId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id', [
             'domain' => $domain,
@@ -158,15 +128,7 @@ class Pipelines extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deletePipeline($domain, $projectName, $pipelineId, $accessToken = null)
+    public function deletePipeline(string $domain, string $projectName, int $pipelineId, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id', [
             'domain' => $domain,
@@ -175,15 +137,7 @@ class Pipelines extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getPipelineActions($domain, $projectName, $pipelineId, $accessToken = null)
+    public function getPipelineActions(string $domain, string $projectName, int $pipelineId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/actions', [
             'domain' => $domain,
@@ -192,16 +146,7 @@ class Pipelines extends Api
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addPipelineAction($data, $domain, $projectName, $pipelineId, $accessToken = null)
+    public function addPipelineAction(array $data, string $domain, string $projectName, int $pipelineId, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/actions', [
             'domain' => $domain,
@@ -210,16 +155,7 @@ class Pipelines extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param int         $actionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getPipelineAction($domain, $projectName, $pipelineId, $actionId, $accessToken = null)
+    public function getPipelineAction(string $domain, string $projectName, int $pipelineId, int $actionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/actions/:action_id', [
             'domain' => $domain,
@@ -229,17 +165,7 @@ class Pipelines extends Api
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param int         $actionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editPipelineAction($data, $domain, $projectName, $pipelineId, $actionId, $accessToken = null)
+    public function editPipelineAction(array $data, string $domain, string $projectName, int $pipelineId, int $actionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/actions/:action_id', [
             'domain' => $domain,
@@ -249,16 +175,7 @@ class Pipelines extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param int         $actionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deletePipelineAction($domain, $projectName, $pipelineId, $actionId, $accessToken = null)
+    public function deletePipelineAction(string $domain, string $projectName, int $pipelineId, int $actionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/actions/:action_id', [
             'domain' => $domain,

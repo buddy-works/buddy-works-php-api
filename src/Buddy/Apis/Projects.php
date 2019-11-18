@@ -17,43 +17,25 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Projects extends Api
 {
-    /**
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getProjects($domain, array $filters = [], $accessToken = null)
+    public function getProjects(string $domain, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects', [
             'domain' => $domain,
         ], $filters);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addProject($data, $domain, $accessToken = null)
+    public function addProject(array $data, string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects', [
             'domain' => $domain,
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getProject($domain, $projectName, $accessToken = null)
+    public function getProject(string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name', [
             'domain' => $domain,
@@ -61,15 +43,7 @@ class Projects extends Api
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editProject($data, $domain, $projectName, $accessToken = null)
+    public function editProject(array $data, string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/projects/:project_name', [
             'domain' => $domain,
@@ -77,14 +51,7 @@ class Projects extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteProject($domain, $projectName, $accessToken = null)
+    public function deleteProject(string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/projects/:project_name', [
             'domain' => $domain,
@@ -92,14 +59,7 @@ class Projects extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getProjectMembers($domain, $projectName, array $filters = [], $accessToken = null)
+    public function getProjectMembers(string $domain, string $projectName, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/members', [
             'domain' => $domain,
@@ -107,16 +67,7 @@ class Projects extends Api
         ], $filters);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $userId
-     * @param int         $permissionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addProjectMember($domain, $projectName, $userId, $permissionId, $accessToken = null)
+    public function addProjectMember(string $domain, string $projectName, int $userId, int $permissionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, [
             'id' => $userId,
@@ -129,15 +80,7 @@ class Projects extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $userId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getProjectMember($domain, $projectName, $userId, $accessToken = null)
+    public function getProjectMember(string $domain, string $projectName, int $userId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/members/:member_id', [
             'domain' => $domain,
@@ -146,16 +89,7 @@ class Projects extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $userId
-     * @param int         $permissionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editProjectMember($domain, $projectName, $userId, $permissionId, $accessToken = null)
+    public function editProjectMember(string $domain, string $projectName, int $userId, int $permissionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, [
             'permission_set' => [
@@ -168,15 +102,7 @@ class Projects extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $userId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteProjectMember($domain, $projectName, $userId, $accessToken = null)
+    public function deleteProjectMember(string $domain, string $projectName, int $userId, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/projects/:project_name/members/:member_id', [
             'domain' => $domain,

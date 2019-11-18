@@ -17,6 +17,8 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Executions extends Api
 {
     const STATUS_SUCCESSFUL = 'SUCCESSFUL';
@@ -30,15 +32,7 @@ class Executions extends Api
     const OPERATION_RETRY = 'RETRY';
     const OPERATION_CANCEL = 'CANCEL';
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getExecutions($domain, $projectName, $pipelineId, array $filters = [], $accessToken = null)
+    public function getExecutions(string $domain, string $projectName, int $pipelineId, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/executions', [
             'domain' => $domain,
@@ -47,16 +41,7 @@ class Executions extends Api
         ], $filters);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function runExecution($data, $domain, $projectName, $pipelineId, $accessToken = null)
+    public function runExecution(array $data, string $domain, string $projectName, int $pipelineId, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/executions', [
             'domain' => $domain,
@@ -65,16 +50,7 @@ class Executions extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param int         $executionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getExecution($domain, $projectName, $pipelineId, $executionId, $accessToken = null)
+    public function getExecution(string $domain, string $projectName, int $pipelineId, int $executionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/executions/:execution_id', [
             'domain' => $domain,
@@ -84,17 +60,7 @@ class Executions extends Api
         ]);
     }
 
-    /**
-     * @param string      $operation
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param int         $executionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    private function cancelOrRetry($operation, $domain, $projectName, $pipelineId, $executionId, $accessToken = null)
+    private function cancelOrRetry(string $operation, string $domain, string $projectName, int $pipelineId, int $executionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, [
             'operation' => $operation,
@@ -106,30 +72,12 @@ class Executions extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param int         $executionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function cancelExecution($domain, $projectName, $pipelineId, $executionId, $accessToken = null)
+    public function cancelExecution(string $domain, string $projectName, int $pipelineId, int $executionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->cancelOrRetry(self::OPERATION_CANCEL, $domain, $projectName, $pipelineId, $executionId, $accessToken);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param int         $pipelineId
-     * @param int         $executionId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function retryRelease($domain, $projectName, $pipelineId, $executionId, $accessToken = null)
+    public function retryRelease(string $domain, string $projectName, int $pipelineId, int $executionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->cancelOrRetry(self::OPERATION_RETRY, $domain, $projectName, $pipelineId, $executionId, $accessToken);
     }

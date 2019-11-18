@@ -42,16 +42,10 @@ class BuddyClient
     /**
      * @codeCoverageIgnore
      *
-     * @param string $url
-     * @param string $method
-     * @param array  $options
-     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
-     *
-     * @return BuddyResponse
      */
-    private function request($url, $method, $options = [])
+    private function request(string $url, string $method, array $options = []): BuddyResponse
     {
         array_merge($options, [
             'timeout' => 60,
@@ -75,17 +69,10 @@ class BuddyClient
     }
 
     /**
-     * @param string     $accessToken
-     * @param string     $url
-     * @param string     $method
-     * @param array|null $body
-     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
-     *
-     * @return BuddyResponse
      */
-    private function requestJson($accessToken, $url, $method, $body = null)
+    private function requestJson(string $accessToken, string $url, string $method, ?array $body = null): BuddyResponse
     {
         $options = [
             'headers' => [
@@ -103,13 +90,8 @@ class BuddyClient
 
     /**
      * @codeCoverageIgnore
-     *
-     * @param string $url
-     * @param string $path
-     *
-     * @return string
      */
-    public function createUrl($url, array $params = [], array $query = [], $path = '/')
+    public function createUrl(string $url, array $params = [], array $query = [], string $path = '/'): string
     {
         if (count($params) > 0) {
             foreach ($params as $k => $v) {
@@ -119,7 +101,7 @@ class BuddyClient
         if (count($query) > 0) {
             $url .= '?'.http_build_query($query);
         }
-        if ($path != '/' && $path != '') {
+        if ($path !== '/' && $path !== '') {
             $path = '/'.ltrim($path, '/');
             $path = urlencode($path);
             $path = preg_replace('/%2F/', '/', $path);
@@ -129,61 +111,27 @@ class BuddyClient
         return self::API_ENDPOINT.$url;
     }
 
-    /**
-     * @param string $accessToken
-     * @param string $url
-     *
-     * @return BuddyResponse
-     */
-    public function getJson($accessToken, $url)
+    public function getJson(string $accessToken, string $url): BuddyResponse
     {
         return $this->requestJson($accessToken, $url, 'GET');
     }
 
-    /**
-     * @param string     $accessToken
-     * @param string     $url
-     * @param array|null $body
-     *
-     * @return BuddyResponse
-     */
-    public function deleteJson($accessToken, $url, $body = null)
+    public function deleteJson(string $accessToken, string $url, ?array $body = null): BuddyResponse
     {
         return $this->requestJson($accessToken, $url, 'DELETE', $body);
     }
 
-    /**
-     * @param string $accessToken
-     * @param string $url
-     * @param array  $body
-     *
-     * @return BuddyResponse
-     */
-    public function postJson($accessToken, $url, $body)
+    public function postJson(string $accessToken, string $url, array $body): BuddyResponse
     {
         return $this->requestJson($accessToken, $url, 'POST', $body);
     }
 
-    /**
-     * @param string $accessToken
-     * @param string $url
-     * @param array  $body
-     *
-     * @return BuddyResponse
-     */
-    public function putJson($accessToken, $url, $body)
+    public function putJson(string $accessToken, string $url, array $body): BuddyResponse
     {
         return $this->requestJson($accessToken, $url, 'PUT', $body);
     }
 
-    /**
-     * @param string $accessToken
-     * @param string $url
-     * @param array  $body
-     *
-     * @return BuddyResponse
-     */
-    public function patchJson($accessToken, $url, $body)
+    public function patchJson(string $accessToken, string $url, array $body): BuddyResponse
     {
         return $this->requestJson($accessToken, $url, 'PATCH', $body);
     }
@@ -191,14 +139,10 @@ class BuddyClient
     /**
      * @codeCoverageIgnore
      *
-     * @param string $url
-     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
-     *
-     * @return BuddyResponse
      */
-    public function post($url, array $params)
+    public function post(string $url, array $params): BuddyResponse
     {
         return $this->request($url, 'POST', [
             'body' => $params,
@@ -208,14 +152,10 @@ class BuddyClient
     /**
      * @codeCoverageIgnore
      *
-     * @param string $url
-     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
-     *
-     * @return BuddyResponse
      */
-    public function get($url)
+    public function get(string $url): BuddyResponse
     {
         return $this->request($url, 'GET');
     }

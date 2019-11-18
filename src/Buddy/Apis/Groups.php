@@ -17,43 +17,25 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Groups extends Api
 {
-    /**
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getGroups($domain, $accessToken = null)
+    public function getGroups(string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/groups', [
             'domain' => $domain,
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addGroup($data, $domain, $accessToken = null)
+    public function addGroup(array $data, string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/groups', [
             'domain' => $domain,
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $groupId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getGroup($domain, $groupId, $accessToken = null)
+    public function getGroup(string $domain, int $groupId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/groups/:group_id', [
             'domain' => $domain,
@@ -61,15 +43,7 @@ class Groups extends Api
         ]);
     }
 
-    /**
-     * @param array       $data
-     * @param string      $domain
-     * @param int         $groupId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function editGroup($data, $domain, $groupId, $accessToken = null)
+    public function editGroup(array $data, string $domain, int $groupId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/groups/:group_id', [
             'domain' => $domain,
@@ -77,14 +51,7 @@ class Groups extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $groupId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteGroup($domain, $groupId, $accessToken = null)
+    public function deleteGroup(string $domain, int $groupId, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/groups/:group_id', [
             'domain' => $domain,
@@ -92,14 +59,7 @@ class Groups extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $groupId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getGroupMembers($domain, $groupId, $accessToken = null)
+    public function getGroupMembers(string $domain, int $groupId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/groups/:group_id/members', [
             'domain' => $domain,
@@ -107,15 +67,7 @@ class Groups extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $groupId
-     * @param int         $userId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addGroupMember($domain, $groupId, $userId, $accessToken = null)
+    public function addGroupMember(string $domain, int $groupId, int $userId, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, [
             'id' => $userId,
@@ -125,15 +77,7 @@ class Groups extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $groupId
-     * @param int         $userId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getGroupMember($domain, $groupId, $userId, $accessToken = null)
+    public function getGroupMember(string $domain, int $groupId, int $userId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/groups/:group_id/members/:member_id', [
             'domain' => $domain,
@@ -142,15 +86,7 @@ class Groups extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param int         $groupId
-     * @param int         $userId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteGroupMember($domain, $groupId, $userId, $accessToken = null)
+    public function deleteGroupMember(string $domain, int $groupId, int $userId, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/workspaces/:domain/groups/:group_id/members/:member_id', [
             'domain' => $domain,

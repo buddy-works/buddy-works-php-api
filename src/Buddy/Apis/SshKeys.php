@@ -17,49 +17,28 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class SshKeys extends Api
 {
-    /**
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getKeys($accessToken = null)
+    public function getKeys(?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/user/keys');
     }
 
-    /**
-     * @param array       $data
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function addKey($data, $accessToken = null)
+    public function addKey(array $data, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/user/keys');
     }
 
-    /**
-     * @param int         $keyId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function deleteKey($keyId, $accessToken = null)
+    public function deleteKey(int $keyId, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, null, '/user/keys/:key_id', [
             'key_id' => $keyId,
         ]);
     }
 
-    /**
-     * @param int         $keyId
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getKey($keyId, $accessToken = null)
+    public function getKey(int $keyId, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/user/keys/:key_id', [
             'key_id' => $keyId,

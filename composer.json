@@ -6,7 +6,9 @@
     "buddy",
     "buddy works",
     "sdk",
-    "api"
+    "api",
+    "continuous integration",
+    "continuous delivery"
   ],
   "homepage": "https://github.com/buddy-works/buddy-works-php-api",
   "license": "Apache-2.0",
@@ -18,10 +20,14 @@
     {
       "name": "Paul Kapala",
       "email": "paulk@buddy.works"
+    },
+    {
+      "name": "Arkadiusz Kondas",
+      "email": "arkadiusz.kondas@buddy.works"
     }
   ],
   "require": {
-    "php": ">=5.5.0",
+    "php": "^7.2",
     "ext-mbstring": "*",
     "guzzlehttp/guzzle": "~5.0"
   },

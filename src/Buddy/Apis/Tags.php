@@ -17,16 +17,11 @@ declare(strict_types=1);
 
 namespace Buddy\Apis;
 
+use Buddy\BuddyResponse;
+
 class Tags extends Api
 {
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getTags($domain, $projectName, $accessToken = null)
+    public function getTags(string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/tags', [
             'domain' => $domain,
@@ -34,15 +29,7 @@ class Tags extends Api
         ]);
     }
 
-    /**
-     * @param string      $domain
-     * @param string      $projectName
-     * @param string      $name
-     * @param string|null $accessToken
-     *
-     * @return \Buddy\BuddyResponse
-     */
-    public function getTag($domain, $projectName, $name, $accessToken = null)
+    public function getTag(string $domain, string $projectName, string $name, ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/tags/:name', [
             'domain' => $domain,
