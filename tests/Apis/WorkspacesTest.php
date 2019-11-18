@@ -32,10 +32,11 @@ class WorkspacesTest extends TestCase
 
     public function testGetWorkspaces(): void
     {
-        $token = getenv('TOKEN_ALL');
-        $buddy = new Buddy();
+        $buddy = new Buddy([
+            'accessToken' => getenv('TOKEN_ALL'),
+        ]);
         $this->assertInstanceOf('Buddy\Apis\Workspaces', $buddy->getApiWorkspaces());
-        $resp = $buddy->getApiWorkspaces()->getWorkspaces($token);
+        $resp = $buddy->getApiWorkspaces()->getWorkspaces();
         $this->assertInstanceOf('Buddy\BuddyResponse', $resp);
         $this->assertIsArray($resp->getBody());
         $this->assertIsArray($resp->getHeaders());

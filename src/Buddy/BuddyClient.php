@@ -21,6 +21,7 @@ use Buddy\Exceptions\BuddyResponseException;
 use Buddy\Exceptions\BuddySDKException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Message\ResponseInterface;
 
 class BuddyClient
 {
@@ -61,6 +62,9 @@ class BuddyClient
                 throw new BuddySDKException($e->getMessage(), $e->getCode());
             }
         }
+        if (!$rawResponse instanceof ResponseInterface) {
+            throw new BuddySDKException('Invalid response');
+        }
         $httpStatusCode = $rawResponse->getStatusCode();
         if ($httpStatusCode >= 200 && $httpStatusCode < 300) {
             return new BuddyResponse($rawResponse->getStatusCode(), $rawResponse->getHeaders(), (string) $rawResponse->getBody());
@@ -95,7 +99,7 @@ class BuddyClient
     {
         if (count($params) > 0) {
             foreach ($params as $k => $v) {
-                $url = preg_replace("/:{$k}/", urlencode($v), $url);
+                $url = preg_replace("/:{$k}/", urlencode((string) $v), (string) $url);
             }
         }
         if (count($query) > 0) {

@@ -17,8 +17,6 @@ declare(strict_types=1);
 
 namespace Buddy;
 
-use Mockery\Exception;
-
 class BuddyResponse
 {
     /**
@@ -45,7 +43,7 @@ class BuddyResponse
         $this->headers = $headers;
         try {
             $this->body = json_decode($body, true);
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $this->body = [];
         }
     }

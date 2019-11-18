@@ -48,12 +48,7 @@ class BuddyOAuth
      */
     private $options;
 
-    /**
-     * BuddyOAuth constructor.
-     *
-     * @param $options
-     */
-    public function __construct(BuddyClient $client, $options)
+    public function __construct(BuddyClient $client, array $options)
     {
         $this->client = $client;
         $this->options = $options;

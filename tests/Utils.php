@@ -37,7 +37,7 @@ class Utils
 
     public static function randomString(): string
     {
-        return time().substr(md5(random_int(0, mt_getrandmax())), 0, 9);
+        return time().substr(md5((string) random_int(0, mt_getrandmax())), 0, 9);
     }
 
     public static function randomEmail(): string
@@ -52,7 +52,7 @@ class Utils
 
     public static function getBuddy(): Buddy
     {
-        if (!self::$buddy) {
+        if (!self::$buddy instanceof Buddy) {
             self::$buddy = new Buddy([
                 'accessToken' => getenv('TOKEN_ALL'),
             ]);
