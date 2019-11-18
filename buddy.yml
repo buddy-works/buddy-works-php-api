@@ -4,7 +4,7 @@
   ref_type: "WILDCARD"
   trigger_condition: "ALWAYS"
   actions:
-    - action: "Execute: tests"
+    - action: "PHP 7.2"
       type: "BUILD"
       working_directory: "/buddy/buddy-works-php-api"
       docker_image_name: "library/php"
@@ -15,6 +15,16 @@
       setup_commands:
         - "apt-get update && apt-get install -y git zip"
         - "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer"
+      mount_filesystem_path: "/buddy/buddy-works-php-api"
+      shell: "BASH"
+      trigger_condition: "ALWAYS"
+    - action: "PHP 7.3"
+      type: "BUILD"
+      working_directory: "/buddy/buddy-works-php-api"
+      docker_image_name: "library/php"
+      docker_image_tag: "7.3-stretch"
+      execute_commands:
+        - "vendor/bin/phpunit"
       mount_filesystem_path: "/buddy/buddy-works-php-api"
       shell: "BASH"
       trigger_condition: "ALWAYS"
