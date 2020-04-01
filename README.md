@@ -1,7 +1,7 @@
 # Buddy Works APIs PHP SDK
 
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg)](https://php.net/)
-[![buddy branch](https://app.buddy.works/buddy-works/buddy-works-php-api/repository/branch/master/badge.svg?token=6fef7735534f7f297de0ec15826a916542070669eddb03fc5f6f44b469022918 "buddy branch")](https://app.buddy.works/buddy-works/buddy-works-php-api/repository/branch/master)
+[![buddy branch](https://app.buddy.works/buddy-works/buddy-works-php-api/repository/branch/master/badge.svg?token=be04e77cb21d0e7e611853e903e521ba233e01d46699a1e6dc00f85a853cbdd6 "buddy branch")](https://app.buddy.works/buddy-works/buddy-works-php-api/repository/branch/master)
 [![Latest Stable Version](https://poser.pugx.org/buddy-works/buddy-works-php-api/v/stable?format=flat)](https://packagist.org/packages/buddy-works/buddy-works-php-api)
 ![GitHub](https://img.shields.io/github/license/buddy-works/buddy-works-php-api)
 
@@ -19,6 +19,7 @@ composer require buddy-works/buddy-works-php-api
 
 | PHP version | SDK version |
 | --------------- | ---------------------- |
+| ^7.3 | 1.3.0 |
 | ^7.2 | 1.2.0 |
 | 5.5  | 1.1.1 |
  

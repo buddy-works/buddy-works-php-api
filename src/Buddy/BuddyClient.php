@@ -21,7 +21,7 @@ use Buddy\Exceptions\BuddyResponseException;
 use Buddy\Exceptions\BuddySDKException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class BuddyClient
 {
@@ -52,9 +52,9 @@ class BuddyClient
             'timeout' => 60,
             'connect_timeout' => 30,
         ]);
-        $request = $this->guzzle->createRequest($method, $url, $options);
+
         try {
-            $rawResponse = $this->guzzle->send($request);
+            $rawResponse = $this->guzzle->request($method, $url, $options);
         } catch (RequestException $e) {
             if ($e->hasResponse()) {
                 $rawResponse = $e->getResponse();
@@ -149,7 +149,7 @@ class BuddyClient
     public function post(string $url, array $params): BuddyResponse
     {
         return $this->request($url, 'POST', [
-            'body' => $params,
+            'form_params' => $params,
         ]);
     }
 
