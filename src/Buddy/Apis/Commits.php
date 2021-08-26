@@ -21,6 +21,9 @@ use Buddy\BuddyResponse;
 
 class Commits extends Api
 {
+    /**
+     * @param mixed[] $filters
+     */
     public function getCommits(string $domain, string $projectName, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/commits', [
@@ -38,6 +41,9 @@ class Commits extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $filters
+     */
     public function getCompare(string $domain, string $projectName, string $base, string $head, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/comparison/:base...:head', [

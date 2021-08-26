@@ -21,79 +21,82 @@ use Buddy\BuddyResponse;
 
 class Pipelines extends Api
 {
-    const PIPELINE_TRIGGER_MODE_MANUAL = 'MANUAL';
-    const PIPELINE_TRIGGER_MODE_SCHEDULED = 'SCHEDULED';
-    const PIPELINE_TRIGGER_MODE_ON_EVERY_PUSH = 'ON_EVERY_PUSH';
+    public const PIPELINE_TRIGGER_MODE_MANUAL = 'MANUAL';
+    public const PIPELINE_TRIGGER_MODE_SCHEDULED = 'SCHEDULED';
+    public const PIPELINE_TRIGGER_MODE_ON_EVERY_PUSH = 'ON_EVERY_PUSH';
 
-    const ACTION_TRIGGER_TIME_ON_EVERY_EXECUTION = 'ON_EVERY_EXECUTION';
-    const ACTION_TRIGGER_TIME_ON_FAILURE = 'ON_FAILURE';
-    const ACTION_TRIGGER_TIME_ON_BACK_TO_SUCCESS = 'ON_BACK_TO_SUCCESS';
+    public const ACTION_TRIGGER_TIME_ON_EVERY_EXECUTION = 'ON_EVERY_EXECUTION';
+    public const ACTION_TRIGGER_TIME_ON_FAILURE = 'ON_FAILURE';
+    public const ACTION_TRIGGER_TIME_ON_BACK_TO_SUCCESS = 'ON_BACK_TO_SUCCESS';
 
-    const ACTION_TYPE_BUILD = 'BUILD';
-    const ACTION_TYPE_ELASTIC_BEANSTALK = 'ELASTIC_BEANSTALK';
-    const ACTION_TYPE_CODE_DEPLOY = 'CODE_DEPLOY';
-    const ACTION_TYPE_EMAIL = 'EMAIL';
-    const ACTION_TYPE_FTP = 'FTP';
-    const ACTION_TYPE_FTPS = 'FTPS';
-    const ACTION_TYPE_HEROKU = 'HEROKU';
-    const ACTION_TYPE_HEROKU_CLI = 'HEROKU_CLI';
-    const ACTION_TYPE_HTTP = 'HTTP';
-    const ACTION_TYPE_PING = 'PING';
-    const ACTION_TYPE_PUSH = 'PUSH';
-    const ACTION_TYPE_RUN_NEXT_PIPELINE = 'RUN_NEXT_PIPELINE';
-    const ACTION_TYPE_AMAZON_S3 = 'AMAZON_S3';
-    const ACTION_TYPE_SFTP = 'SFTP';
-    const ACTION_TYPE_DIGITAL_OCEAN = 'DIGITAL_OCEAN';
-    const ACTION_TYPE_GCE = 'GCE';
-    const ACTION_TYPE_SLACK = 'SLACK';
-    const ACTION_TYPE_SMS = 'SMS';
-    const ACTION_TYPE_SSH_COMMAND = 'SSH_COMMAND';
-    const ACTION_TYPE_TCP = 'TCP';
-    const ACTION_TYPE_WEB = 'WEB';
-    const ACTION_TYPE_WEB_DAV = 'WEB_DAV';
-    const ACTION_TYPE_PUSHOVER = 'PUSHOVER';
-    const ACTION_TYPE_PUSHBULLET = 'PUSHBULLET';
-    const ACTION_TYPE_SHOPIFY = 'SHOPIFY';
-    const ACTION_TYPE_AZURE = 'AZURE';
-    const ACTION_TYPE_DOCKERFILE = 'DOCKERFILE';
-    const ACTION_TYPE_LAMBDA = 'LAMBDA';
-    const ACTION_TYPE_AWS_LAMBDA_DEPLOY = 'AWS_LAMBDA_DEPLOY';
-    const ACTION_TYPE_GCS = 'GCS';
-    const ACTION_TYPE_GOOGLE_APP_ENGINE = 'GOOGLE_APP_ENGINE';
-    const ACTION_TYPE_RACKSPACE = 'RACKSPACE';
-    const ACTION_TYPE_CLOUDFLARE = 'CLOUDFLARE';
-    const ACTION_TYPE_RSYNC = 'RSYNC';
-    const ACTION_TYPE_CLOUD_FRONT = 'CLOUD_FRONT';
-    const ACTION_TYPE_MONITOR = 'MONITOR';
-    const ACTION_TYPE_AWS_CLI = 'AWS_CLI';
-    const ACTION_TYPE_SLEEP = 'SLEEP';
-    const ACTION_TYPE_GOOGLE_CDN = 'GOOGLE_CDN';
-    const ACTION_TYPE_KUBERNETES_APPLY = 'KUBERNETES_APPLY';
-    const ACTION_TYPE_KUBERNETES_SET_IMAGE = 'KUBERNETES_SET_IMAGE';
-    const ACTION_TYPE_KUBERNETES_RUN_POD = 'KUBERNETES_RUN_POD';
-    const ACTION_TYPE_NEW_RELIC = 'NEW_RELIC';
-    const ACTION_TYPE_GKE_APPLY = 'GKE_APPLY';
-    const ACTION_TYPE_GKE_SET_IMAGE = 'GKE_SET_IMAGE';
-    const ACTION_TYPE_GKE_RUN_POD = 'GKE_RUN_POD';
-    const ACTION_TYPE_GKE_RUN_JOB = 'GKE_RUN_JOB';
-    const ACTION_TYPE_WAIT_FOR_APPLY = 'WAIT_FOR_APPLY';
-    const ACTION_TYPE_ZIP = 'ZIP';
+    public const ACTION_TYPE_BUILD = 'BUILD';
+    public const ACTION_TYPE_ELASTIC_BEANSTALK = 'ELASTIC_BEANSTALK';
+    public const ACTION_TYPE_CODE_DEPLOY = 'CODE_DEPLOY';
+    public const ACTION_TYPE_EMAIL = 'EMAIL';
+    public const ACTION_TYPE_FTP = 'FTP';
+    public const ACTION_TYPE_FTPS = 'FTPS';
+    public const ACTION_TYPE_HEROKU = 'HEROKU';
+    public const ACTION_TYPE_HEROKU_CLI = 'HEROKU_CLI';
+    public const ACTION_TYPE_HTTP = 'HTTP';
+    public const ACTION_TYPE_PING = 'PING';
+    public const ACTION_TYPE_PUSH = 'PUSH';
+    public const ACTION_TYPE_RUN_NEXT_PIPELINE = 'RUN_NEXT_PIPELINE';
+    public const ACTION_TYPE_AMAZON_S3 = 'AMAZON_S3';
+    public const ACTION_TYPE_SFTP = 'SFTP';
+    public const ACTION_TYPE_DIGITAL_OCEAN = 'DIGITAL_OCEAN';
+    public const ACTION_TYPE_GCE = 'GCE';
+    public const ACTION_TYPE_SLACK = 'SLACK';
+    public const ACTION_TYPE_SMS = 'SMS';
+    public const ACTION_TYPE_SSH_COMMAND = 'SSH_COMMAND';
+    public const ACTION_TYPE_TCP = 'TCP';
+    public const ACTION_TYPE_WEB = 'WEB';
+    public const ACTION_TYPE_WEB_DAV = 'WEB_DAV';
+    public const ACTION_TYPE_PUSHOVER = 'PUSHOVER';
+    public const ACTION_TYPE_PUSHBULLET = 'PUSHBULLET';
+    public const ACTION_TYPE_SHOPIFY = 'SHOPIFY';
+    public const ACTION_TYPE_AZURE = 'AZURE';
+    public const ACTION_TYPE_DOCKERFILE = 'DOCKERFILE';
+    public const ACTION_TYPE_LAMBDA = 'LAMBDA';
+    public const ACTION_TYPE_AWS_LAMBDA_DEPLOY = 'AWS_LAMBDA_DEPLOY';
+    public const ACTION_TYPE_GCS = 'GCS';
+    public const ACTION_TYPE_GOOGLE_APP_ENGINE = 'GOOGLE_APP_ENGINE';
+    public const ACTION_TYPE_RACKSPACE = 'RACKSPACE';
+    public const ACTION_TYPE_CLOUDFLARE = 'CLOUDFLARE';
+    public const ACTION_TYPE_RSYNC = 'RSYNC';
+    public const ACTION_TYPE_CLOUD_FRONT = 'CLOUD_FRONT';
+    public const ACTION_TYPE_MONITOR = 'MONITOR';
+    public const ACTION_TYPE_AWS_CLI = 'AWS_CLI';
+    public const ACTION_TYPE_SLEEP = 'SLEEP';
+    public const ACTION_TYPE_GOOGLE_CDN = 'GOOGLE_CDN';
+    public const ACTION_TYPE_KUBERNETES_APPLY = 'KUBERNETES_APPLY';
+    public const ACTION_TYPE_KUBERNETES_SET_IMAGE = 'KUBERNETES_SET_IMAGE';
+    public const ACTION_TYPE_KUBERNETES_RUN_POD = 'KUBERNETES_RUN_POD';
+    public const ACTION_TYPE_NEW_RELIC = 'NEW_RELIC';
+    public const ACTION_TYPE_GKE_APPLY = 'GKE_APPLY';
+    public const ACTION_TYPE_GKE_SET_IMAGE = 'GKE_SET_IMAGE';
+    public const ACTION_TYPE_GKE_RUN_POD = 'GKE_RUN_POD';
+    public const ACTION_TYPE_GKE_RUN_JOB = 'GKE_RUN_JOB';
+    public const ACTION_TYPE_WAIT_FOR_APPLY = 'WAIT_FOR_APPLY';
+    public const ACTION_TYPE_ZIP = 'ZIP';
 
-    const ACTION_INPUT_TYPE_SCM_REPOSITORY = 'SCM_REPOSITORY';
-    const ACTION_INPUT_TYPE_BUILD_ARTIFACTS = 'BUILD_ARTIFACTS';
+    public const ACTION_INPUT_TYPE_SCM_REPOSITORY = 'SCM_REPOSITORY';
+    public const ACTION_INPUT_TYPE_BUILD_ARTIFACTS = 'BUILD_ARTIFACTS';
 
-    const ACTION_AUTH_MODE_PASS = 'PASS';
-    const ACTION_AUTH_MODE_PRIVATE_KEY = 'PRIVATE_KEY';
-    const ACTION_AUTH_MODE_PRIVATE_KEY_AND_PASS = 'PRIVATE_KEY_AND_PASS';
+    public const ACTION_AUTH_MODE_PASS = 'PASS';
+    public const ACTION_AUTH_MODE_PRIVATE_KEY = 'PRIVATE_KEY';
+    public const ACTION_AUTH_MODE_PRIVATE_KEY_AND_PASS = 'PRIVATE_KEY_AND_PASS';
 
-    const SERVICE_TYPE_MYSQL = 'MYSQL';
-    const SERVICE_TYPE_MONGO_DB = 'MONGO_DB';
-    const SERVICE_TYPE_MARIADB = 'MARIADB';
-    const SERVICE_TYPE_POSTGRE_SQL = 'POSTGRE_SQL';
-    const SERVICE_TYPE_REDIS = 'REDIS';
-    const SERVICE_TYPE_MEMCACHED = 'MEMCACHED';
-    const SERVICE_TYPE_ELASTICSEARCH = 'ELASTICSEARCH';
+    public const SERVICE_TYPE_MYSQL = 'MYSQL';
+    public const SERVICE_TYPE_MONGO_DB = 'MONGO_DB';
+    public const SERVICE_TYPE_MARIADB = 'MARIADB';
+    public const SERVICE_TYPE_POSTGRE_SQL = 'POSTGRE_SQL';
+    public const SERVICE_TYPE_REDIS = 'REDIS';
+    public const SERVICE_TYPE_MEMCACHED = 'MEMCACHED';
+    public const SERVICE_TYPE_ELASTICSEARCH = 'ELASTICSEARCH';
 
+    /**
+     * @param mixed[] $filters
+     */
     public function getPipelines(string $domain, string $projectName, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines', [
@@ -102,6 +105,9 @@ class Pipelines extends Api
         ], $filters);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function addPipeline(array $data, string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines', [
@@ -119,6 +125,9 @@ class Pipelines extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function editPipeline(array $data, string $domain, string $projectName, int $pipelineId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id', [
@@ -146,6 +155,9 @@ class Pipelines extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function addPipelineAction(array $data, string $domain, string $projectName, int $pipelineId, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/actions', [
@@ -165,6 +177,9 @@ class Pipelines extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function editPipelineAction(array $data, string $domain, string $projectName, int $pipelineId, int $actionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/actions/:action_id', [

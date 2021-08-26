@@ -38,6 +38,9 @@ class Branches extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function addBranch(array $data, string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/branches', [

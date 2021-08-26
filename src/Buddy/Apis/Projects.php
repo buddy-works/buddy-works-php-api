@@ -21,6 +21,9 @@ use Buddy\BuddyResponse;
 
 class Projects extends Api
 {
+    /**
+     * @param mixed[] $filters
+     */
     public function getProjects(string $domain, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects', [
@@ -28,6 +31,9 @@ class Projects extends Api
         ], $filters);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function addProject(array $data, string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects', [
@@ -43,6 +49,9 @@ class Projects extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function editProject(array $data, string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/projects/:project_name', [
@@ -59,6 +68,9 @@ class Projects extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $filters
+     */
     public function getProjectMembers(string $domain, string $projectName, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/members', [

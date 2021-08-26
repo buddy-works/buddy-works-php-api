@@ -26,6 +26,9 @@ class SshKeys extends Api
         return $this->getJson($accessToken, '/user/keys');
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function addKey(array $data, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/user/keys');

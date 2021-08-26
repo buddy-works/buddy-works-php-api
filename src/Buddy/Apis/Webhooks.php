@@ -21,11 +21,11 @@ use Buddy\BuddyResponse;
 
 class Webhooks extends Api
 {
-    const EVENT_PUSH = 'PUSH';
-    const EVENT_EXECUTION_STARTED = 'EXECUTION_STARTED';
-    const EVENT_EXECUTION_SUCCESSFUL = 'EXECUTION_SUCCESSFUL';
-    const EVENT_EXECUTION_FAILED = 'EXECUTION_FAILED';
-    const EVENT_EXECUTION_FINISHED = 'EXECUTION_FINISHED';
+    public const EVENT_PUSH = 'PUSH';
+    public const EVENT_EXECUTION_STARTED = 'EXECUTION_STARTED';
+    public const EVENT_EXECUTION_SUCCESSFUL = 'EXECUTION_SUCCESSFUL';
+    public const EVENT_EXECUTION_FAILED = 'EXECUTION_FAILED';
+    public const EVENT_EXECUTION_FINISHED = 'EXECUTION_FINISHED';
 
     public function getWebhooks(string $domain, ?string $accessToken = null): BuddyResponse
     {
@@ -34,6 +34,9 @@ class Webhooks extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function addWebhook(array $data, string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/webhooks', [
@@ -49,6 +52,9 @@ class Webhooks extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function editWebhook(array $data, string $domain, int $webhookId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/webhooks/:webhook_id', [

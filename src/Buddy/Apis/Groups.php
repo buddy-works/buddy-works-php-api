@@ -28,6 +28,9 @@ class Groups extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function addGroup(array $data, string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/groups', [
@@ -43,6 +46,9 @@ class Groups extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function editGroup(array $data, string $domain, int $groupId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/groups/:group_id', [

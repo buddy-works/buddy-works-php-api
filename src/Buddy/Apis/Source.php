@@ -21,6 +21,9 @@ use Buddy\BuddyResponse;
 
 class Source extends Api
 {
+    /**
+     * @param mixed[] $filters
+     */
     public function getContents(string $domain, string $projectName, string $path = '/', array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/repository/contents', [
@@ -29,6 +32,9 @@ class Source extends Api
         ], $filters, $path);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function addFile(array $data, string $domain, string $projectName, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/contents', [
@@ -37,6 +43,9 @@ class Source extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function editFile(array $data, string $domain, string $projectName, string $path, ?string $accessToken = null): BuddyResponse
     {
         return $this->putJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/contents', [
@@ -45,6 +54,9 @@ class Source extends Api
         ], [], $path);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function deleteFile(array $data, string $domain, string $projectName, string $path, ?string $accessToken = null): BuddyResponse
     {
         return $this->deleteJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/repository/contents', [

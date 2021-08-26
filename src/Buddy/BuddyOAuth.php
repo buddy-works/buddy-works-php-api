@@ -21,33 +21,33 @@ use Buddy\Exceptions\BuddySDKException;
 
 class BuddyOAuth
 {
-    const SCOPE_WORKSPACE = 'WORKSPACE';
-    const SCOPE_PROJECT_DELETE = 'PROJECT_DELETE';
-    const SCOPE_REPOSITORY_READ = 'REPOSITORY_READ';
-    const SCOPE_REPOSITORY_WRITE = 'REPOSITORY_WRITE';
-    const SCOPE_EXECUTION_INFO = 'EXECUTION_INFO';
-    const SCOPE_EXECUTION_RUN = 'EXECUTION_RUN';
-    const SCOPE_EXECUTION_MANAGE = 'EXECUTION_MANAGE';
-    const SCOPE_USER_INFO = 'USER_INFO';
-    const SCOPE_USER_KEY = 'USER_KEY';
-    const SCOPE_USER_EMAIL = 'USER_EMAIL';
-    const SCOPE_INTEGRATION_INFO = 'INTEGRATION_INFO';
-    const SCOPE_MEMBER_EMAIL = 'MEMBER_EMAIL';
-    const SCOPE_MANAGE_EMAILS = 'MANAGE_EMAILS';
-    const SCOPE_WEBHOOK_INFO = 'WEBHOOK_INFO';
-    const SCOPE_WEBHOOK_ADD = 'WEBHOOK_ADD';
-    const SCOPE_WEBHOOK_MANAGE = 'WEBHOOK_MANAGE';
+    public const SCOPE_WORKSPACE = 'WORKSPACE';
+    public const SCOPE_PROJECT_DELETE = 'PROJECT_DELETE';
+    public const SCOPE_REPOSITORY_READ = 'REPOSITORY_READ';
+    public const SCOPE_REPOSITORY_WRITE = 'REPOSITORY_WRITE';
+    public const SCOPE_EXECUTION_INFO = 'EXECUTION_INFO';
+    public const SCOPE_EXECUTION_RUN = 'EXECUTION_RUN';
+    public const SCOPE_EXECUTION_MANAGE = 'EXECUTION_MANAGE';
+    public const SCOPE_USER_INFO = 'USER_INFO';
+    public const SCOPE_USER_KEY = 'USER_KEY';
+    public const SCOPE_USER_EMAIL = 'USER_EMAIL';
+    public const SCOPE_INTEGRATION_INFO = 'INTEGRATION_INFO';
+    public const SCOPE_MEMBER_EMAIL = 'MEMBER_EMAIL';
+    public const SCOPE_MANAGE_EMAILS = 'MANAGE_EMAILS';
+    public const SCOPE_WEBHOOK_INFO = 'WEBHOOK_INFO';
+    public const SCOPE_WEBHOOK_ADD = 'WEBHOOK_ADD';
+    public const SCOPE_WEBHOOK_MANAGE = 'WEBHOOK_MANAGE';
+
+    private BuddyClient $client;
 
     /**
-     * @var BuddyClient
+     * @var mixed[]
      */
-    private $client;
+    private array $options;
 
     /**
-     * @var array
+     * @param mixed[] $options
      */
-    private $options;
-
     public function __construct(BuddyClient $client, array $options)
     {
         $this->client = $client;
@@ -55,6 +55,8 @@ class BuddyOAuth
     }
 
     /**
+     * @param string[] $scopes
+     *
      * @throws BuddySDKException
      */
     public function getAuthorizeUrl(array $scopes, string $state, ?string $redirectUrl = null): string
@@ -84,6 +86,8 @@ class BuddyOAuth
 
     /**
      * @throws BuddySDKException
+     *
+     * @return mixed[]
      */
     public function getAccessToken(string $state, ?string $redirectUrl = null): array
     {
