@@ -22,28 +22,18 @@ use Exception;
 class BuddyResponseException extends BuddySDKException
 {
     /**
-     * @var array
+     * @var mixed[]
      */
-    private $headers;
+    private array $headers;
+
+    private string $body;
+
+    private int $statusCode;
 
     /**
-     * @var string
+     * @param mixed[] $headers
      */
-    private $body;
-
-    /**
-     * @var int
-     */
-    private $statusCode;
-
-    /**
-     * BuddyResponseException constructor.
-     *
-     * @param int    $statusCode
-     * @param array  $headers
-     * @param string $body
-     */
-    public function __construct($statusCode, $headers, $body)
+    public function __construct(int $statusCode, array $headers, string $body)
     {
         $this->statusCode = $statusCode;
         $this->headers = $headers;
@@ -61,6 +51,9 @@ class BuddyResponseException extends BuddySDKException
         }
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getHeaders(): array
     {
         return $this->headers;

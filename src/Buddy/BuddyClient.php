@@ -25,16 +25,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class BuddyClient
 {
-    const API_ENDPOINT = 'https://api.buddy.works';
+    public const API_ENDPOINT = 'https://api.buddy.works';
 
-    /**
-     * @var \GuzzleHttp\Client
-     */
-    private $guzzle;
+    private Client $guzzle;
 
-    /**
-     * BuddyClient constructor.
-     */
     public function __construct()
     {
         $this->guzzle = new Client();
@@ -43,12 +37,14 @@ class BuddyClient
     /**
      * @codeCoverageIgnore
      *
+     * @param mixed[] $options
+     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
      */
     private function request(string $url, string $method, array $options = []): BuddyResponse
     {
-        array_merge($options, [
+        $options = array_merge($options, [
             'timeout' => 60,
             'connect_timeout' => 30,
         ]);
@@ -73,6 +69,8 @@ class BuddyClient
     }
 
     /**
+     * @param mixed[]|null $body
+     *
      * @throws BuddyResponseException
      * @throws BuddySDKException
      */
@@ -94,6 +92,9 @@ class BuddyClient
 
     /**
      * @codeCoverageIgnore
+     *
+     * @param mixed[] $params
+     * @param mixed[] $query
      */
     public function createUrl(string $url, array $params = [], array $query = [], string $path = '/'): string
     {
@@ -120,21 +121,33 @@ class BuddyClient
         return $this->requestJson($accessToken, $url, 'GET');
     }
 
+    /**
+     * @param mixed[]|null $body
+     */
     public function deleteJson(string $accessToken, string $url, ?array $body = null): BuddyResponse
     {
         return $this->requestJson($accessToken, $url, 'DELETE', $body);
     }
 
+    /**
+     * @param mixed[] $body
+     */
     public function postJson(string $accessToken, string $url, array $body): BuddyResponse
     {
         return $this->requestJson($accessToken, $url, 'POST', $body);
     }
 
+    /**
+     * @param mixed[] $body
+     */
     public function putJson(string $accessToken, string $url, array $body): BuddyResponse
     {
         return $this->requestJson($accessToken, $url, 'PUT', $body);
     }
 
+    /**
+     * @param mixed[] $body
+     */
     public function patchJson(string $accessToken, string $url, array $body): BuddyResponse
     {
         return $this->requestJson($accessToken, $url, 'PATCH', $body);
@@ -142,6 +155,8 @@ class BuddyClient
 
     /**
      * @codeCoverageIgnore
+     *
+     * @param mixed[] $params
      *
      * @throws BuddyResponseException
      * @throws BuddySDKException

@@ -23,16 +23,16 @@ use Buddy\Exceptions\BuddySDKException;
 
 class Api
 {
-    /**
-     * @var BuddyClient
-     */
-    protected $client;
+    protected BuddyClient $client;
 
     /**
-     * @var array
+     * @var mixed[]
      */
-    protected $options;
+    protected array $options;
 
+    /**
+     * @param mixed[] $options
+     */
     public function __construct(BuddyClient $client, array $options = [])
     {
         $this->client = $client;
@@ -40,6 +40,9 @@ class Api
     }
 
     /**
+     * @param mixed[] $params
+     * @param mixed[] $query
+     *
      * @throws BuddySDKException
      */
     protected function getJson(?string $accessToken, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
@@ -48,6 +51,10 @@ class Api
     }
 
     /**
+     * @param mixed[] $patchData
+     * @param mixed[] $params
+     * @param mixed[] $query
+     *
      * @throws BuddySDKException
      */
     protected function patchJson(?string $accessToken, array $patchData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
@@ -56,6 +63,10 @@ class Api
     }
 
     /**
+     * @param mixed[]|null $deleteData
+     * @param mixed[]      $params
+     * @param mixed[]      $query
+     *
      * @throws BuddySDKException
      */
     protected function deleteJson(?string $accessToken, ?array $deleteData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
@@ -64,6 +75,10 @@ class Api
     }
 
     /**
+     * @param mixed[] $postData
+     * @param mixed[] $params
+     * @param mixed[] $query
+     *
      * @throws BuddySDKException
      */
     protected function postJson(?string $accessToken, array $postData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
@@ -72,6 +87,10 @@ class Api
     }
 
     /**
+     * @param mixed[] $putData
+     * @param mixed[] $params
+     * @param mixed[] $query
+     *
      * @throws BuddySDKException
      */
     protected function putJson(?string $accessToken, array $putData, string $url, array $params = [], array $query = [], string $path = '/'): BuddyResponse
@@ -81,10 +100,8 @@ class Api
 
     /**
      * @throws BuddySDKException
-     *
-     * @return string|mixed
      */
-    protected function getAccessToken(?string $accessToken = null)
+    protected function getAccessToken(?string $accessToken = null): string
     {
         if (isset($accessToken)) {
             return $accessToken;

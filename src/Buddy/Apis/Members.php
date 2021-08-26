@@ -21,6 +21,9 @@ use Buddy\BuddyResponse;
 
 class Members extends Api
 {
+    /**
+     * @param mixed[] $filters
+     */
     public function getWorkspaceMembers(string $domain, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/members', [
@@ -63,6 +66,9 @@ class Members extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $filters
+     */
     public function getWorkspaceMemberProjects(string $domain, int $userId, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/members/:member_id/projects', [

@@ -25,15 +25,12 @@ use Buddy\Exceptions\BuddySDKException;
 
 class Utils
 {
-    /**
-     * @var Buddy
-     */
-    private static $buddy;
+    private static Buddy $buddy;
 
     /**
-     * @var array
+     * @var mixed[]
      */
-    private static $workspace;
+    private static array $workspace;
 
     public static function randomString(): string
     {
@@ -62,7 +59,7 @@ class Utils
     }
 
     /**
-     * @throws BuddySDKException
+     * @return mixed[]
      */
     public static function getWorkspace(): array
     {
@@ -88,7 +85,7 @@ class Utils
     }
 
     /**
-     * @throws BuddySDKException
+     * @return mixed[]
      */
     public static function addProject(): array
     {
@@ -97,24 +94,33 @@ class Utils
         ], self::getWorkspaceDomain())->getBody();
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function addUser(): array
     {
         return Utils::getBuddy()->getApiMembers()->addWorkspaceMember(self::getWorkspaceDomain(), self::randomEmail())->getBody();
     }
 
     /**
-     * @throws BuddySDKException
+     * @return mixed[]
      */
     public static function addUser2Project(string $projectName, int $userId, int $permissionId): array
     {
         return Utils::getBuddy()->getApiProjects()->addProjectMember(self::getWorkspaceDomain(), $projectName, $userId, $permissionId)->getBody();
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function addUser2Group(int $groupId, int $userId): array
     {
         return Utils::getBuddy()->getApiGroups()->addGroupMember(self::getWorkspaceDomain(), $groupId, $userId)->getBody();
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function addPermission(): array
     {
         return self::getBuddy()->getApiPermissions()->addWorkspacePermission([
@@ -125,6 +131,9 @@ class Utils
         ], self::getWorkspaceDomain())->getBody();
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function addGroup(): array
     {
         return self::getBuddy()->getApiGroups()->addGroup([
@@ -133,6 +142,9 @@ class Utils
         ], self::getWorkspaceDomain())->getBody();
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function addFile(string $projectName): array
     {
         $resp = self::getBuddy()->getApiSource()->addFile([
@@ -145,6 +157,9 @@ class Utils
         return $resp;
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function addScenario(string $projectName): array
     {
         Utils::addFile($projectName);
@@ -156,6 +171,9 @@ class Utils
         ], self::getWorkspaceDomain(), $projectName)->getBody();
     }
 
+    /**
+     * @return mixed[]
+     */
     public static function addWebhook(): array
     {
         return Utils::getBuddy()->getApiWebhooks()->addWebhook([

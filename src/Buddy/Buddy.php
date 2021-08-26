@@ -36,98 +36,27 @@ use Buddy\Apis\Workspaces;
 
 class Buddy
 {
-    /**
-     * @var BuddyClient
-     */
-    private $client;
+    private BuddyClient $client;
+    private BuddyOAuth $oauth;
+    private Workspaces $apiWorkspaces;
+    private Projects $apiProjects;
+    private Members $apiMembers;
+    private Permissions $apiPermissions;
+    private Groups $apiGroups;
+    private Webhooks $apiWebhooks;
+    private Branches $apiBranches;
+    private Commits $apiCommits;
+    private Emails $apiEmails;
+    private Profile $apiProfile;
+    private Executions $apiExecutions;
+    private Pipelines $apiPipelines;
+    private Source $apiSource;
+    private SshKeys $apiSshKeys;
+    private Tags $apiTags;
+    private Integrations $apiIntegrations;
 
     /**
-     * @var BuddyOAuth
-     */
-    private $oauth;
-
-    /**
-     * @var Apis\Workspaces
-     */
-    private $apiWorkspaces;
-
-    /**
-     * @var Apis\Projects
-     */
-    private $apiProjects;
-
-    /**
-     * @var Apis\Members
-     */
-    private $apiMembers;
-
-    /**
-     * @var Apis\Permissions
-     */
-    private $apiPermissions;
-
-    /**
-     * @var Apis\Groups
-     */
-    private $apiGroups;
-
-    /**
-     * @var Apis\Webhooks
-     */
-    private $apiWebhooks;
-
-    /**
-     * @var Apis\Branches
-     */
-    private $apiBranches;
-
-    /**
-     * @var Apis\Commits
-     */
-    private $apiCommits;
-
-    /**
-     * @var Apis\Emails
-     */
-    private $apiEmails;
-
-    /**
-     * @var Apis\Profile
-     */
-    private $apiProfile;
-
-    /**
-     * @var Apis\Executions
-     */
-    private $apiExecutions;
-
-    /**
-     * @var Apis\Pipelines
-     */
-    private $apiPipelines;
-
-    /**
-     * @var Apis\Source
-     */
-    private $apiSource;
-
-    /**
-     * @var Apis\SshKeys
-     */
-    private $apiSshKeys;
-
-    /**
-     * @var Apis\Tags
-     */
-    private $apiTags;
-
-    /**
-     * @var Apis\Integrations
-     */
-    private $apiIntegrations;
-
-    /**
-     * Buddy constructor.
+     * @param mixed[] $config
      */
     public function __construct(array $config = [])
     {
@@ -151,129 +80,81 @@ class Buddy
         $this->apiIntegrations = new Integrations($this->client, $config);
     }
 
-    /**
-     * @return Apis\Integrations
-     */
     public function getApiIntegrations(): Integrations
     {
         return $this->apiIntegrations;
     }
 
-    /**
-     * @return Apis\Tags
-     */
     public function getApiTags(): Tags
     {
         return $this->apiTags;
     }
 
-    /**
-     * @return Apis\SshKeys
-     */
     public function getApiSshKeys(): SshKeys
     {
         return $this->apiSshKeys;
     }
 
-    /**
-     * @return Apis\Source
-     */
     public function getApiSource(): Source
     {
         return $this->apiSource;
     }
 
-    /**
-     * @return Apis\Pipelines
-     */
     public function getApiPipelines(): Pipelines
     {
         return $this->apiPipelines;
     }
 
-    /**
-     * @return Apis\Executions
-     */
     public function getApiExecutions(): Executions
     {
         return $this->apiExecutions;
     }
 
-    /**
-     * @return Apis\Profile
-     */
     public function getApiProfile(): Profile
     {
         return $this->apiProfile;
     }
 
-    /**
-     * @return Apis\Emails
-     */
     public function getApiEmails(): Emails
     {
         return $this->apiEmails;
     }
 
-    /**
-     * @return Apis\Commits
-     */
     public function getApiCommits(): Commits
     {
         return $this->apiCommits;
     }
 
-    /**
-     * @return Apis\Branches
-     */
     public function getApiBranches(): Branches
     {
         return $this->apiBranches;
     }
 
-    /**
-     * @return Apis\Webhooks
-     */
     public function getApiWebhooks(): Webhooks
     {
         return $this->apiWebhooks;
     }
 
-    /**
-     * @return Apis\Groups
-     */
     public function getApiGroups(): Groups
     {
         return $this->apiGroups;
     }
 
-    /**
-     * @return Apis\Permissions
-     */
     public function getApiPermissions(): Permissions
     {
         return $this->apiPermissions;
     }
 
-    /**
-     * @return Apis\Members
-     */
     public function getApiMembers(): Members
     {
         return $this->apiMembers;
     }
 
-    /**
-     * @return Apis\Workspaces
-     */
     public function getApiWorkspaces(): Workspaces
     {
         return $this->apiWorkspaces;
     }
 
-    /**
-     * @return Apis\Projects
-     */
     public function getApiProjects(): Projects
     {
         return $this->apiProjects;

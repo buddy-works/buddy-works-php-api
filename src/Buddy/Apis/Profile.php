@@ -26,6 +26,9 @@ class Profile extends Api
         return $this->getJson($accessToken, '/user');
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function editAuthenticatedUser(array $data, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/user');

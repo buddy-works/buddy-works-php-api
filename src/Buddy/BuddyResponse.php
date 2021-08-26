@@ -20,22 +20,19 @@ namespace Buddy;
 class BuddyResponse
 {
     /**
-     * @var array
+     * @var mixed[]
      */
-    private $body;
+    private array $body;
 
     /**
-     * @var array
+     * @var mixed[]
      */
-    private $headers;
+    private array $headers;
+
+    private int $statusCode;
 
     /**
-     * @var int
-     */
-    private $statusCode;
-
-    /**
-     * BuddyResponse constructor.
+     * @param mixed[] $headers
      */
     public function __construct(int $statusCode, array $headers, string $body)
     {
@@ -53,11 +50,17 @@ class BuddyResponse
         return $this->getStatusCode() >= 200 && $this->getStatusCode() < 300;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getBody(): array
     {
         return $this->body;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getHeaders(): array
     {
         return $this->headers;

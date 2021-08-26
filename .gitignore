@@ -3,4 +3,5 @@ tests/env.php
 tests/BuddyTestCredentials.php
 /.idea
 .phpunit.result.cache
-.php_cs.cache
+/.php-cs-fixer.php
+/.php-cs-fixer.cache

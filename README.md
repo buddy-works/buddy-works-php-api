@@ -19,9 +19,10 @@ composer require buddy-works/buddy-works-php-api
 
 | PHP version | SDK version |
 | --------------- | ---------------------- |
-| ^7.3 | 1.3.0 |
-| ^7.2 | 1.2.0 |
-| 5.5  | 1.1.1 |
+| ^8.0 | 1.4 |
+| ^7.3 | 1.3 |
+| ^7.2 | 1.2 |
+| 5.5  | 1.1 |
  
 ## Usage of OAUTH
 

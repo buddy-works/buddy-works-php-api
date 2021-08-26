@@ -21,17 +21,20 @@ use Buddy\BuddyResponse;
 
 class Executions extends Api
 {
-    const STATUS_SUCCESSFUL = 'SUCCESSFUL';
-    const STATUS_FAILED = 'FAILED';
-    const STATUS_INPROGRESS = 'INPROGRESS';
-    const STATUS_ENQUEUED = 'ENQUEUED';
-    const STATUS_SKIPPED = 'SKIPPED';
-    const STATUS_TERMINATED = 'TERMINATED';
-    const STATUS_INITIAL = 'INITIAL';
+    public const STATUS_SUCCESSFUL = 'SUCCESSFUL';
+    public const STATUS_FAILED = 'FAILED';
+    public const STATUS_INPROGRESS = 'INPROGRESS';
+    public const STATUS_ENQUEUED = 'ENQUEUED';
+    public const STATUS_SKIPPED = 'SKIPPED';
+    public const STATUS_TERMINATED = 'TERMINATED';
+    public const STATUS_INITIAL = 'INITIAL';
 
-    const OPERATION_RETRY = 'RETRY';
-    const OPERATION_CANCEL = 'CANCEL';
+    public const OPERATION_RETRY = 'RETRY';
+    public const OPERATION_CANCEL = 'CANCEL';
 
+    /**
+     * @param mixed[] $filters
+     */
     public function getExecutions(string $domain, string $projectName, int $pipelineId, array $filters = [], ?string $accessToken = null): BuddyResponse
     {
         return $this->getJson($accessToken, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/executions', [
@@ -41,6 +44,9 @@ class Executions extends Api
         ], $filters);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function runExecution(array $data, string $domain, string $projectName, int $pipelineId, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/projects/:project_name/pipelines/:pipeline_id/executions', [

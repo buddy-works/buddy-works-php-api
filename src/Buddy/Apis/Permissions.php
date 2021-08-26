@@ -21,14 +21,14 @@ use Buddy\BuddyResponse;
 
 class Permissions extends Api
 {
-    const PIPELINE_ACCESS_LEVEL_DENIED = 'DENIED';
-    const PIPELINE_ACCESS_LEVEL_READ_ONLY = 'READ_ONLY';
-    const PIPELINE_ACCESS_LEVEL_RUN_ONLY = 'RUN_ONLY';
-    const PIPELINE_ACCESS_LEVEL_READ_WRITE = 'READ_WRITE';
+    public const PIPELINE_ACCESS_LEVEL_DENIED = 'DENIED';
+    public const PIPELINE_ACCESS_LEVEL_READ_ONLY = 'READ_ONLY';
+    public const PIPELINE_ACCESS_LEVEL_RUN_ONLY = 'RUN_ONLY';
+    public const PIPELINE_ACCESS_LEVEL_READ_WRITE = 'READ_WRITE';
 
-    const REPOSITORY_ACCESS_LEVEL_DENIED = 'DENIED';
-    const REPOSITORY_ACCESS_LEVEL_READ_ONLY = 'READ_ONLY';
-    const REPOSITORY_ACCESS_LEVEL_READ_WRITE = 'READ_WRITE';
+    public const REPOSITORY_ACCESS_LEVEL_DENIED = 'DENIED';
+    public const REPOSITORY_ACCESS_LEVEL_READ_ONLY = 'READ_ONLY';
+    public const REPOSITORY_ACCESS_LEVEL_READ_WRITE = 'READ_WRITE';
 
     public function getWorkspacePermissions(string $domain, ?string $accessToken = null): BuddyResponse
     {
@@ -37,6 +37,9 @@ class Permissions extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function addWorkspacePermission(array $data, string $domain, ?string $accessToken = null): BuddyResponse
     {
         return $this->postJson($accessToken, $data, '/workspaces/:domain/permissions', [
@@ -52,6 +55,9 @@ class Permissions extends Api
         ]);
     }
 
+    /**
+     * @param mixed[] $data
+     */
     public function editWorkspacePermission(array $data, string $domain, int $permissionId, ?string $accessToken = null): BuddyResponse
     {
         return $this->patchJson($accessToken, $data, '/workspaces/:domain/permissions/:permission_set_id', [
